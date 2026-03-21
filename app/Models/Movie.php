@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\LibraryItem;
 
 class Movie extends Model
 {
-    use HasFactory;
 
     /**
      * MOVIE ATTRIBUTES
@@ -22,6 +21,8 @@ class Movie extends Model
      * $this->attributes['quantity'] - int - contains the available movie quantity
      * $this->attributes['quantity_views'] - int - contains the number of times the movie has been viewed
      * $this->attributes['image'] - string - contains the movie image path or filename
+     * $this->attributes['created_at'] - timestamp - contains the movie creation timestamp
+     * $this->attributes['updated_at'] - timestamp - contains the movie update timestamp
      */
     protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'image'];
 
@@ -30,10 +31,10 @@ class Movie extends Model
     //     return $this->hasMany(Item::class);
     // }
 
-    // public function libraryItems(): HasMany
-    // {
-    //     return $this->hasMany(LibraryItem::class);
-    // }
+    public function libraryItems(): HasMany
+    {
+        return $this->hasMany(LibraryItem::class);
+    }
 
     // public function wishlistItems(): HasMany
     // {
@@ -43,11 +44,6 @@ class Movie extends Model
     public function getId(): int
     {
         return $this->attributes['id'];
-    }
-
-    public function setId(int $id): void
-    {
-        $this->attributes['id'] = $id;
     }
 
     public function getTitle(): string
