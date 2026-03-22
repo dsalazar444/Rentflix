@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('css/admin/movie.index.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <input type="hidden" id="hasErrors" value="{{ $errors->any() ? '1' : '0' }}">
-<input type="hidden" id="lastFormSubmitted" value="">
+<input type="hidden" id="lastFormSubmitted" value="{{ session('lastForm', '') }}">
 <div class="admin-panel">
 
     <!-- Panel header -->

@@ -106,6 +106,16 @@
                         @enderror
                     </div>
 
+                    <div class="movie-form-group mb-3">
+                        <label for="description">Descripción</label>
+                        <textarea id="description" name="description" rows="3"
+                            class="movie-input @error('description') is-invalid @enderror"
+                            placeholder="Sinopsis de la película..."></textarea>
+                        @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="row mb-3">
                         <div class="col movie-form-group">
                             <label for="director">Director</label>
@@ -159,3 +169,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    window.movieUpdateRoute = "{{ route('admin.movie.update', ':id') }}";
+</script>

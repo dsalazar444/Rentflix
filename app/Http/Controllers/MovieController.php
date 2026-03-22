@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Interfaces\ImageStorage;
 use App\Http\Requests\StoreMovieRequest;
+use App\Http\Requests\UpdateMovieRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -58,7 +59,7 @@ class MovieController extends Controller
         return redirect()->route('admin.movie.index');
     }
 
-    public function update(StoreMovieRequest $request, string $id): RedirectResponse
+    public function update(UpdateMovieRequest $request, string $id): RedirectResponse
     {
         $movie = Movie::find($id);
         if (!$movie) {
