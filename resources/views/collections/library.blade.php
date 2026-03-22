@@ -26,16 +26,16 @@
 
     {{-- Movies grid --}}
     <div class="library-grid">
-        {{-- SAMPLE DATA - TODO: Replace with real data --}}
+        @foreach ($viewData['libraryItems'] as $item)
         <div class="library-card">
             <div class="card-poster">
-                <img src="https://via.placeholder.com/300x450/1a1a1a/e63946?text=Sample+Movie" alt="Sample Movie" class="card-img">
-                <span class="card-badge">PG-13</span>
+                <img src="{{ asset('storage/' . $item->movie->getFileName()) }}" alt="Sample Movie" class="card-img">
+                <span class="card-badge">{{ $item->movie->getClassificationCapitalized() }}</span>
             </div>
 
             <div class="card-info">
-                <h3 class="card-title">Sample Movie Title</h3>
-                <span class="card-genre">Action</span>
+                <h3 class="card-title">{{ $item->movie->getTitle() }}</h3>
+                <span class="card-genre">{{ $item->movie->getGenreCapitalized() }}</span>
 
                 <div class="card-expiry expiry-ok">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
@@ -49,6 +49,7 @@
                 <span class="card-expiry-date">Apr 20, 2026</span>
             </div>
         </div>
+        @endforeach
 
         <div class="library-card card-expiring">
             <div class="card-poster">
