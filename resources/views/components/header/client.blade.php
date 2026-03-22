@@ -20,7 +20,7 @@
                 </svg>
                 <span>Catalogo</span>
             </a>
-            <a href="{{ route('collection.library') }}" class="nav-item">
+            <a href="{{ route('collections.library') }}" class="nav-item">
                 <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4l2-3h2l2 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
                     <circle cx="12" cy="13" r="3"></circle>

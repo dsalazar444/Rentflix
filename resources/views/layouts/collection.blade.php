@@ -4,12 +4,12 @@
     <h1 class="collection-title">Mi Colección</h1>
 
     <div class="collection-tabs">
-        <a href="{{ route('collection.library') }}" 
-           class="collection-tab {{ request()->routeIs('collection.library') ? 'active' : '' }}">
+        <a href="{{ route('collections.library') }}" 
+           class="collection-tab {{ request()->routeIs('collections.library') ? 'active' : '' }}">
             Mi Biblioteca
         </a>
-        <a href="{{ route('collection.wishlist') }}" 
-           class="collection-tab {{ request()->routeIs('collection.wishlist') ? 'active' : '' }}">
+        <a href="{{ route('collections.wishlist') }}" 
+           class="collection-tab {{ request()->routeIs('collections.wishlist') ? 'active' : '' }}">
             Mi Wishlist
         </a>
     </div>

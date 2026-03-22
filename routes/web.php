@@ -17,8 +17,8 @@ Route::get('/catalog/movie/{id}', 'App\Http\Controllers\CatalogController@show')
 Route::get('/users', 'App\Http\Controllers\UserController@index')->name('user.index');
 Route::post('/users', 'App\Http\Controllers\UserController@create')->name('user.create');
 
-Route::get('/collections/library', 'App\Http\Controllers\LibraryItemController@index')->name('collection.library');
-Route::get('/collections/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('collection.wishlist');
+Route::get('/collections/library', 'App\Http\Controllers\LibraryItemController@index')->name('collections.library');
+Route::get('/collections/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('collections.wishlist');
 
 Route::get('/auth', 'App\Http\Controllers\AuthController@index')->name('auth.index');
 Route::post('/auth/register', 'App\Http\Controllers\AuthController@create')->name('auth.create');
