@@ -57,4 +57,35 @@ class MovieController extends Controller
 
         return redirect()->route('admin.movie.index');
     }
+
+    public function update(StoreMovieRequest $request, string $id): RedirectResponse
+    {
+        $movie = Movie::find($id);
+        if (!$movie) {
+            return redirect()->route('admin.movie.index');
+        }
+
+        $data = $request->only([
+            'title',
+            'director',
+            'genre',
+            'format',
+            'price',
+            'quantity',
+            'description',
+            'classification',
+            'trailer_link',
+            'year',
+            'location',
+        ]);
+
+        if ($request->hasFile('movie_image')) {
+            $imageName = $this->imageStorage->store($request, 'movie_image');
+            $data['file_name'] = $imageName;
+        }
+
+        $movie->update($data);
+
+        return redirect()->route('admin.movie.index');
+    }
 }

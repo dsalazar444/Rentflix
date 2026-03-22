@@ -16,7 +16,7 @@ class StoreMovieRequest extends FormRequest
         return [
             'title' => 'required|string',
             'director' => 'required|string',
-            'genre' => 'required|in:accion,aventuras,animación,comedia,drama,fantasía,terror,ciencia ficcion',
+            'genre' => 'required|in:accion,aventuras,animacion,comedia,drama,fantasia,terror,ciencia ficcion',
             'classification' => 'required|string',
             'year' => 'required|integer|min:1900|max:' . date('Y'),
             'format' => 'required|in:DVD,digital',

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/admin/movie.index.css') }}">
-<link rel="stylesheet" href="{{ asset('css/admin/modalMovieCreate.css') }}">
-<input type="hidden" id="tiene-errores" value="{{ $errors->any() ? '1' : '0' }}">
+<link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
+<input type="hidden" id="hasErrors" value="{{ $errors->any() ? '1' : '0' }}">
+<input type="hidden" id="lastFormSubmitted" value="">
 <div class="admin-panel">
 
     <!-- Panel header -->
@@ -23,7 +24,7 @@
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
         </svg>
-        <input type="text" placeholder="Buscar películas..." id="search-input">
+        <input type="text" placeholder="Buscar películas..." id="searchInput">
     </div>
 
     <!-- Table  -->
@@ -61,21 +62,26 @@
                     <td>
                         <span class="badge-status available">
                             @if ($movie->getQuantity() > 0)
-                                Disponible
+                            Disponible
                             @else
-                                Agotada
+                            Agotada
                             @endif
                         </span>
                     </td>
 
                     <td class="actions">
-                        <button class="btn-action btn-edit" title="Editar">
+
+                        <button class="btn-action btn-edit" title="Editar" 
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalEdit"
+                            data-movie="{{ $movie->toJson() }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                             </svg>
                         </button>
+
                         <form action="{{ route('admin.movie.delete', ['id' => $movie->getId()]) }}" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta película?')">
                             @csrf
                             @method('DELETE')
@@ -98,4 +104,6 @@
 </div>
 
 @include('admin.movie.components.modalMovieCreate')
+@include('admin.movie.components.modalMovieEdit')
+
 @endsection
