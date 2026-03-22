@@ -9,7 +9,6 @@ use App\Http\Requests\UpdateMovieRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
-
 class MovieController extends Controller
 {
     private ImageStorage $imageStorage;
@@ -50,7 +49,7 @@ class MovieController extends Controller
     public function delete(string $id): RedirectResponse
     {
         $movie = Movie::find($id);
-        if (!$movie) {
+        if (! $movie) {
 
             return redirect()->route('admin.movie.index');
         }

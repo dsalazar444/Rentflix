@@ -1,4 +1,5 @@
 <?php
+
 /** Made by: Samuel Martínez Arteaga */
 
 namespace App\Models;
@@ -21,7 +22,7 @@ class WishlistItem extends Model
      */
     protected $fillable = ['user_id', 'movie_id'];
 
-    function user(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

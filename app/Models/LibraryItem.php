@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Movie;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LibraryItem extends Model
 {
-
     /**
      * LIBRARY ITEM ATTRIBUTES
      * $this->attributes['id'] - int - contains the library item primary key (id)
@@ -55,4 +52,3 @@ class LibraryItem extends Model
         $this->attributes['movie_id'] = $movie_id;
     }
 }
-

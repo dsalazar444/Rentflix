@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
-class CatalogController extends Controller{
-
+class CatalogController extends Controller
+{
     public function index(): View
     {
         $viewData = [];
@@ -21,12 +21,11 @@ class CatalogController extends Controller{
     {
         $viewData = [];
         $movie = Movie::find($id);
-        if (!$movie) {
+        if (! $movie) {
             return redirect()->route('catalog.index');
         }
         $viewData['movie'] = $movie;
 
         return view('catalog.show')->with('viewData', $viewData);
     }
-
 }

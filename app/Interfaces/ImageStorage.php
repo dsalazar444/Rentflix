@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Interfaces; 
-use Illuminate\Http\Request; 
+namespace App\Interfaces;
 
-interface ImageStorage { 
-    public function store(Request $request, string $idInputFile): string; 
-} 
+use Illuminate\Http\Request;
+
+interface ImageStorage
+{
+    public function store(Request $request, string $idInputFile): string;
+}

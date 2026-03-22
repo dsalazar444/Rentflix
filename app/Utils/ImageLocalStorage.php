@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Utils;
 
@@ -12,11 +12,12 @@ class ImageLocalStorage implements ImageStorage
     {
         if ($request->hasFile($idInputFile)) {
             $file = $request->file($idInputFile);
-            $fileName = 'image_' . time() . '.' . $file->getClientOriginalExtension();
+            $fileName = 'image_'.time().'.'.$file->getClientOriginalExtension();
             Storage::disk('public')->put(
                 $fileName,
                 file_get_contents($file->getRealPath())
             );
+
             return $fileName;
         }
         throw new \Exception("No file uploaded for input: $idInputFile");
