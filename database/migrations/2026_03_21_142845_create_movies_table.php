@@ -21,7 +21,8 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('quantity');
             $table->integer('quantity_views')->default(0);
-            $table->string('image');
+            $table->string('trailer_link')->nullable();
+            $table->string('file_name')->nullable();
             $table->timestamps();
         });
     }

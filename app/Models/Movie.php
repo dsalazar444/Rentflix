@@ -15,16 +15,16 @@ class Movie extends Model
      * $this->attributes['title'] - string - contains the movie title
      * $this->attributes['director'] - string - contains the movie director name
      * $this->attributes['genre'] - string - contains the movie genre
-     * $this->attributes['format'] - string - indicates the movie format (e.g., physical/digital)
+     * $this->attributes['format'] - string - indicates the movie format (e.g., dvd/digital)
      * $this->attributes['location'] - string - contains the movie storage/location
      * $this->attributes['price'] - int - contains the movie price
      * $this->attributes['quantity'] - int - contains the available movie quantity
      * $this->attributes['quantity_views'] - int - contains the number of times the movie has been viewed
-     * $this->attributes['image'] - string - contains the movie image path or filename
+     * $this->attributes['file_name'] - string - contains the movie image path or filename
      * $this->attributes['created_at'] - timestamp - contains the movie creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the movie update timestamp
      */
-    protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'image'];
+    protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name'];
 
     // public function items(): HasMany
     // {

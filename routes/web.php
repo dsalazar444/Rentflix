@@ -2,4 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'App\Http\Controllers\MovieController@index')->name('movie.index');
+Route::get('/admin/movies', 'App\Http\Controllers\MovieController@index')->name('admin.movie.index');
+Route::post('/admin/movies/save', 'App\Http\Controllers\MovieController@save')->name('admin.movie.save');
+
