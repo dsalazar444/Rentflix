@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\LibraryItem;
 
 class Movie extends Model
 {
-
     /**
      * MOVIE ATTRIBUTES
      * $this->attributes['id'] - int - contains the movie primary key (id)

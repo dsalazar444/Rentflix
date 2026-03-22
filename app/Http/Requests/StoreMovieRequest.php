@@ -18,7 +18,7 @@ class StoreMovieRequest extends FormRequest
             'director' => 'required|string',
             'genre' => 'required|in:accion,aventuras,animación,comedia,drama,fantasía,terror,ciencia ficcion',
             'classification' => 'required|string',
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
+            'year' => 'required|integer|min:1900|max:'.date('Y'),
             'format' => 'required|in:DVD,digital',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
@@ -27,7 +27,4 @@ class StoreMovieRequest extends FormRequest
             'trailer_link' => 'nullable|url',
         ];
     }
-
-
-  
 }

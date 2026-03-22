@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Movie;
-use App\Interfaces\ImageStorage;
 use App\Http\Requests\StoreMovieRequest;
-use Illuminate\View\View;
+use App\Interfaces\ImageStorage;
+use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
-
+use Illuminate\View\View;
 
 class MovieController extends Controller
 {
@@ -49,7 +48,7 @@ class MovieController extends Controller
     public function delete(string $id): RedirectResponse
     {
         $movie = Movie::find($id);
-        if (!$movie) {
+        if (! $movie) {
 
             return redirect()->route('admin.movie.index');
         }
