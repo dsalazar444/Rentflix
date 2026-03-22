@@ -18,7 +18,7 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                <span>Panel Admin</span>
+                <span>Panel Peliculas</span>
             </a>
             <a href="{{ route('catalog.index') }}" class="nav-item">
                 <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
