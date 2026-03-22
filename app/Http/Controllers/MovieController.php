@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMovieRequest;
-use App\Interfaces\ImageStorage;
-use App\Models\Movie;
+use App\Http\Requests\UpdateMovieRequest;
+use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -53,6 +53,37 @@ class MovieController extends Controller
             return redirect()->route('admin.movie.index');
         }
         $movie->delete();
+
+        return redirect()->route('admin.movie.index');
+    }
+
+    public function update(UpdateMovieRequest $request, string $id): RedirectResponse
+    {
+        $movie = Movie::find($id);
+        if (!$movie) {
+            return redirect()->route('admin.movie.index');
+        }
+
+        $data = $request->only([
+            'title',
+            'director',
+            'genre',
+            'format',
+            'price',
+            'quantity',
+            'description',
+            'classification',
+            'trailer_link',
+            'year',
+            'location',
+        ]);
+
+        if ($request->hasFile('movie_image')) {
+            $imageName = $this->imageStorage->store($request, 'movie_image');
+            $data['file_name'] = $imageName;
+        }
+
+        $movie->update($data);
 
         return redirect()->route('admin.movie.index');
     }

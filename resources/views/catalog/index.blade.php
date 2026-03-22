@@ -81,7 +81,7 @@
             <select class="sort-select">
                 <option value="priceAsc">Precio: menor a mayor</option>
                 <option value="priceDesc">Precio: mayor a menor</option>
-                <option value="title">Título A-Z</option>
+                <option value="available">Disponibles</option>
             </select>
         </div>
     </div>
