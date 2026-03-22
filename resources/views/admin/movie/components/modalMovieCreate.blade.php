@@ -1,4 +1,4 @@
-<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true" data-has-errors="{{ $errors->any() ? 'true' : 'false' }}">
+<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content movie-modal-content">
 
@@ -57,9 +57,9 @@
                             <select id="classification" name="classification"
                                 class="movie-input @error('classification') is-invalid @enderror">
                                 <option value="ATP" {{ old('classification') == 'ATP' ? 'selected' : '' }}>ATP</option>
-                                <option value="7"  {{ old('classification') == '7' ? 'selected' : '' }}>7</option>
-                                <option value="13" {{ old('classification') == '13' ? 'selected' : '' }}>13</option>
-                                <option value="18" {{ old('classification') == '18' ? 'selected' : '' }}>18</option>
+                                <option value="7"  {{ old('classification') == '7' ? 'selected' : '' }}>7+</option>
+                                <option value="13" {{ old('classification') == '13' ? 'selected' : '' }}>13+</option>
+                                <option value="18" {{ old('classification') == '18' ? 'selected' : '' }}>18+</option>
                             </select>
                             @error('classification')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -128,7 +128,7 @@
                             <label for="format">Formato</label>
                             <select id="format" name="format"
                                 class="movie-input @error('format') is-invalid @enderror">
-                                <option value="dvd" {{ old('format') == 'dvd' ? 'selected' : '' }}>DVD</option>
+                                <option value="DVD" {{ old('format') == 'DVD' ? 'selected' : '' }}>DVD</option>
                                 <option value="digital" {{ old('format') == 'digital' ? 'selected' : '' }}>Digital</option>
                             </select>
                             @error('format')

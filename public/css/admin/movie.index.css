@@ -154,7 +154,7 @@
 .actions {
     display: flex !important;
     gap: 0.5rem;
-    align-items: center;
+    align-items: flex-start;
 }
 .btn-action {
     background: transparent;

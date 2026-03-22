@@ -20,7 +20,8 @@
     <div class="search-box">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
         </svg>
         <input type="text" placeholder="Buscar películas..." id="search-input">
     </div>
@@ -40,28 +41,33 @@
                 </tr>
             </thead>
             <tbody>
-               
+                @foreach ($viewData["movies"] as $movie)
                 <tr class="movie-row">
                     <td class="movie-info">
-                        <img src="https://images.unsplash.com/photo-1489599849228-13a0f07cc6c3?w=200&h=300&fit=crop" alt="Inception" class="movie-thumb">
+                        <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="movie-thumb">
                         <div>
-                            <span class="movie-title">Inception</span>
-                            <span class="movie-classification">PG-13</span>
+                            <span class="movie-title">{{ $movie->getTitle() }}</span>
+                            <span class="movie-classification">{{ $movie->getClassificationCapitalized() }}+</span>
                         </div>
                     </td>
-                    <td>Ciencia Ficción</td>
-                    <td>2010</td>
+                    <td>{{ $movie->getGenreCapitalized() }}</td>
+                    <td>{{ $movie->getYear() }}</td>
                     <td>
                         <span class="badge-format">
-                            Blu-ray
+                            {{ $movie->getFormatCapitalized() }}
                         </span>
                     </td>
-                    <td class="price">$24.99</td>
+                    <td class="price">${{ number_format($movie->getPrice(), 2) }}</td>
                     <td>
                         <span class="badge-status available">
+                            @if ($movie->getQuantity() > 0)
                             Disponible
+                            @else
+                            Agotada
+                            @endif
                         </span>
                     </td>
+
                     <td class="actions">
                         <button class="btn-action btn-edit" title="Editar">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -70,7 +76,9 @@
                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                             </svg>
                         </button>
-                        <form action="#" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta película?')">
+                        <form action="{{ route('movie.delete', ['id' => $movie->getId()]) }}" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta película?')">
+                            @csrf
+                            @method('DELETE')
                             <button class="btn-action btn-delete" type="submit" title="Eliminar">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                     fill="none" stroke="#e63946" stroke-width="2">
@@ -82,7 +90,7 @@
                         </form>
                     </td>
                 </tr>
-        
+                @endforeach
             </tbody>
         </table>
     </div>

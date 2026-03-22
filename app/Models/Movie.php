@@ -21,10 +21,12 @@ class Movie extends Model
      * $this->attributes['quantity'] - int - contains the available movie quantity
      * $this->attributes['quantity_views'] - int - contains the number of times the movie has been viewed
      * $this->attributes['file_name'] - string - contains the movie image path or filename
+     * $this->attributes['classification'] - string - contains the movie classification (e.g., PG-13)
+     * $this->attributes['year'] - int - contains the movie release year
      * $this->attributes['created_at'] - timestamp - contains the movie creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the movie update timestamp
      */
-    protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name'];
+    protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year'];
 
     // public function items(): HasMany
     // {
@@ -71,6 +73,11 @@ class Movie extends Model
         return $this->attributes['genre'];
     }
 
+    public function getGenreCapitalized(): string
+    {
+        return ucfirst($this->attributes['genre']);
+    }
+
     public function setGenre(string $genre): void
     {
         $this->attributes['genre'] = $genre;
@@ -84,6 +91,36 @@ class Movie extends Model
     public function setFormat(string $format): void
     {
         $this->attributes['format'] = $format;
+    }
+
+    public function getFormatCapitalized(): string
+    {
+        return ucfirst($this->attributes['format']);
+    }
+
+    public function getClassification(): string
+    {
+        return $this->attributes['classification'];
+    }
+
+    public function getClassificationCapitalized(): string
+    {
+        return ucfirst($this->attributes['classification']);
+    }
+
+    public function setClassification(string $classification): void
+    {
+        $this->attributes['classification'] = $classification;
+    }
+
+    public function getYear(): int
+    {
+        return (int) $this->attributes['year'];
+    }
+
+    public function setYear(int $year): void
+    {
+        $this->attributes['year'] = $year;
     }
 
     public function getLocation(): string
@@ -116,14 +153,14 @@ class Movie extends Model
         $this->attributes['quantity'] = $quantity;
     }
 
-    public function getImage(): string
+    public function getFileName(): string
     {
-        return $this->attributes['image'];
+        return $this->attributes['file_name'];
     }
 
-    public function setImage(string $image): void
+    public function setFileName(string $file_name): void
     {
-        $this->attributes['image'] = $image;
+        $this->attributes['file_name'] = $file_name;
     }
 
     public function getQuantityViews(): int

@@ -29,7 +29,6 @@ class MovieController extends Controller
     public function save(StoreMovieRequest $request): RedirectResponse
     {
         $imageName = $this->imageStorage->store($request, 'movie_image');
-
         Movie::create($request->only([
             'title',
             'director',
@@ -37,9 +36,24 @@ class MovieController extends Controller
             'format',
             'price',
             'quantity',
+            'description',
+            'classification',
             'trailer_link',
+            'year',
             'location',
         ]) + ['file_name' => $imageName]);
+
+        return redirect()->route('admin.movie.index');
+    }
+
+    public function delete(string $id): RedirectResponse
+    {
+        $movie = Movie::find($id);
+        if (!$movie) {
+
+            return redirect()->route('admin.movie.index');
+        }
+        $movie->delete();
 
         return redirect()->route('admin.movie.index');
     }
