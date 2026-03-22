@@ -30,7 +30,11 @@
                     fill="none" stroke="currentColor" stroke-width="2">
                     <polygon points="5 3 19 12 5 21 5 3"/>
                 </svg>
-                Ver Trailer
+                @if($viewData['isInLibrary'])
+                    Ver Pelicula
+                @else   
+                    Ver Trailer
+                @endif
             </a>
 
             <form action="{{ route($viewData['isInWishlist'] ? 'collections.wishlist.delete' : 'collections.wishlist.add', ['id' => $viewData['movie']->getId()]) }}" method="POST" style="display: inline;">

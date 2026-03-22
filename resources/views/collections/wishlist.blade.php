@@ -2,8 +2,7 @@
 
 
 @section('collectionContent')
-<link rel="stylesheet" href="{{ asset('css/collection/wishlist.css') }}">
-
+<link rel="stylesheet" href="{{ asset('css/collections/collections.css') }}">
 <div class="library-wrapper">
 	@if($viewData['wishlistItems']->isEmpty())
 	<div class="empty-state">

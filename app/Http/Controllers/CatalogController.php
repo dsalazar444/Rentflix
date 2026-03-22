@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use App\Models\WishlistItem;
+use App\Models\LibraryItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -27,9 +28,13 @@ class CatalogController extends Controller
         }
         $viewData['movie'] = $movie;
         $viewData['isInWishlist'] = false;
+        $viewData['isInLibrary'] = false;
 
         if (session('user_id')) {
             $viewData['isInWishlist'] = WishlistItem::where('user_id', session('user_id'))
+                ->where('movie_id', $movie->getId())
+                ->exists();
+            $viewData['isInLibrary'] = LibraryItem::where('user_id', session('user_id'))
                 ->where('movie_id', $movie->getId())
                 ->exists();
         }

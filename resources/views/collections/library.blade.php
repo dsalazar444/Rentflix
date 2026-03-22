@@ -1,9 +1,9 @@
 @extends('layouts.collection')
 @section('collectionContent')
-<link rel="stylesheet" href="{{ asset('css/collection/library.css') }}">
+<link rel="stylesheet" href="{{ asset('css/collections/collections.css') }}">
 <div class="library-wrapper">
 
-    @if(1==0)
+    @if($viewData['libraryItems']->count() == 0)
     <div class="empty-state">
         <div class="empty-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
@@ -18,60 +18,54 @@
                 <line x1="17" y1="7" x2="22" y2="7"/>
             </svg>
         </div>
-        <h3 class="empty-title">Your library is empty</h3>
-        <p class="empty-subtitle">Movies you rent will appear here</p>
-        <a href="{{ route('catalog.index') }}" class="btn-explore">Explore Catalog</a>
+        <h3 class="empty-title">Tu libreria esta vacia</h3>
+        <p class="empty-subtitle">Las peliculas que alquilas apareceran aqui</p>
+        <a href="{{ route('catalog.index') }}" class="btn-explore">Explorar Catalogo</a>
     </div>
     @else
 
-    {{-- Movies grid --}}
+    <!-- Movies -->
+
+    @if($viewData['expiringSoon']->count() > 0)
+    <div class="notifications-container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" class="notification-icon">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <div class="notifications-list">
+            @foreach($viewData['expiringSoon'] as $item)
+            <div class="alert-expiring"> En {{ $item->getDaysUntilExpiration() }} dias expira: {{ $item->movie->getTitle() }}</div>
+            @endforeach
+        </div>
+    </div>
+    @endif
     <div class="library-grid">
-        {{-- SAMPLE DATA - TODO: Replace with real data --}}
-        <div class="library-card">
+        @foreach ($viewData['libraryItems'] as $item)
+        <a href="{{ route('catalog.show', ['id' => $item->movie->getId()]) }}" target="_blank" class="library-card {{ $item->getDaysUntilExpiration() <= 3 ? 'card-expiring' : '' }}" style="text-decoration: none; color: inherit;">
             <div class="card-poster">
-                <img src="https://via.placeholder.com/300x450/1a1a1a/e63946?text=Sample+Movie" alt="Sample Movie" class="card-img">
-                <span class="card-badge">PG-13</span>
+                <img src="{{ asset('storage/' . $item->movie->getFileName()) }}" alt="Sample Movie" class="card-img">
+                <span class="card-badge">{{ $item->movie->getClassificationCapitalized() }}</span>
             </div>
 
             <div class="card-info">
-                <h3 class="card-title">Sample Movie Title</h3>
-                <span class="card-genre">Action</span>
+                <h3 class="card-title">{{ $item->movie->getTitle() }}</h3>
+                <span class="card-genre">{{ $item->movie->getGenreCapitalized() }}</span>
 
-                <div class="card-expiry expiry-ok">
+                <div class="card-expiry {{ $item->getDaysUntilExpiration() <= 3 ? 'expiry-warning' : 'expiry-ok' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <polyline points="12 6 12 12 16 14"/>
                     </svg>
-                    Expires in 5 days
+                    Expira en {{ $item->getDaysUntilExpiration() }} dias
                 </div>
 
-                <span class="card-expiry-date">Apr 20, 2026</span>
+                <span class="card-expiry-date">{{ $item->getExpirationDate() }}</span>
             </div>
-        </div>
-
-        <div class="library-card card-expiring">
-            <div class="card-poster">
-                <img src="https://via.placeholder.com/300x450/1a1a1a/e63946?text=Expiring+Soon" alt="Expiring Movie" class="card-img">
-                <span class="card-badge">R</span>
-            </div>
-
-            <div class="card-info">
-                <h3 class="card-title">Expiring Soon Movie</h3>
-                <span class="card-genre">Drama</span>
-
-                <div class="card-expiry expiry-warning">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                    Expires in 2 days
-                </div>
-
-                <span class="card-expiry-date">Mar 24, 2026</span>
-            </div>
-        </div>
+        </a>
+        @endforeach
+        
     </div>
     @endif
 
