@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CatalogController extends Controller{
 
@@ -11,8 +12,21 @@ class CatalogController extends Controller{
     {
         $viewData = [];
         $viewData['movies'] = Movie::all();
+        $viewData['newdlyAdded'] = Movie::orderBy('created_at', 'desc')->take(5)->get();
 
-        return view('admin.movie.index')->with('viewData', $viewData);
+        return view('catalog.index')->with('viewData', $viewData);
+    }
+
+    public function show(string $id): View|RedirectResponse
+    {
+        $viewData = [];
+        $movie = Movie::find($id);
+        if (!$movie) {
+            return redirect()->route('catalog.index');
+        }
+        $viewData['movie'] = $movie;
+
+        return view('catalog.show')->with('viewData', $viewData);
     }
 
 }

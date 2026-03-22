@@ -26,7 +26,7 @@ class Movie extends Model
      * $this->attributes['created_at'] - timestamp - contains the movie creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the movie update timestamp
      */
-    protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year'];
+    protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year', 'description', 'trailer_link'];
 
     // public function items(): HasMany
     // {
@@ -38,10 +38,10 @@ class Movie extends Model
         return $this->hasMany(LibraryItem::class);
     }
 
-    // public function wishlistItems(): HasMany
-    // {
-    //     return $this->hasMany(WishlistItem::class);
-    // }
+    public function wishlistItems(): HasMany
+    {
+        return $this->hasMany(WishlistItem::class);
+    }
 
     public function getId(): int
     {
@@ -171,5 +171,45 @@ class Movie extends Model
     public function setQuantityViews(int $quantity_views): void
     {
         $this->attributes['quantity_views'] = $quantity_views;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function getMonthCreatedAt(): string
+    {
+        return date('F', strtotime($this->attributes['created_at']));
+    }
+
+    public function getDayCreatedAt(): string
+    {
+        return date('d', strtotime($this->attributes['created_at']));
+    }
+
+    public function getDescription(): string
+    {
+        return $this->attributes['description'];
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->attributes['description'] = $description;
+    }
+
+    public function getUpdatedAt(): string
+    {
+        return $this->attributes['updated_at'];
+    }
+
+    public function getTrailerLink(): string
+    {
+        return $this->attributes['trailer_link'];
+    }
+
+    public function setTrailerLink(string $trailer_link): void
+    {
+        $this->attributes['trailer_link'] = $trailer_link;
     }
 }

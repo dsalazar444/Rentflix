@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Admin routes
+Route::get('/admin/movie', 'App\Http\Controllers\MovieController@index')->name('admin.movie.index');
+Route::post('/admin/movie/save', 'App\Http\Controllers\MovieController@save')->name('admin.movie.save');
+Route::delete('/admin/movie/delete/{id}', 'App\Http\Controllers\MovieController@delete')->name('admin.movie.delete');
 
-Route::get('/admin/movies', 'App\Http\Controllers\MovieController@index')->name('admin.movie.index');
-Route::post('/admin/movies/save', 'App\Http\Controllers\MovieController@save')->name('admin.movie.save');
-Route::delete('/movie/delete/{id}', 'App\Http\Controllers\MovieController@delete')->name('movie.delete');
+// Catalog routes
+Route::get('/', 'App\Http\Controllers\CatalogController@index')->name('catalog.index');
+Route::get('/catalog/movie/{id}', 'App\Http\Controllers\CatalogController@show')->name('catalog.show');
 
-
-Route::get('/', 'App\Http\Controllers\MovieController@index')->name('movie.index');
+// User routes
 Route::get('/users', 'App\Http\Controllers\UserController@index')->name('user.index');
 Route::post('/users', 'App\Http\Controllers\UserController@create')->name('user.create');

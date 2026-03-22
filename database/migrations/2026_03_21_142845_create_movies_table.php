@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('quantity_views')->default(0);
             $table->string('classification');
             $table->integer('year');
+            $table->string('description');
             $table->string('trailer_link')->nullable();
             $table->string('file_name')->nullable();
             $table->timestamps();

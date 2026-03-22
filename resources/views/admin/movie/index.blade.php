@@ -61,9 +61,9 @@
                     <td>
                         <span class="badge-status available">
                             @if ($movie->getQuantity() > 0)
-                            Disponible
+                                Disponible
                             @else
-                            Agotada
+                                Agotada
                             @endif
                         </span>
                     </td>
@@ -76,7 +76,7 @@
                                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                             </svg>
                         </button>
-                        <form action="{{ route('movie.delete', ['id' => $movie->getId()]) }}" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta película?')">
+                        <form action="{{ route('admin.movie.delete', ['id' => $movie->getId()]) }}" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta película?')">
                             @csrf
                             @method('DELETE')
                             <button class="btn-action btn-delete" type="submit" title="Eliminar">
