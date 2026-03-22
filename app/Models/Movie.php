@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\LibraryItem;
 
 class Movie extends Model
 {
-
     /**
      * MOVIE ATTRIBUTES
      * $this->attributes['id'] - int - contains the movie primary key (id)
@@ -28,10 +26,10 @@ class Movie extends Model
      */
     protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year', 'description', 'trailer_link'];
 
-    // public function items(): HasMany
-    // {
-    //     return $this->hasMany(Item::class);
-    // }
+    public function items(): HasMany
+    {
+        return $this->hasMany(BillItem::class);
+    }
 
     public function libraryItems(): HasMany
     {

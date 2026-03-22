@@ -1,4 +1,5 @@
 <?php
+
 /** Made by: Samuel Martínez Arteaga */
 
 namespace App\Models;
