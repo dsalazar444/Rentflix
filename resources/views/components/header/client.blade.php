@@ -1,7 +1,7 @@
 <!-- Made by: Samuel Martínez Arteaga -->
 
 @php
-    $profileInitial = session()->has('user_id') ? 'C' : 'R';
+$profileInitial = session()->has('user_id') ? 'C' : 'R';
 @endphp
 
 <header class="rentflix-header client-header">
@@ -20,7 +20,7 @@
                 </svg>
                 <span>Catalogo</span>
             </a>
-            <a href="{{ route('collection.library') }}" class="nav-item">
+            <a href="{{ route('collections.library') }}" class="nav-item">
                 <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4l2-3h2l2 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
                     <circle cx="12" cy="13" r="3"></circle>
@@ -38,11 +38,13 @@
         </div>
 
         <div class="header-actions">
-            <button class="action-btn favorites-btn" aria-label="Favoritos">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-            </button>
+            <a href="{{ route('collections.wishlist') }}">
+                <button class="action-btn favorites-btn" aria-label="Favoritos">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </button>
+            </a>
             <button class="action-btn cart-btn" aria-label="Carrito">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"></circle>

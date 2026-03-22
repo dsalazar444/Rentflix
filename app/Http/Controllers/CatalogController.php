@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\WishlistItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -25,6 +26,13 @@ class CatalogController extends Controller
             return redirect()->route('catalog.index');
         }
         $viewData['movie'] = $movie;
+        $viewData['isInWishlist'] = false;
+
+        if (session('user_id')) {
+            $viewData['isInWishlist'] = WishlistItem::where('user_id', session('user_id'))
+                ->where('movie_id', $movie->getId())
+                ->exists();
+        }
 
         return view('catalog.show')->with('viewData', $viewData);
     }
