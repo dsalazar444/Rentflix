@@ -14,7 +14,7 @@ class LibraryItemController extends Controller
     public function index(): View
     {
         $viewData = [];
-        $viewData['libraryItems'] = LibraryItem::all();
+        $viewData['libraryItems'] = LibraryItem::with('user', 'movie')->get();
 
         return view('collections.library')->with('viewData', $viewData);
     }

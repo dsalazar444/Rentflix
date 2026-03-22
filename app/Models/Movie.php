@@ -26,10 +26,10 @@ class Movie extends Model
      */
     protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year', 'description', 'trailer_link'];
 
-    // public function items(): HasMany
-    // {
-    //     return $this->hasMany(Item::class);
-    // }
+    public function items(): HasMany
+    {
+        return $this->hasMany(BillItem::class);
+    }
 
     public function libraryItems(): HasMany
     {
