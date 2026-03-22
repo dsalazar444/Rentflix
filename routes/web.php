@@ -15,3 +15,7 @@ Route::get('/catalog/movie/{id}', 'App\Http\Controllers\CatalogController@show')
 // User routes
 Route::get('/users', 'App\Http\Controllers\UserController@index')->name('user.index');
 Route::post('/users', 'App\Http\Controllers\UserController@create')->name('user.create');
+
+// Collection routes
+Route::get('/collections/library', 'App\Http\Controllers\LibraryItemController@index')->name('collection.library');
+Route::get('/collections/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('collection.wishlist');
