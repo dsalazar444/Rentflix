@@ -12,6 +12,7 @@ function fillEditModal(event) {
     form.querySelector('[name="year"]').value           = movie.year;
     form.querySelector('[name="classification"]').value = movie.classification;
     form.querySelector('[name="trailer_link"]').value      = movie.trailer_link;
+    form.querySelector('[name="description"]').value    = movie.description;
 
     const posterPreview = document.getElementById('posterPreview');
     posterPreview.src = `/storage/${movie.file_name}`;
@@ -20,7 +21,7 @@ function fillEditModal(event) {
     document.getElementById('movie_image_edit').value = '';
     document.getElementById('fileNameDisplay').textContent = '';
 
-    form.action = `/admin/movies/${movie.id}`;
+    form.action = window.movieUpdateRoute.replace(':id', movie.id);
 }
 
 function handleFileSelect() {

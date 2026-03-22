@@ -16,20 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    const movieForm = document.getElementById('movieForm');
-    if (movieForm) {
-        movieForm.addEventListener('submit', function() {
-            lastFormSubmitted.value = 'movieForm';
-        });
-    }
-    
-    const formEdit = document.getElementById('formEdit');
-    if (formEdit) {
-        formEdit.addEventListener('submit', function() {
-            lastFormSubmitted.value = 'formEdit';
-        });
-    }
-    
     const movieModal = document.getElementById('movieModal');
     if (movieModal) {
         movieModal.addEventListener('show.bs.modal', function() {
@@ -45,25 +31,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     if (hasErrors && hasErrors.value === '1') {
+        const lastForm = lastFormSubmitted.value;
+        let modalIdToOpen = 'movieModal'; // por defecto
+        
+        if (lastForm === 'formEdit') {
+            modalIdToOpen = 'modalEdit';
+        } else if (lastForm === 'movieForm') {
+            modalIdToOpen = 'movieModal';
+        }
+        
         const checkModal = setInterval(function() {
-            let modalIdToOpen = 'movieModal'; 
-            
-            if (lastFormSubmitted.value === 'formEdit') {
-                modalIdToOpen = 'modalEdit';
-            } else if (lastFormSubmitted.value === 'movieForm') {
-                modalIdToOpen = 'movieModal';
-            }
-            
-            const movieModal = document.getElementById(modalIdToOpen);
-            if (movieModal && typeof bootstrap !== 'undefined') {
+            const targetModal = document.getElementById(modalIdToOpen);
+            if (targetModal && typeof bootstrap !== 'undefined') {
                 clearInterval(checkModal);
-                var modal = new bootstrap.Modal(movieModal);
+                const modal = new bootstrap.Modal(targetModal);
                 modal.show();
             }
-        }, 100);
+        }, 50);
         
         setTimeout(function() {
             clearInterval(checkModal);
-        }, 5000);
+        }, 3000);
     }
 });
