@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidateUser;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -14,14 +14,9 @@ class UserController extends Controller
         return view('user.index');
     }
 
-    public function create(Request $request): RedirectResponse
+    public function create(ValidateUser $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:4'],
-            'role' => ['required', 'in:client,admin'],
-        ]);
+        $validated = $request->validated();
 
         $user = User::create([
             'name' => $validated['name'],
@@ -30,9 +25,26 @@ class UserController extends Controller
             'role' => $validated['role'],
         ]);
 
-        $request->session()->put('user_id', $user->id);
-        $request->session()->put('role', $user->role);
+        $request->session()->put('user_id', $user->getID());
+        $request->session()->put('role', $user->getRole());
 
         return redirect()->route('user.index')->with('success', 'Usuario creado correctamente.');
     }
+
+    public function login(ValidateUser $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $user = User::where('email', $validated['email'])->first();
+
+        if (!$user || !Hash::check($validated['password'], $user->password)) {
+            return redirect()->route('user.index')->with('error', 'Credenciales inválidas.');
+        }
+
+        $request->session()->put('user_id', $user->getID());
+        $request->session()->put('role', $user->getRole());
+
+        return redirect()->route('user.index')->with('success', 'Inicio de sesión exitoso.');
+    }
+
 }
