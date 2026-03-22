@@ -1,10 +1,12 @@
 <?php
 
+/** Made by: Samuel Martínez Arteaga */
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateUser extends FormRequest
+class LoginUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,10 +16,8 @@ class ValidateUser extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:4'],
-            'role' => ['required', 'in:client,admin'],
         ];
     }
 }

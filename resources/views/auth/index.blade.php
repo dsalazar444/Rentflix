@@ -1,6 +1,12 @@
 <!-- Made by: Samuel Martínez Arteaga -->
 
-@extends('app.layout')
+@extends('layouts.app')
+
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/auth/auth.index.css') }}">
+@endsection
+
+@section('content_container_class', 'container-fluid px-0 my-0')
 
 @section('content')
 <div class="login-container">
@@ -37,21 +43,22 @@
     <div class="login-right">
         <div class="login-form-container">
             <div class="auth-switch" role="tablist" aria-label="Cambiar formulario">
-                <button type="button" class="auth-switch-btn" data-panel="login-panel">Iniciar Sesión</button>
-                <button type="button" class="auth-switch-btn is-active" data-panel="register-panel">Registrarse</button>
+                <button type="button" class="auth-switch-btn is-active" data-panel="login-panel">Iniciar Sesión</button>
+                <button type="button" class="auth-switch-btn" data-panel="register-panel">Registrarse</button>
             </div>
 
-            <div id="login-panel" class="auth-panel" aria-hidden="true">
+            <div id="login-panel" class="auth-panel is-active" aria-hidden="false">
                 <h2>Iniciar Sesión</h2>
                 <p class="form-subtitle">Ingresa con tu email y contraseña</p>
 
-                <form class="login-form" action="#" method="POST" onsubmit="return false;">
+                <form class="login-form" method="POST" action="{{ route('auth.login') }}">
+                    @csrf
                     <div class="form-group">
                         <label for="login_email">Email</label>
                         <input
                             type="email"
                             id="login_email"
-                            name="login_email"
+                            name="email"
                             placeholder="tu@email.com"
                             required
                         >
@@ -63,7 +70,7 @@
                             <input
                                 type="password"
                                 id="login_password"
-                                name="login_password"
+                                name="password"
                                 placeholder="••••••••"
                                 required
                             >
@@ -80,7 +87,7 @@
                 </form>
             </div>
 
-            <div id="register-panel" class="auth-panel is-active" aria-hidden="false">
+            <div id="register-panel" class="auth-panel" aria-hidden="true">
                 <h2>Crear Usuario</h2>
                 <p class="form-subtitle">Completa los datos para registrar un usuario</p>
 
@@ -98,7 +105,7 @@
                     </div>
                 @endif
 
-                <form class="login-form" method="POST" action="{{ route('user.create') }}">
+                <form class="login-form" method="POST" action="{{ route('auth.create') }}">
                     @csrf
                     <div class="form-group">
                         <label for="name">Nombre</label>
@@ -163,5 +170,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/authSwitchLoginPage.js') }}"></script>
+<script src="{{ asset('js/auth/authSwitchLoginPage.js') }}"></script>
 @endsection
