@@ -36,11 +36,4 @@ class ShoppingCartController extends Controller
 
         return redirect()->back();
     }
-
-        public function clean(): RedirectResponse
-    {
-        session()->forget('cart');
-
-        return redirect()->back();
-    }
 }
