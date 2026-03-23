@@ -49,12 +49,8 @@ Route::get('/bill/list', 'App\Http\Controllers\BillController@listBills')->name(
 Route::get('/bills/download/{id}', 'App\Http\Controllers\BillController@download')->name('bill.download');
 
 // Wishlist routes
-Route::get('/collections/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('collections.wishlist');
 Route::post('/catalog/wishlist/add/{id}', 'App\Http\Controllers\WishlistItemController@add')->name('collections.wishlist.add');
 Route::delete('/catalog/wishlist/delete/{id}', 'App\Http\Controllers\WishlistItemController@delete')->name('collections.wishlist.delete');
-
-// Library routes
-Route::get('/collections/library', 'App\Http\Controllers\LibraryItemController@index')->name('collections.library');
 
 // Shopping cart routes
 Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');
