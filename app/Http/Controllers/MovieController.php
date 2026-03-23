@@ -7,8 +7,8 @@ use App\Http\Requests\UpdateMovieRequest;
 use App\Interfaces\ImageStorage;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MovieController extends Controller
 {
@@ -92,13 +92,13 @@ class MovieController extends Controller
 
     public function search(Request $request): View
     {
-        $query = $request->get('movie_name', ''); 
+        $query = $request->get('movie_name', '');
         $result = Movie::searchMovieByName($query);
 
         return view('movie.result')->with('viewData', [
             'movies' => $result['movies'],
             'query' => $query,
-            'not_found' => $result['not_found']
+            'not_found' => $result['not_found'],
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-// Autora: Daniela Salazar
+// Made by: Daniela Salazar
 
 namespace App\Models;
 
@@ -110,6 +110,6 @@ class BillItem extends Model
 
     public function getTotalPrice(): int
     {
-        return $this->attributes['price'] *  $this->attributes['quantity'];
+        return $this->attributes['price'] * $this->attributes['quantity'];
     }
 }

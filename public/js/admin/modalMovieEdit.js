@@ -1,6 +1,6 @@
 // Made by: Laura Andrea Castrillón Fajardo
 
-// Manages the edit movie modal, filling the form with the movie data and handling 
+// Manages the edit movie modal, filling the form with the movie data and handling
 // the file input for the poster image.
 function fillEditModal(event) {
     const movie = JSON.parse(event.relatedTarget.dataset.movie);
@@ -28,7 +28,7 @@ function fillEditModal(event) {
     form.action = window.movieUpdateRoute.replace(":id", movie.id);
 }
 
-// Handles the file input for the poster image in the edit modal, 
+// Handles the file input for the poster image in the edit modal,
 // showing the selected file name and hiding the preview if a new file is selected.
 function handleFileSelect() {
     const fileInput = document.getElementById("movie_image_edit");

@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Mail\InvoiceMail;
 use App\Models\Bill;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/test-mail', function () {
     $bill = Bill::with(['user', 'items.movie'])->find(1);
-    
+
     Mail::to($bill->user->email)->send(new InvoiceMail($bill));
-    
+
     return 'Correo enviado!';
 });
 
@@ -57,7 +57,6 @@ Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')
 Route::delete('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
 Route::get('/cart/clean', 'App\Http\Controllers\ShoppingCartController@clean')->name('cart.clean');
 Route::post('/cart/process', 'App\Http\Controllers\BillController@processPayment')->name('cart.process');
-
 
 // Movie routes
 Route::get('/movie', 'App\Http\Controllers\MovieController@search')->name('movie.search');

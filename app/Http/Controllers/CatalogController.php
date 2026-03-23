@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LibraryItem;
 use App\Models\Movie;
 use App\Models\WishlistItem;
-use App\Models\LibraryItem;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CatalogController extends Controller

@@ -154,7 +154,7 @@ class Bill extends Model
                     ]);
                 }
             }
-           
+
             return $bill;
         } catch (Exception $e) {
             throw $e;

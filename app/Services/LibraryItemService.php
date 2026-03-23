@@ -9,7 +9,7 @@ class LibraryItemService
 {
     public function add(int $userId, int $movieId): void
     {
-        LibraryItem::create(['user_id'  => $userId, 'movie_id' => $movieId,]);
+        LibraryItem::create(['user_id' => $userId, 'movie_id' => $movieId]);
     }
 
     public function notify(int $userId): Collection
@@ -27,7 +27,7 @@ class LibraryItemService
         $expiredItems = LibraryItem::where('created_at', '<', now()->subMonth())
             ->with('movie')
             ->get();
-            
+
         foreach ($expiredItems as $item) {
             if ($item->movie->getFormat() === 'DVD') {
                 $item->movie->increment('quantity', 1);

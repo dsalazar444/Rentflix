@@ -6,8 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Models\WishlistItem;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class WishlistItemController extends Controller
 {
@@ -24,11 +24,11 @@ class WishlistItemController extends Controller
     public function add(Request $request): RedirectResponse
     {
 
-        if (!session('user_id')) {
+        if (! session('user_id')) {
             return redirect()->route('auth.index')->with('error', 'Debes iniciar sesión para añadir películas a tu lista de deseos');
         }
 
-        $wishlistItem = new WishlistItem();
+        $wishlistItem = new WishlistItem;
         $wishlistItem->setUserId(session('user_id'));
         $wishlistItem->setMovieId($request->route('id'));
         $wishlistItem->save();
@@ -44,6 +44,7 @@ class WishlistItemController extends Controller
 
         if ($wishlistItem) {
             $wishlistItem->delete();
+
             return redirect()->back()->with('success', 'Película eliminada de la lista de deseos');
         }
 

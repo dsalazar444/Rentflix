@@ -5,17 +5,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
 
 class ShoppingCartController extends Controller
 {
     public function add(Request $request): RedirectResponse
     {
-        $id = $request->route("id");
+        $id = $request->route('id');
         $cart = session()->get('cart', []);
 
-        if (!in_array($id, $cart)) {
+        if (! in_array($id, $cart)) {
             $cart[] = $id;
             session()->put('cart', $cart);
         }

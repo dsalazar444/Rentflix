@@ -71,7 +71,6 @@ class BillController extends Controller
         return redirect()->route('admin.bill.index')->with('success', 'Factura actualizada correctamente');
     }
 
-
     public function processPayment(CreateBillRequest $request): RedirectResponse
     {
         try {
