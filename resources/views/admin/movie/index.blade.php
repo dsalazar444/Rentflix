@@ -6,7 +6,7 @@
 <input type="hidden" id="lastFormSubmitted" value="{{ session('lastForm', '') }}">
 <div class="admin-panel">
 
-    <!-- Panel header -->
+    <!-- Header Panel -->
     <div class="panel-header">
         <div class="panel-title">
             <h1>Panel de Administración</h1>
@@ -70,7 +70,6 @@
                     </td>
 
                     <td class="actions">
-
                         <button class="btn-action btn-edit" title="Editar" 
                             data-bs-toggle="modal"
                             data-bs-target="#modalEdit"
@@ -100,11 +99,11 @@
             </tbody>
         </table>
     </div>
-
 </div>
-
 @include('admin.movie.components.modalMovieCreate')
 @include('admin.movie.components.modalMovieEdit')
-
-<script src="{{ asset('js/admin/modalMovieEdit.js') }}"></script>
+@push('scripts')
+    <script src="{{ asset('js/admin/modalErrors.js') }}"></script>
+    <script src="{{ asset('js/admin/modalMovieEdit.js') }}"></script>
+@endpush
 @endsection

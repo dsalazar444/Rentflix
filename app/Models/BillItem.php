@@ -107,4 +107,9 @@ class BillItem extends Model
     {
         $this->attributes['updated_at'] = $updated_at;
     }
+
+    public function getTotalPrice(): int
+    {
+        return $this->attributes['price'] *  $this->attributes['quantity'];
+    }
 }

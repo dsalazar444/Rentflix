@@ -57,6 +57,22 @@
     height: 320px;
     border-radius: 14px;
     overflow: hidden;
+    display: block;
+    text-decoration: none;
+    position: relative;
+}
+.featured-rank {
+    position: absolute;
+    left: 0.7rem;
+    bottom: 0.4rem;
+    z-index: 3;
+    font-size: 5.4rem;
+    font-weight: 900;
+    line-height: 0.9;
+    color: rgb(1, 58, 1);
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    opacity: 0.82;
+    pointer-events: none;
 }
 .featured-img {
     width: 100%;

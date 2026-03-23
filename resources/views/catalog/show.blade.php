@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="{{ asset('css/catalog/show.css') }}">
 <div class="movie-detail-wrapper">
 
+    @if (session('success'))
+        <div class="alert-success">{{ session('success') }}</div>
+    @endif
+
     <div class="movie-detail-container">
 
         <div class="movie-poster-col">
@@ -10,24 +14,44 @@
                 <img src="{{ asset('storage/' . $viewData['movie']->getFileName()) }}" alt="{{ $viewData['movie']->getTitle() }}" class="poster-img">
             </div>
 
-            <button class="btn-rent">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
-                Reservar
-            </button>
+            <form action="{{ route('cart.add', ['id' => $viewData['movie']->getId()]) }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn-rent {{ $viewData['isInShoppingCart'] ? 'btn-rent-disabled' : '' }}" {{ $viewData['isInShoppingCart'] ? 'disabled' : '' }} aria-disabled="{{ $viewData['isInShoppingCart'] ? 'true' : 'false' }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    {{ $viewData['isInShoppingCart'] ? 'Ya agregado al carrito' : 'Agregar al carrito' }}
+                </button>
+            </form>
 
             <a href="{{ $viewData['movie']->getTrailerLink() }}" target="_blank" class="btn-trailer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2">
                     <polygon points="5 3 19 12 5 21 5 3"/>
                 </svg>
-                Ver Trailer
+                @if($viewData['isInLibrary'])
+                    Ver Pelicula
+                @else
+                    Ver Trailer
+                @endif
             </a>
+
+            <form action="{{ route($viewData['isInWishlist'] ? 'collections.wishlist.delete' : 'collections.wishlist.add', ['id' => $viewData['movie']->getId()]) }}" method="POST" style="display: inline;">
+                @csrf
+                @if($viewData['isInWishlist'])
+                    @method('DELETE')
+                @endif
+                <button type="submit" class="btn-wishlist {{ $viewData['isInWishlist'] ? 'btn-wishlist-remove' : '' }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    {{ $viewData['isInWishlist'] ? 'Eliminar de Wishlist' : 'Añadir a Wishlist' }}
+                </button>
+            </form>
         </div>
 
         <div class="movie-info-col">
