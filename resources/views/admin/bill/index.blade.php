@@ -1,6 +1,6 @@
+<!-- Made by: Daniela Salazar -->
 @extends('layouts.app')
 @section('content')
-<!-- Made by: Daniela Salazar -->
 <link rel="stylesheet" href="{{ asset('css/admin/movie.index.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/bill.index.css') }}">

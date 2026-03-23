@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 // models are PHP classes that represent and interact with your database tables using the built-in Eloquent ORM.
 
@@ -123,6 +126,13 @@ class Bill extends Model
         return $this->items;
     }
 
+    public function calculateTotalPrice(): int
+    {
+        return $this->items->sum(function($item) {
+            return $item->getPrice() * $item->getQuantity();
+        });
+    }
+
     // Synchronizes bill items: updates existing items and deletes those not in the provided list
     public function syncItems($items): void
     {
@@ -160,4 +170,17 @@ class Bill extends Model
             throw $e;
         }
     }
+
+    public function generatePdf(): Response
+    {
+        if (!$this->relationLoaded('items')) {
+            $this->load('items.movie');
+        }
+
+        $pdf = Pdf::loadView('bill.pdf', ['bill' => $this]);
+        
+        return $pdf->download('factura_id_' . $this->id . '.pdf');
+    }
+
+
 }
