@@ -1,9 +1,9 @@
 // Made by: Laura Andrea Castrillón Fajardo
 
 // Manages the display of validation errors in the modals for creating and editing movies.
-document.addEventListener('DOMContentLoaded', function() {
-    const hasErrors = document.getElementById('hasErrors');
-    const lastFormSubmitted = document.getElementById('lastFormSubmitted');
+document.addEventListener("DOMContentLoaded", function () {
+    const hasErrors = document.getElementById("hasErrors");
+    const lastFormSubmitted = document.getElementById("lastFormSubmitted");
 
     const cleanModalErrors = (modalId) => {
         const modal = document.getElementById(modalId);

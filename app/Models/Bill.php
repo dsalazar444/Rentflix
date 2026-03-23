@@ -142,18 +142,22 @@ class Bill extends Model
     // Creates a new bill with its associated items in a single transaction
     public static function createWithItems(array $billData, array $items): self
     {
-        $bill = self::create($billData);
+        try {
+            $bill = self::create($billData);
 
-        if ($items) {
-            foreach ($items as $itemData) {
-                $bill->items()->create([
-                    'movie_id' => $itemData['movie_id'],
-                    'quantity' => $itemData['quantity'],
-                    'price' => $itemData['price'],
-                ]);
+            if ($items) {
+                foreach ($items as $index => $itemData) {
+                    $createdItem = $bill->items()->create([
+                        'movie_id' => $itemData['movie_id'],
+                        'quantity' => $itemData['quantity'],
+                        'price' => $itemData['price'],
+                    ]);
+                }
             }
-        }
 
-        return $bill;
+            return $bill;
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 }

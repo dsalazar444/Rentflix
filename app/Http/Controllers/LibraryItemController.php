@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\LibraryItem;
-use Illuminate\View\View;
 use App\Services\LibraryItemService;
+use Illuminate\View\View;
 
 class LibraryItemController extends Controller
 {

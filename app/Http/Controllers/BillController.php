@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBillRequest;
 use App\Models\Bill;
+use App\Models\LibraryItem;
 use App\Models\Movie;
 use App\Models\User;
 use Exception;
@@ -37,7 +38,7 @@ class BillController extends Controller
                 $request->items ?? []
             );
 
-            return redirect()->route('admin.bill.index')->with('success', 'Factura creada correctamente');
+            return redirect()->back()->with('success', 'Factura creada correctamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error al crear la factura. Por favor, intenta de nuevo.');
         }
@@ -68,5 +69,29 @@ class BillController extends Controller
         }
 
         return redirect()->route('admin.bill.index')->with('success', 'Factura actualizada correctamente');
+    }
+
+    public function processPayment(CreateBillRequest $request): RedirectResponse
+    {
+        try {
+            $bill = Bill::createWithItems(
+                [
+                    'user_id' => $request->user_id,
+                    'price' => $request->price,
+                    'address' => $request->address,
+                ],
+                $request->items ?? []
+            );
+
+            // Sync purchased movies to user's library
+            LibraryItem::synchLibraryAfterPurchase($bill);
+
+            // Clean shopping cart from session
+            session()->forget('cart');
+
+            return redirect()->back()->with('success', 'Pago procesado correctamente');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error al procesar pago. Por favor, intenta de nuevo.');
+        }
     }
 }
