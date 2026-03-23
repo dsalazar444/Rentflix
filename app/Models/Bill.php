@@ -5,7 +5,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Bill extends Model
 {
-    use HasFactory;
     /*
      * BILL ATTRIBUTES
      * $this->attributes['id'] - int - contains the bill primary key (id)
@@ -49,7 +47,7 @@ class Bill extends Model
 
     public function setId(int $id): void
     {
-        return str_pad($this->attributes['id'], 6, '0', STR_PAD_LEFT);
+        $this->attributes['id'] = $id;
     }
 
     public function getPrice(): int
@@ -103,7 +101,7 @@ class Bill extends Model
 
     public function setCreatedAt($created_at)
     {
-        return $this->created_at->format('d-m-Y');
+        $this->attributes['created_at'] = $created_at;
     }
 
     public function getUpdatedAt(): string
