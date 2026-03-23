@@ -69,6 +69,16 @@
 .btn-rent:hover {
     background: #c1121f;
 }
+.btn-rent.btn-rent-disabled,
+.btn-rent:disabled {
+    background: #4b5563;
+    color: #d1d5db;
+    cursor: not-allowed;
+}
+.btn-rent.btn-rent-disabled:hover,
+.btn-rent:disabled:hover {
+    background: #4b5563;
+}
 .btn-trailer {
     background: #22c55e;
     border: none;

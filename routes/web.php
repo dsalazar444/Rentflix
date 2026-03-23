@@ -46,3 +46,7 @@ Route::delete('/catalog/wishlist/delete/{id}', 'App\Http\Controllers\WishlistIte
 // Library routes
 Route::get('/collections/library', 'App\Http\Controllers\LibraryItemController@index')->name('collections.library');
 
+// Shopping cart routes
+Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');
+Route::delete('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
+Route::get('/cart/clean', 'App\Http\Controllers\ShoppingCartController@clean')->name('cart.clean');

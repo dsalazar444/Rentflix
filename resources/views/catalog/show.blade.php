@@ -14,16 +14,18 @@
                 <img src="{{ asset('storage/' . $viewData['movie']->getFileName()) }}" alt="{{ $viewData['movie']->getTitle() }}" class="poster-img">
             </div>
 
-            <button class="btn-rent">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
-                Reservar
-            </button>
+            <form action="{{ route('cart.add', ['id' => $viewData['movie']->getId()]) }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn-rent {{ $viewData['isInShoppingCart'] ? 'btn-rent-disabled' : '' }}" {{ $viewData['isInShoppingCart'] ? 'disabled' : '' }} aria-disabled="{{ $viewData['isInShoppingCart'] ? 'true' : 'false' }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    {{ $viewData['isInShoppingCart'] ? 'Ya agregado al carrito' : 'Agregar al carrito' }}
+                </button>
+            </form>
 
             <a href="{{ $viewData['movie']->getTrailerLink() }}" target="_blank" class="btn-trailer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
@@ -32,7 +34,7 @@
                 </svg>
                 @if($viewData['isInLibrary'])
                     Ver Pelicula
-                @else   
+                @else
                     Ver Trailer
                 @endif
             </a>

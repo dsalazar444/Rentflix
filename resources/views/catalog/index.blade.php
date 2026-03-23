@@ -7,24 +7,11 @@
     <section class="featured-section">
         <div class="section-header">
             <h2 class="section-title"><em>Destacados</em></h2>
-            <div class="carousel-controls">
-                <button class="carousel-btn" id="btn-prev">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"/>
-                    </svg>
-                </button>
-                <button class="carousel-btn" id="btn-next">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"/>
-                    </svg>
-                </button>
-            </div>
         </div>
         <div class="featured-carousel" id="featured-carousel">
             @forelse ($viewData['featured'] as $movie)
             <a href="{{ route('catalog.show', ['id' => $movie['id']]) }}" class="featured-card" title="{{ $movie->getTitle() }}">
+                <span class="featured-rank">{{ $loop->iteration }}</span>
                 <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="featured-img">
             </a>
             @empty

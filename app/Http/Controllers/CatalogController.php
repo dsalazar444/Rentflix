@@ -54,6 +54,10 @@ class CatalogController extends Controller
         $viewData['movie'] = $movie;
         $viewData['isInWishlist'] = false;
         $viewData['isInLibrary'] = false;
+        $viewData['isInShoppingCart'] = false;
+
+        $shoppingCart = array_map('intval', session()->get('cart', []));
+        $viewData['isInShoppingCart'] = in_array($movie->getId(), $shoppingCart, true);
 
         if (session('user_id')) {
             $viewData['isInWishlist'] = WishlistItem::where('user_id', session('user_id'))
