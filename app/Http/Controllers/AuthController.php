@@ -4,12 +4,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\LoginUserRequest;
+use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $validated['email'])->first();
 
-        if (!$user || !Hash::check($validated['password'], $user->getPassword())) {
+        if (! $user || ! Hash::check($validated['password'], $user->getPassword())) {
             return redirect()->route('auth.index')->with('error', 'Credenciales inválidas.');
         }
 
@@ -54,7 +54,7 @@ class AuthController extends Controller
     public function logout(Request $request): RedirectResponse
     {
         $request->session()->flush();
+
         return redirect()->route('catalog.index');
     }
-
 }

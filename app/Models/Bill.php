@@ -1,19 +1,18 @@
 <?php
 
-// # Autora: Daniela Salazar
+// Made by: Daniela Salazar
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 // models are PHP classes that represent and interact with your database tables using the built-in Eloquent ORM.
 
 class Bill extends Model
 {
-    use HasFactory;
     /*
      * BILL ATTRIBUTES
      * $this->attributes['id'] - int - contains the bill primary key (id)
@@ -26,7 +25,7 @@ class Bill extends Model
 
     public function items(): HasMany
     {
-        return $this->hasMany(BillItem::class)->chaperone();
+        return $this->hasMany(BillItem::class);
     }
 
     public function user(): BelongsTo
@@ -34,18 +33,21 @@ class Bill extends Model
         return $this->belongsTo(User::class)->withDefault();
     }
 
-
     protected $fillable = ['price', 'address', 'user_id'];
-
 
     public function getId(): int
     {
         return $this->attributes['id'];
     }
 
-    public function getIdFormatted(): string
+    public function getIdWithNumeral(): string
     {
-        return str_pad($this->attributes['id'], 6, '0', STR_PAD_LEFT);
+        return '#'.$this->attributes['id'];
+    }
+
+    public function setId(int $id): void
+    {
+        $this->attributes['id'] = $id;
     }
 
     public function getPrice(): int
@@ -68,14 +70,38 @@ class Bill extends Model
         $this->attributes['address'] = $address;
     }
 
+    public function getUserId(): int
+    {
+        return $this->attributes['user_id'];
+    }
+
+    public function setUserId(int $user_id): void
+    {
+        $this->attributes['user_id'] = $user_id;
+    }
+
+    public function getUserFirstName(): string
+    {
+        if ($this->user && $this->user->name) {
+            return explode(' ', trim($this->user->name))[0];
+        }
+
+        return '';
+    }
+
     public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getCreatedAtFormatted(): string
+    public function getCreatedAtWithFormat(): string
     {
-        return $this->created_at->format('d-m-Y');
+        return $this->created_at ? $this->created_at->format('M d, Y') : '';
+    }
+
+    public function setCreatedAt($created_at)
+    {
+        $this->attributes['created_at'] = $created_at;
     }
 
     public function getUpdatedAt(): string
@@ -86,5 +112,48 @@ class Bill extends Model
     public function setUpdatedAt($updated_at)
     {
         $this->attributes['updated_at'] = $updated_at;
+    }
+
+    public function getItems(): Collection
+    {
+        if (! $this->relationLoaded('items')) {
+            $this->load('items.movie');
+        }
+
+        return $this->items;
+    }
+
+    // Synchronizes bill items: updates existing items and deletes those not in the provided list
+    public function syncItems($items): void
+    {
+        $requestItemIds = collect($items ?? [])->pluck('id')->filter()->map(fn ($id) => (int) $id)->toArray();
+
+        $this->items()->whereNotIn('id', $requestItemIds)->delete();
+
+        foreach ($items as $itemData) {
+            $item = $this->items()->where('id', $itemData['id'])->first();
+            if ($item) {
+                $item->quantity = $itemData['quantity'];
+                $item->save();
+            }
+        }
+    }
+
+    // Creates a new bill with its associated items in a single transaction
+    public static function createWithItems(array $billData, array $items): self
+    {
+        $bill = self::create($billData);
+
+        if ($items) {
+            foreach ($items as $itemData) {
+                $bill->items()->create([
+                    'movie_id' => $itemData['movie_id'],
+                    'quantity' => $itemData['quantity'],
+                    'price' => $itemData['price'],
+                ]);
+            }
+        }
+
+        return $bill;
     }
 }

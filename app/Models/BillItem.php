@@ -58,7 +58,6 @@ class BillItem extends Model
         $this->attributes['price'] = $price;
     }
 
-
     public function getQuantity(): int
     {
         return $this->attributes['quantity'];

@@ -1,6 +1,6 @@
 <?php
 
-// Autora: Daniela Salazar
+// Made by: Daniela Salazar
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
