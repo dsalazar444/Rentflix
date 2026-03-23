@@ -8,6 +8,7 @@ use App\Interfaces\ImageStorage;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -87,5 +88,17 @@ class MovieController extends Controller
         $movie->update($data);
 
         return redirect()->route('admin.movie.index');
+    }
+
+    public function search(Request $request): View
+    {
+        $query = $request->get('movie_name', ''); 
+        $result = Movie::searchMovieByName($query);
+
+        return view('movie.result')->with('viewData', [
+            'movies' => $result['movies'],
+            'query' => $query,
+            'not_found' => $result['not_found']
+        ]);
     }
 }

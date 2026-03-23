@@ -210,4 +210,24 @@ class Movie extends Model
     {
         $this->attributes['trailer_link'] = $trailer_link;
     }
+
+    public static function searchMovieByName(string $movie_name){
+
+        $movies = collect();
+        $not_found = false;
+
+        if ($movie_name) {
+           $movies = Movie::whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($movie_name) . '%'])->get();
+            
+            if ($movies->isEmpty()) {
+                $not_found = true;
+            }
+        }
+
+        return [
+            'movies' => $movies,
+            'not_found' => $not_found
+            ];
+
+    }
 }

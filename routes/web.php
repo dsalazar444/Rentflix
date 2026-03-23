@@ -56,3 +56,7 @@ Route::get('/collections/library', 'App\Http\Controllers\LibraryItemController@i
 Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');
 Route::delete('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
 Route::get('/cart/clean', 'App\Http\Controllers\ShoppingCartController@clean')->name('cart.clean');
+
+
+// Movie routes
+Route::get('/movie', 'App\Http\Controllers\MovieController@search')->name('movie.search');
