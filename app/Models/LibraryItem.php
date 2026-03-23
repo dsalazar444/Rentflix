@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Bill;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -78,5 +79,24 @@ class LibraryItem extends Model
         return $this->attributes['updated_at'];
     }
 
+    public static function synchLibraryAfterPurchase(Bill $bill): void
+    {
+        try {
+            
+            // Add purchased movies to user's library
+            foreach ($bill->items as $billItem) {
+                
+                $libraryItem = self::firstOrCreate(
+                    [
+                        'user_id' => $bill->user_id,
+                        'movie_id' => $billItem->movie_id,
+                    ]
+                );                
+            }
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
 
 }

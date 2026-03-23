@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBillRequest;
 use App\Models\Bill;
+use App\Models\LibraryItem;
 use App\Models\Movie;
 use App\Models\User;
 use Exception;
@@ -74,7 +75,6 @@ class BillController extends Controller
     public function processPayment(CreateBillRequest $request): RedirectResponse
     {
         try {
-            
             $bill = Bill::createWithItems(
                 [
                     'user_id' => $request->user_id,
@@ -83,14 +83,16 @@ class BillController extends Controller
                 ],
                 $request->items ?? []
             );
-            
-            // Clean shopping cart from session only for client checkout
+
+            // Sync purchased movies to user's library
+            LibraryItem::synchLibraryAfterPurchase($bill);
+
+            // Clean shopping cart from session
             session()->forget('cart');
 
             return redirect()->back()->with('success', 'Pago procesado correctamente');
         } catch (Exception $e) {
-
-        return redirect()->back()->with('error', 'Error al procesar pago. Por favor, intenta de nuevo.');
+            return redirect()->back()->with('error', 'Error al procesar pago. Por favor, intenta de nuevo.');
         }
     }
 }

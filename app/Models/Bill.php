@@ -154,10 +154,7 @@ class Bill extends Model
                     ]);
                 }
             }
-            
-            // Double-check what's in DB
-            $checkCount = \App\Models\BillItem::where('bill_id', $bill->id)->count();
-
+           
             return $bill;
         } catch (Exception $e) {
             throw $e;
