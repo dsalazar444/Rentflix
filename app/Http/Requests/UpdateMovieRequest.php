@@ -25,7 +25,7 @@ class UpdateMovieRequest extends FormRequest
             'quantity' => 'required|integer|min:0',
             'movie_image' => 'nullable|image|mimes:jpeg,png,jpg',
             'description' => 'required|string',
-            'trailer_link' => 'nullable|url',
+            'trailer_link' => 'required|url',
         ];
     }
 

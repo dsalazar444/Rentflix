@@ -110,8 +110,8 @@
             <!--  Total Price Bill  -->
             <div class="total-section">
                 <div class="total-row final">
-                    <span>Total</span>
-                    <span>${{ $bill->getPrice() }}</span>
+                    <span>Total: </span>
+                    <span> ${{ $bill->getPrice() }}</span>
                 </div>
             </div>
 
