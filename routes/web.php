@@ -44,6 +44,10 @@ Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\BillController@de
 Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\BillController@update')->name('admin.bill.update');
 Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->name('admin.bill.save');
 
+// bill routes
+Route::get('/bill/list', 'App\Http\Controllers\BillController@listBills')->name('bill.list');
+Route::get('/bills/download/{id}', 'App\Http\Controllers\BillController@download')->name('bill.download');
+
 // Wishlist routes
 Route::get('/collections/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('collections.wishlist');
 Route::post('/catalog/wishlist/add/{id}', 'App\Http\Controllers\WishlistItemController@add')->name('collections.wishlist.add');

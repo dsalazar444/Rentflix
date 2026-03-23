@@ -66,6 +66,7 @@ $cartSubtotal = $cartSubtotal ?? 0;
                 </button>
 
                 <div class="profile-menu" role="menu" aria-hidden="true">
+                    <a href="{{ route('bill.list') }}" class="profile-menu-item" role="menuitem">Tus facturas</a>
                     <a href="{{ route('auth.logout') }}" class="profile-menu-item" role="menuitem">Cerrar sesion</a>
                 </div>
             </div>

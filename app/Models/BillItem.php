@@ -14,7 +14,7 @@ class BillItem extends Model
     /*
      * BILL ITEM ATTRIBUTES
      * $this->attributes['id'] - int - contains the primary key of the bill item
-     * $this->attributes['price'] - int - contains the price of the item
+     * $this->attributes['price'] - int - contains the unit price (price per single unit)
      * $this->attributes['quantity'] - int - contains the quantity of this item in the bill
      * $this->attributes['movie_id'] - int - contains the foreign key to the movie
      * $this->attributes['bill_id'] - int - contains the foreign key to the bill

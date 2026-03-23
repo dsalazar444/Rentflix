@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Daniela Salazar Amaya
+
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;

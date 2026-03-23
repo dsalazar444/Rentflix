@@ -12,6 +12,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class BillController extends Controller
@@ -93,5 +94,25 @@ class BillController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error al procesar pago. Por favor, intenta de nuevo.');
         }
+    }
+
+    public function listBills(): View
+    {
+        $userId = session('user_id');
+        $viewData = [];
+        $viewData['bills'] = Bill::where('user_id', $userId)->with('items.movie')->get();
+        
+        return view('bill.listBills')->with('viewData', $viewData);
+    }
+
+    public function download(string $id): Response
+    {
+        $bill = Bill::with('items.movie', 'user')->find($id);
+
+        if (!$bill) {
+            abort(404, 'Factura no encontrada');
+        }
+
+        return $bill->generatePDF();
     }
 }
