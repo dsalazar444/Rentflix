@@ -5,16 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\WishlistItem;
 use App\Models\LibraryItem;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class CatalogController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        $selectedGenre = $request->query('genre', 'all');
+        $selectedSort = $request->query('sort', 'priceAsc');
+
+        $moviesQuery = Movie::query();
+
+        if ($selectedGenre !== 'all') {
+            $moviesQuery->where('genre', $selectedGenre);
+        }
+
+        if ($selectedSort === 'priceDesc') {
+            $moviesQuery->orderBy('price', 'desc');
+        } elseif ($selectedSort === 'available') {
+            $moviesQuery->where('quantity', '>', 0);
+            $moviesQuery->orderBy('title', 'asc');
+        } else {
+            $moviesQuery->orderBy('price', 'asc');
+        }
+
+        $movies = $moviesQuery->get();
+
         $viewData = [];
-        $viewData['movies'] = Movie::all();
+        $viewData['movies'] = $movies;
+        $viewData['moviesCount'] = $movies->count();
         $viewData['newdlyAdded'] = Movie::orderBy('created_at', 'desc')->take(5)->get();
+        $viewData['featured'] = Movie::orderBy('quantity_views', 'desc')->take(4)->get();
+        $viewData['selectedGenre'] = $selectedGenre;
+        $viewData['selectedSort'] = $selectedSort;
 
         return view('catalog.index')->with('viewData', $viewData);
     }
