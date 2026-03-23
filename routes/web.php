@@ -1,6 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\InvoiceMail;
+use App\Models\Bill;
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-mail', function () {
+    $bill = Bill::with(['user', 'items.movie'])->find(1);
+    
+    Mail::to($bill->user->email)->send(new InvoiceMail($bill));
+    
+    return 'Correo enviado!';
+});
 
 // Admin routes
 Route::get('/admin/movie', 'App\Http\Controllers\MovieController@index')->name('admin.movie.index');
