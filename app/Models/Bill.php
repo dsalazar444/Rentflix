@@ -147,13 +147,16 @@ class Bill extends Model
 
             if ($items) {
                 foreach ($items as $index => $itemData) {
-                    $bill->items()->create([
+                    $createdItem = $bill->items()->create([
                         'movie_id' => $itemData['movie_id'],
                         'quantity' => $itemData['quantity'],
                         'price' => $itemData['price'],
                     ]);
                 }
             }
+            
+            // Double-check what's in DB
+            $checkCount = \App\Models\BillItem::where('bill_id', $bill->id)->count();
 
             return $bill;
         } catch (Exception $e) {

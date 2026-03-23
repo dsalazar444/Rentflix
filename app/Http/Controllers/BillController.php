@@ -37,11 +37,6 @@ class BillController extends Controller
                 $request->items ?? []
             );
 
-            // Clean shopping cart from session only for client checkout
-            if ($request->route()->getName() === 'cart.save') {
-                session()->forget('cart');
-            }
-
             return redirect()->back()->with('success', 'Factura creada correctamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error al crear la factura. Por favor, intenta de nuevo.');
@@ -73,5 +68,29 @@ class BillController extends Controller
         }
 
         return redirect()->route('admin.bill.index')->with('success', 'Factura actualizada correctamente');
+    }
+
+
+    public function processPayment(CreateBillRequest $request): RedirectResponse
+    {
+        try {
+            
+            $bill = Bill::createWithItems(
+                [
+                    'user_id' => $request->user_id,
+                    'price' => $request->price,
+                    'address' => $request->address,
+                ],
+                $request->items ?? []
+            );
+            
+            // Clean shopping cart from session only for client checkout
+            session()->forget('cart');
+
+            return redirect()->back()->with('success', 'Pago procesado correctamente');
+        } catch (Exception $e) {
+
+        return redirect()->back()->with('error', 'Error al procesar pago. Por favor, intenta de nuevo.');
+        }
     }
 }

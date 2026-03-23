@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
-            <form action="{{ route('cart.save') }}" method="POST" data-clean-url="{{ route('cart.clean') }}">
+            <form action="{{ route('cart.process') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="user_id" value="{{ session('user_id') }}">
