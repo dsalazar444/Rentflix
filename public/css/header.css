@@ -1,7 +1,11 @@
 /** Made by: Samuel Martínez Arteaga */
 
 .rentflix-header {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8));
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.95),
+        rgba(0, 0, 0, 0.8)
+    );
     border-bottom: 1px solid rgba(255, 0, 0, 0.1);
     position: sticky;
     top: 0;

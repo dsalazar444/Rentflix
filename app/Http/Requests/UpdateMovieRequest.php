@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMovieRequest extends FormRequest
 {
@@ -19,7 +19,7 @@ class UpdateMovieRequest extends FormRequest
             'director' => 'required|string',
             'genre' => 'required|in:accion,aventuras,animacion,comedia,drama,fantasia,terror,ciencia ficcion',
             'classification' => 'required|string',
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
+            'year' => 'required|integer|min:1900|max:'.date('Y'),
             'format' => 'required|in:DVD,digital',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',

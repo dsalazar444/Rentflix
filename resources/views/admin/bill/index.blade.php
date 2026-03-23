@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
+<!-- Made by: Daniela Salazar -->
 <link rel="stylesheet" href="{{ asset('css/admin/movie.index.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/bill.index.css') }}">
 <input type="hidden" id="hasErrors" value="{{ $errors->any() ? '1' : '0' }}">
 <input type="hidden" id="lastFormSubmitted" value="{{ session('lastForm', '') }}">
 <div class="admin-panel">
@@ -10,12 +12,25 @@
     <div class="panel-header">
         <div class="panel-title">
             <h1>Panel de Administración</h1>
-            <p>Gestiona el catálogo de películas</p>
+            <p>Gestiona el catálogo de facturas</p>
         </div>
-        <button class="btn-add" data-bs-toggle="modal" data-bs-target="#movieModal">
-            <span>+</span> Agregar Película
+        <button class="btn-add" data-bs-toggle="modal" data-bs-target="#modalBillCreate"> <!--  CAMBIARRRRRRRRRRRR-->
+            <span>+</span> Agregar Factura
         </button>
     </div>
+
+    @if(session('success'))
+        <div class="alert alert-success alert-notify-m">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if($errors->any())
+        <ul id="errors" class="alert alert-danger alert-notify-m list-unstyled">
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
 
     <!-- Search Bar -->
     <div class="search-box">
@@ -24,7 +39,7 @@
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
         </svg>
-        <input type="text" placeholder="Buscar películas..." id="searchInput">
+        <input type="text" placeholder="Buscar facturas por id..." id="searchInput">
     </div>
 
     <!-- Table  -->
@@ -32,49 +47,37 @@
         <table class="table-movies">
             <thead>
                 <tr>
-                    <th>Película</th>
-                    <th>Género</th>
-                    <th>Año</th>
-                    <th>Formato</th>
+                    <th>ID Factura</th>
+                    <th>Fecha</th>
                     <th>Precio</th>
-                    <th>Estado</th>
+                    <th>A nombre de</th>
+                    <th>Items</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($viewData["movies"] as $movie)
+                @foreach ($viewData["bills"] as $bill)
                 <tr class="movie-row">
                     <td class="movie-info">
-                        <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="movie-thumb">
                         <div>
-                            <span class="movie-title">{{ $movie->getTitle() }}</span>
-                            <span class="movie-classification">{{ $movie->getClassificationCapitalized() }}+</span>
+                            <span class="movie-title">{{ $bill->getIdWithNumeral() }}</span>
                         </div>
                     </td>
-                    <td>{{ $movie->getGenreCapitalized() }}</td>
-                    <td>{{ $movie->getYear() }}</td>
+                    <td>{{ $bill->getCreatedAtWithFormat() }}</td>
+                    <td class="price">${{ number_format($bill->getPrice(), 2) }}</td>
+                    <td>Id: {{ $bill->getUserId() }}, {{ $bill->getUserFirstName()}}</td>
                     <td>
-                        <span class="badge-format">
-                            {{ $movie->getFormatCapitalized() }}
-                        </span>
+                        <button class="btn-items" data-items='@json($bill->getItems())' onclick="showItemsModal(this)">
+                            <span>+</span> Ver items
+                        </button>
                     </td>
-                    <td class="price">${{ number_format($movie->getPrice(), 2) }}</td>
-                    <td>
-                        <span class="badge-status available">
-                            @if ($movie->getQuantity() > 0)
-                            Disponible
-                            @else
-                            Agotada
-                            @endif
-                        </span>
-                    </td>
-
+            
                     <td class="actions">
 
                         <button class="btn-action btn-edit" title="Editar" 
                             data-bs-toggle="modal"
-                            data-bs-target="#modalEdit"
-                            data-movie="{{ $movie->toJson() }}">
+                            data-bs-target="#modalBillEdit"
+                            data-bill="{{ $bill->toJson() }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -82,7 +85,7 @@
                             </svg>
                         </button>
 
-                        <form action="{{ route('admin.movie.delete', ['id' => $movie->getId()]) }}" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta película?')">
+                        <form action="{{ route('admin.bill.delete', ['id' => $bill->getId()]) }}" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta factura?')">
                             @csrf
                             @method('DELETE')
                             <button class="btn-action btn-delete" type="submit" title="Eliminar">
@@ -103,8 +106,12 @@
 
 </div>
 
-@include('admin.movie.components.modalMovieCreate')
-@include('admin.movie.components.modalMovieEdit')
+@include('admin.bill.components.modalListItems')
+@include('admin.bill.components.modalBillEdit', ['viewData' => $viewData])
+@include('admin.bill.components.modalBillCreate', ['users' => $viewData['users'], 'movies' => $viewData['movies']])
 
-<script src="{{ asset('js/admin/modalMovieEdit.js') }}"></script>
+<script src="{{ asset('js/admin/bill/modalListItems.js') }}"></script>
+<script src="{{ asset('js/admin/bill/modalBillCreate.js') }}"></script>
+<script src="{{ asset('js/admin/bill/modalBillEdit.js') }}"></script>
+
 @endsection

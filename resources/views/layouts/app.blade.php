@@ -23,7 +23,7 @@
     </script>
     <script src="{{ asset('js/auth/headerProfileMenu.js') }}"></script>
     <script src="{{ asset('js/admin/modalErrors.js') }}"></script>
-    <script src="{{ asset('js/admin/modalMovieEdit.js') }}"></script>
+    <!--<script src="{{ asset('js/admin/modalMovieEdit.js') }}"></script>-->
 </body>
 
 </html>

@@ -1,66 +1,72 @@
 <?php
 
-// Autora: Daniela Salazar
+// Made by: Daniela Salazar
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBillRequest;
+use App\Http\Requests\CreateBillRequest;
 use App\Models\Bill;
+use App\Models\Movie;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class BillController extends Controller
 {
     public function index(): View
     {
-
         $viewData = [];
-        $viewData['title'] = 'Bills - RentFlix';
-        $viewData['subtitle'] = 'List of bills';
-        $viewData['bills'] = Bill::all();
+        $viewData['bills'] = Bill::with('items.movie')->get();
+        $viewData['users'] = User::all();
+        $viewData['movies'] = Movie::all();
 
-        return view('bill.index')->with('viewData', $viewData);
+        return view('admin.bill.index')->with('viewData', $viewData);
     }
 
-    // Index-like function but for a single product
-    public function show(string $id): View
+    public function save(CreateBillRequest $request): RedirectResponse
     {
+        try {
+            Bill::createWithItems(
+                [
+                    'user_id' => $request->user_id,
+                    'price' => $request->price,
+                    'address' => $request->address,
+                ],
+                $request->items ?? []
+            );
 
-        $viewData = [];
-        $bill = Bill::findOrFail($id);
-        $viewData['title'] = 'Bill '.$id.' - RentFlix';
-        $viewData['subtitle'] = 'Bill '.$id.' - Bill information';
-        $viewData['bill'] = $bill;
-
-        return view('bill.show')->with('viewData', $viewData);
-    }
-
-    public function create(): View
-    {
-
-        $viewData = [];
-        $viewData['title'] = 'Create bill';
-
-        return view('bill.create')->with('viewData', $viewData);
-    }
-
-    public function save(StoreBillRequest $request): RedirectResponse
-    {
-
-        $request->validate([
-            'price' => 'required|numeric|min:0',
-            'address' => 'required|string|max:300',
-        ]);
-
-        Bill::create($request->only(['price', 'address']));
-
-        return redirect()->route('bill.create')->with('success', 'Bill created successfully!');
+            return redirect()->route('admin.bill.index')->with('success', 'Factura creada correctamente');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error al crear la factura. Por favor, intenta de nuevo.');
+        }
     }
 
     public function delete(string $id): RedirectResponse
     {
-        Bill::destroy($id);
+        $bill = Bill::find($id);
+        if (! $bill) {
+            return redirect()->route('admin.bill.index');
+        }
+        $bill->delete();
 
-        return redirect()->route('bill.index')->with('success', 'Bill deleted successfully!');
+        return redirect()->route('admin.bill.index')->with('success', 'Factura eliminada correctamente');
+    }
+
+    public function update(Request $request, int $id): RedirectResponse
+    {
+
+        $bill = Bill::find($id);
+
+        if (! $bill) {
+            return redirect()->route('admin.bill.index')->with('failure', 'Factura no existe');
+        }
+
+        if ($request->has('items')) {
+            $bill->syncItems($request->items);
+        }
+
+        return redirect()->route('admin.bill.index')->with('success', 'Factura actualizada correctamente');
     }
 }

@@ -2,7 +2,7 @@
     padding: 2rem;
     background-color: #111;
     color: #fff;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Segoe UI", sans-serif;
 }
 .panel-header {
     display: flex;
@@ -34,9 +34,28 @@
     gap: 0.5rem;
     transition: background 0.2s;
 }
-.btn-add:hover {
+
+.btn-add:hover,
+.btn-items:hover {
     background: #c1121f;
 }
+
+.btn-items {
+    background: #e63946;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: background 0.2s;
+    margin: 0.1rem 0.2rem;
+}
+
 .search-box {
     display: flex;
     align-items: center;
@@ -162,7 +181,9 @@
     cursor: pointer;
     padding: 0.4rem;
     border-radius: 6px;
-    transition: background 0.2s, color 0.2s;
+    transition:
+        background 0.2s,
+        color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
