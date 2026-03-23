@@ -32,13 +32,15 @@ $cartSubtotal = $cartSubtotal ?? 0;
             </a>
         </nav>
 
-        <div class="header-search">
-            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.35-4.35"></path>
-            </svg>
-            <input type="text" class="search-input" placeholder="Buscar peliculas...">
-        </div>
+        <form action="{{ route('movie.search') }}" method="GET" class="header-search-form">
+            <div class="header-search">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" name="movie_name" class="search-input" placeholder="Buscar peliculas..." required>
+            </div>
+        </form>
 
         <div class="header-actions">
             <a href="{{ route('collections.wishlist') }}">
