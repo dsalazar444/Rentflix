@@ -22,7 +22,7 @@ class BillItem extends Model
      * $this->attributes['updated_at'] - timestamp - contains the last modification date
      */
 
-    protected $fillable = ['price', 'quantity', 'user_id', 'movie_id'];
+    protected $fillable = ['price', 'quantity', 'movie_id'];
 
     // relationships
 

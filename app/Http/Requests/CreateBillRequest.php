@@ -21,6 +21,7 @@ class CreateBillRequest extends FormRequest
             'items' => 'required|array',
             'items.*.movie_id' => 'required|exists:movies,id',
             'items.*.quantity' => 'required|integer|min:1',
+            'items.*.price' => 'required|numeric|min:0',
         ];
     }
 

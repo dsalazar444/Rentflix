@@ -6,7 +6,8 @@ $cartMovieItems = $cartMovieItems ?? collect();
 $cartCount = $cartCount ?? 0;
 $cartSubtotal = $cartSubtotal ?? 0;
 @endphp
-
+<link rel="stylesheet" href="{{ asset('css/catalog/index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <header class="rentflix-header client-header">
     <div class="header-container">
         <a href="{{ route('catalog.index') }}" class="header-logo" aria-label="Ir al catalogo">
@@ -72,6 +73,12 @@ $cartSubtotal = $cartSubtotal ?? 0;
     </div>
 </header>
 
+@if(session('success'))
+    <div class="alert-success">{{ session('success') }}</div>
+@elseif(session('error'))
+    <div class="alert-error">{{ session('error') }}</div>
+@endif
+
 <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
     <div class="offcanvas-header cart-offcanvas-header">
         <h5 class="offcanvas-title" id="cartOffcanvasLabel">Mi carrito</h5>
@@ -117,7 +124,9 @@ $cartSubtotal = $cartSubtotal ?? 0;
                 <span>Total</span>
                 <strong>${{ number_format($cartSubtotal, 2) }}</strong>
             </div>
-            <button class="cart-checkout-btn" type="button" {{ $cartMovieItems->isEmpty() ? 'disabled' : '' }}>Finalizar compra</button>
+            <button class="cart-checkout-btn" type="button" data-bs-toggle="modal" data-bs-target="#checkoutModal" {{ $cartMovieItems->isEmpty() ? 'disabled' : '' }}>Finalizar compra</button>
         </div>
     </div>
 </div>
+
+@include('cart.components.modalCartSave')

@@ -3,10 +3,6 @@
 <link rel="stylesheet" href="{{ asset('css/catalog/show.css') }}">
 <div class="movie-detail-wrapper">
 
-    @if (session('success'))
-        <div class="alert-success">{{ session('success') }}</div>
-    @endif
-
     <div class="movie-detail-container">
 
         <div class="movie-poster-col">

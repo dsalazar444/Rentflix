@@ -38,7 +38,7 @@ Route::post('/auth/register', 'App\Http\Controllers\AuthController@create')->nam
 Route::post('/auth/login', 'App\Http\Controllers\AuthController@login')->name('auth.login');
 Route::get('/auth/logout', 'App\Http\Controllers\AuthController@logout')->name('auth.logout');
 
-// Bill routes
+// Admin bill routes
 Route::get('/admin/bill', 'App\Http\Controllers\BillController@index')->name('admin.bill.index');
 Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\BillController@delete')->name('admin.bill.delete');
 Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\BillController@update')->name('admin.bill.update');
@@ -56,6 +56,7 @@ Route::get('/collections/library', 'App\Http\Controllers\LibraryItemController@i
 Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');
 Route::delete('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
 Route::get('/cart/clean', 'App\Http\Controllers\ShoppingCartController@clean')->name('cart.clean');
+Route::post('/cart/save', 'App\Http\Controllers\BillController@save')->name('cart.save');
 
 
 // Movie routes

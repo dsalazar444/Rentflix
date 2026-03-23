@@ -37,7 +37,12 @@ class BillController extends Controller
                 $request->items ?? []
             );
 
-            return redirect()->route('admin.bill.index')->with('success', 'Factura creada correctamente');
+            // Clean shopping cart from session only for client checkout
+            if ($request->route()->getName() === 'cart.save') {
+                session()->forget('cart');
+            }
+
+            return redirect()->back()->with('success', 'Factura creada correctamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error al crear la factura. Por favor, intenta de nuevo.');
         }
