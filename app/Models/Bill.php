@@ -43,9 +43,9 @@ class Bill extends Model
         return $this->attributes['id'];
     }
 
-    public function setId(int $id): void
+    public function getIdFormatted(): string
     {
-        $this->attributes['id'] = $id;
+        return str_pad($this->attributes['id'], 6, '0', STR_PAD_LEFT);
     }
 
     public function getPrice(): int
@@ -73,9 +73,9 @@ class Bill extends Model
         return $this->attributes['created_at'];
     }
 
-    public function setCreatedAt($created_at)
+    public function getCreatedAtFormatted(): string
     {
-        $this->attributes['created_at'] = $created_at;
+        return $this->created_at->format('d-m-Y');
     }
 
     public function getUpdatedAt(): string
