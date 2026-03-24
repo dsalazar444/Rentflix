@@ -41,6 +41,11 @@ class BillItem extends Model
         return $this->attributes['price'];
     }
 
+    public function getPriceFormatted(): string
+    {
+        return number_format($this->getPrice(), 2);
+    }
+
     public function setPrice(int $price): void
     {
         $this->attributes['price'] = $price;
@@ -86,8 +91,8 @@ class BillItem extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function getTotalPrice(): int
+    public function getTotalPrice(): string
     {
-        return $this->attributes['price'] * $this->attributes['quantity'];
+        return number_format($this->attributes['price'] * $this->attributes['quantity'], 2);
     }
 }

@@ -128,15 +128,15 @@
             <tr>
                 <td>{{ $item->movie->getTitle() }}</td>
                 <td>{{ $item->getQuantity() }}</td>
-                <td>${{ number_format($item->getPrice(), 2) }}</td>
-                <td>${{ number_format($item->getTotalPrice(), 2) }}</td>
+                <td>${{ $item->getPriceFormatted() }}</td>
+                <td>${{ $item->getTotalPrice() }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
     
     <div class="total-section">
-        <strong>Total: ${{ number_format($bill->getPrice(), 2) }}</strong>
+        <strong>Total: ${{ $bill->getPriceFormatted() }}</strong>
     </div>
 </body>
 </html>

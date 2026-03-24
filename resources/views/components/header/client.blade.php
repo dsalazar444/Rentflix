@@ -103,7 +103,7 @@ $cartSubtotal = $cartSubtotal ?? 0;
                         <p class="cart-item-title">{{ $movie->getTitle() }}</p>
                         <p class="cart-item-meta">{{ $movie->getGenreCapitalized() }} · {{ $movie->getYear() }}</p>
                         <div class="cart-item-row">
-                            <strong class="cart-item-price">${{ number_format($movie->getPrice(), 2) }}</strong>
+                            <strong class="cart-item-price">${{ $movie->getPriceFormatted() }}</strong>
                             <form action="{{ route('cart.remove', ['id' => $movie->getId()]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

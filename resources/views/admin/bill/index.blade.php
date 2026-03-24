@@ -65,7 +65,7 @@
                         </div>
                     </td>
                     <td>{{ $bill->getCreatedAtWithFormat() }}</td>
-                    <td class="price">${{ number_format($bill->getPrice(), 2) }}</td>
+                    <td class="price">${{ $bill->getPriceFormatted() }}</td>
                     <td>Id: {{ $bill->getUserId() }}, {{ $bill->getUserFirstName()}}</td>
                     <td>
                         <button class="btn-items" data-items='@json($bill->getItems())' onclick="showItemsModal(this)">

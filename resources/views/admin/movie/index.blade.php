@@ -60,7 +60,7 @@
                             {{ $movie->getFormatCapitalized() }}
                         </span>
                     </td>
-                    <td class="price">${{ number_format($movie->getPrice(), 2) }}</td>
+                    <td class="price">${{ $movie->getPriceFormatted() }}</td>
                     <td>
                         <span class="badge-status available">
                             @if ($movie->getQuantity() > 0)
