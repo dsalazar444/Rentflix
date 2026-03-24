@@ -56,6 +56,6 @@ class AuthController extends Controller
     {
         $request->session()->flush();
 
-        return view('catalog.index');
+        return view('auth.index');
     }
 }
