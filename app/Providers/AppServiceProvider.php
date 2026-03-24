@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        View::composer('components.header.client', function ($view) {
+        View::composer('header.client', function ($view) {
             $view->with(app(CartService::class)->getSummary());
         });
     }

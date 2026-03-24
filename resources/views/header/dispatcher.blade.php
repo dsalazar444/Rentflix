@@ -6,9 +6,9 @@
 @endphp
 
 @if (!$isAuthenticated || !$role)
-    @include('components.header.guest')
+    @include('header.guest')
 @elseif ($role === 'admin')
-    @include('components.header.admin')
+    @include('header.admin')
 @else
-    @include('components.header.client')
+    @include('header.client')
 @endif

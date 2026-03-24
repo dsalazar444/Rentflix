@@ -37,11 +37,13 @@ class CartService
         $cartIds = array_values(array_unique(array_map('intval', $shoppingCart)));
         $orderMap = array_flip($cartIds);
 
-        return Movie::whereIn('id', $cartIds)
+        $movieItems = Movie::whereIn('id', $cartIds)
             ->get()
             ->sortBy(function (Movie $movie) use ($orderMap) {
                 return $orderMap[$movie->getId()] ?? PHP_INT_MAX;
             })
             ->values();
+
+        return $movieItems;
     }
 }

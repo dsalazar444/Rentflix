@@ -28,10 +28,10 @@ class WishlistItemController extends Controller
             return redirect()->route('auth.index')->with('error', 'Debes iniciar sesión para añadir películas a tu lista de deseos');
         }
 
-        $wishlistItem = new WishlistItem;
-        $wishlistItem->setUserId(session('user_id'));
-        $wishlistItem->setMovieId($request->route('id'));
-        $wishlistItem->save();
+        WishlistItem::create([
+            'user_id' => session('user_id'),
+            'movie_id' => $request->route('id'),
+        ]);
 
         return redirect()->back()->with('success', 'Película añadida a la lista de deseos');
     }

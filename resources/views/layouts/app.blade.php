@@ -16,7 +16,7 @@
 
 <body>
 
-    @include('components.header.dispatcher')
+    @include('header.dispatcher')
 
     <div class="@yield('content-container-class', 'container my-4')">
         @yield('content')
