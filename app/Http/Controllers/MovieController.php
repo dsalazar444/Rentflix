@@ -99,7 +99,7 @@ class MovieController extends Controller
         $viewData = [];
         $viewData['movies'] = $result['movies'];
         $viewData['query'] = $query;
-        $viewData['not_found'] = $result['not_found'];
+        $viewData['notFound'] = $result['notFound'];
 
         return view('movie.result')->with('viewData', $viewData);
     }

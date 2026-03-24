@@ -224,19 +224,19 @@ class Movie extends Model
     public static function searchMovieByName(string $movie_name)
     {
         $movies = collect();
-        $not_found = false;
+        $notFound = false;
 
         if ($movie_name) {
             $movies = Movie::whereRaw('LOWER(title) LIKE ?', ['%'.strtolower($movie_name).'%'])->get();
 
             if ($movies->isEmpty()) {
-                $not_found = true;
+                $notFound = true;
             }
         }
 
         return [
             'movies' => $movies,
-            'not_found' => $not_found,
+            'notFound' => $notFound,
         ];
     }
 }

@@ -12,7 +12,7 @@
             <span class="movies-count">Coincidencias con {{ $viewData['query'] }} </span>
         </div>
 
-        @if($viewData['not_found'])
+        @if($viewData['notFound'])
             <div class="no-results-message">
                 <p >No hay coincidencias para "{{ $viewData['query'] }}"</p>
                 <a href="{{ route('catalog.index') }}" class="btn-return">Volver al catálogo</a>
