@@ -12,8 +12,8 @@
     <!-- Header Panel -->
     <div class="panel-header">
         <div class="panel-title">
-            <h1>Tus facturas</h1>
-            <p>Descarga tus facturas en formato PDF</p>
+            <h1>{{ __('billListBills.titlePage') }}</h1>
+            <p>{{ __('billListBills.subtitle') }}</p>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 <div class="alert-message">
-                    <strong>¡Éxito!</strong>
+                    <strong>{{ __('billListBills.successTitle') }}</strong>
                 </div>
             </div>
             <button type="button" class="alert-close" onclick="closeAlert()">&times;</button>
@@ -40,7 +40,7 @@
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
         </svg>
-        <input type="text" placeholder="Buscar factura con id..." id="searchInput">
+        <input type="text" placeholder="{{ __('billListBills.searchPlaceholder') }}" id="searchInput">
     </div>
 
     <!-- Table  -->
@@ -48,9 +48,9 @@
         <table class="table-movies">
             <thead>
                 <tr>
-                    <th>Id Factura</th>
-                    <th>Fecha de Creación</th>
-                    <th>Descargar</th>
+                    <th>{{ __('billListBills.tableHeaders.billId') }}</th>
+                    <th>{{ __('billListBills.tableHeaders.creationDate') }}</th>
+                    <th>{{ __('billListBills.tableHeaders.download') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,7 +65,7 @@
                     <td>
                         <a href="{{ route('bill.download', ['id' => $bill->getId()]) }}" 
                             class="btn-action" 
-                            title="Descargar factura">
+                            title="{{ __('billListBills.downloadButtonTitle') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" 
                                 fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -75,7 +75,7 @@
                         </a>
                         <a href="{{ route('bill.send', ['id' => $bill->getId()]) }}" 
                             class="btn-action" 
-                            title="Enviar factura por correo">
+                            title="{{ __('billListBills.sendButtonTitle') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" 
                                 fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>

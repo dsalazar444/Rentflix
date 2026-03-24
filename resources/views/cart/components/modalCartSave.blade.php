@@ -5,7 +5,7 @@
     <div class="modal-dialog">
         <div class="modal-content movie-modal-content">
             <div class="modal-header movie-modal-header">
-                <h5 class="modal-title">Completar compra</h5>
+                <h5 class="modal-title">{{ __('cartModalSave.modalTitle') }}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
@@ -22,14 +22,14 @@
                     @endforeach
 
                     <div class="movie-form-group mb-3">
-                        <label for="address" class="form-label">Dirección de entrega</label>
-                        <input type="text" name="address" id="address" class="movie-input" placeholder="Ej: Calle 123, Apt 4B" required>
+                        <label for="address" class="form-label">{{ __('cartModalSave.addressLabel') }}</label>
+                        <input type="text" name="address" id="address" class="movie-input" placeholder="{{ __('cartModalSave.addressPlaceholder') }}" required>
                     </div>
                 </div>
 
                 <div class="modal-footer movie-modal-footer">
-                    <button type="button" class="movie-btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="movie-btn-save">Confirmar compra</button>
+                    <button type="button" class="movie-btn-cancel" data-bs-dismiss="modal">{{ __('cartModalSave.cancelButton') }}</button>
+                    <button type="submit" class="movie-btn-save">{{ __('cartModalSave.confirmButton') }}</button>
                 </div>
             </form>
         </div>

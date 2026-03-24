@@ -8,7 +8,7 @@
     <!-- Featured Section -->
     <section class="featured-section">
         <div class="section-header">
-            <h2 class="section-title"><em>Destacados</em></h2>
+            <h2 class="section-title"><em>{{ __('catalogIndex.featuredTitle') }}</em></h2>
         </div>
         <div class="featured-carousel" id="featured-carousel">
             @forelse ($viewData['featured'] as $movie)
@@ -26,7 +26,7 @@
 
     <!-- Newly added -->
     <section class="newdly-section">
-        <h2 class="section-title">Recien Agregadas</h2>
+        <h2 class="section-title">{{ __('catalogIndex.recentlyAddedTitle') }}</h2>
         <div class="newdly-list">
             @foreach ($viewData['newdlyAdded'] as $movie)
             <div class="newdly-item">
@@ -40,7 +40,7 @@
                     <span class="newdly-meta">{{ $movie->getGenreCapitalized() }} • {{ $movie->getClassificationCapitalized() }}</span>
                 </div>
                 <div class="newdly-actions">
-                    <a href="{{ route('catalog.show', ['id' => $movie['id']]) }}" class="btn-reserve">EXPLORAR</a>
+                    <a href="{{ route('catalog.show', ['id' => $movie['id']]) }}" class="btn-reserve">{{ __('catalogIndex.exploreButton') }}</a>
                 </div>
             </div>
             @endforeach
@@ -57,28 +57,28 @@
                     <line x1="8" y1="12" x2="16" y2="12"/>
                     <line x1="11" y1="18" x2="13" y2="18"/>
                 </svg>
-                Filtros
+                {{ __('catalogIndex.filtersButton') }}
             </button>
             <div class="genre-tags">
-                <a href="{{ route('catalog.index', ['genre' => 'all', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'all' ? 'active' : '' }}">Todos</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Acción', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Acción' ? 'active' : '' }}">Acción</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Aventuras', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Aventuras' ? 'active' : '' }}">Aventuras</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Animación', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Animación' ? 'active' : '' }}">Animación</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Drama', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Drama' ? 'active' : '' }}">Drama</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Fantasía', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Fantasía' ? 'active' : '' }}">Fantasía</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Terror', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Terror' ? 'active' : '' }}">Terror</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Romántico', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Romántico' ? 'active' : '' }}">Romántico</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Sci-Fi', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Sci-Fi' ? 'active' : '' }}">Sci-Fi</a>
-                <a href="{{ route('catalog.index', ['genre' => 'Policiales', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Policiales' ? 'active' : '' }}">Policiales</a>
+                <a href="{{ route('catalog.index', ['genre' => 'all', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'all' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.all') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Acción', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Acción' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.accion') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Aventuras', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Aventuras' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.aventuras') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Animación', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Animación' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.animacion') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Drama', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Drama' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.drama') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Fantasía', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Fantasía' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.fantasia') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Terror', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Terror' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.terror') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Romántico', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Romántico' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.romantico') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Sci-Fi', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Sci-Fi' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.scifi') }}</a>
+                <a href="{{ route('catalog.index', ['genre' => 'Policiales', 'sort' => $viewData['selectedSort']]) }}" class="genre-tag {{ $viewData['selectedGenre'] === 'Policiales' ? 'active' : '' }}">{{ __('catalogIndex.genreFilters.policiales') }}</a>
             </div>
         </div>
         <div class="filters-right">
             <form action="{{ route('catalog.index') }}" method="GET">
                 <input type="hidden" name="genre" value="{{ $viewData['selectedGenre'] }}">
                 <select class="sort-select" name="sort" onchange="this.form.submit()">
-                    <option value="priceAsc" {{ $viewData['selectedSort'] === 'priceAsc' ? 'selected' : '' }}>Precio: menor a mayor</option>
-                    <option value="priceDesc" {{ $viewData['selectedSort'] === 'priceDesc' ? 'selected' : '' }}>Precio: mayor a menor</option>
-                    <option value="available" {{ $viewData['selectedSort'] === 'available' ? 'selected' : '' }}>Disponibles</option>
+                    <option value="priceAsc" {{ $viewData['selectedSort'] === 'priceAsc' ? 'selected' : '' }}>{{ __('catalogIndex.sortOptions.priceAsc') }}</option>
+                    <option value="priceDesc" {{ $viewData['selectedSort'] === 'priceDesc' ? 'selected' : '' }}>{{ __('catalogIndex.sortOptions.priceDesc') }}</option>
+                    <option value="available" {{ $viewData['selectedSort'] === 'available' ? 'selected' : '' }}>{{ __('catalogIndex.sortOptions.available') }}</option>
                 </select>
             </form>
         </div>
@@ -87,8 +87,8 @@
     <!-- All Movies -->
     <section class="movies-section">
         <div class="movies-header">
-            <h2 class="section-title">Todas las Películas</h2>
-            <span class="movies-count">{{ $viewData['moviesCount'] }} películas encontradas</span>
+            <h2 class="section-title">{{ __('catalogIndex.allMoviesTitle') }}</h2>
+            <span class="movies-count">{{ $viewData['moviesCount'] }} {{ __('catalogIndex.moviesFoundText') }}</span>
         </div>
         <div class="movies-grid">
             @foreach ($viewData['movies'] as $movie)
@@ -107,7 +107,7 @@
                                 <line x1="8" y1="2" x2="8" y2="6"/>
                                 <line x1="3" y1="10" x2="21" y2="10"/>
                             </svg>
-                            Reservar
+                            {{ __('catalogIndex.reserveButton') }}
                         </span>
                     </div>
                 </div>
@@ -128,9 +128,9 @@
                         <span class="card-price">${{ $movie->getPrice() }}</span>
                         <span class="card-status available">
                             @if ($movie->getQuantity() > 0)
-                                Disponible
+                                {{ __('catalogIndex.statusAvailable') }}
                             @else
-                                Agotada
+                                {{ __('catalogIndex.statusSoldOut') }}
                             @endif
                         </span>
                     </div>
