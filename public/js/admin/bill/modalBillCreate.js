@@ -1,5 +1,6 @@
 // Made by: Daniela Salazar
 
+// Add and remove bill items in create bill modal
 function addNewBillItem() {
     const select = document.getElementById("movieSelect");
     const quantityInput = document.getElementById("quantityInput");
@@ -13,15 +14,12 @@ function addNewBillItem() {
     }
 
     const movieTitle = select.options[select.selectedIndex].text;
-
     const itemsList = document.getElementById("bill-items-list-create");
 
-    // If it's the first item, clear the "No items added" message
     if (itemsList.children.length === 1 && itemsList.querySelector("p")) {
         itemsList.innerHTML = "";
     }
 
-    // Obtener el índice basado en cuántos items ya existen
     const itemIndex = itemsList.children.length;
 
     const newRow = document.createElement("div");

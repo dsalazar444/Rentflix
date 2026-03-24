@@ -1,6 +1,4 @@
-/* 
- * Made by: Daniela Salazar 
- */
+/* Made by: Daniela Salazar Amaya*/
 
 .bill-item-row {
     display: flex;
@@ -12,7 +10,6 @@
     background: #1a1a1a;
     border-radius: 4px;
 }
-
 .bill-item-row-solo-txt {
     display: flex;
     justify-content: space-between;
@@ -22,21 +19,18 @@
     background: #1a1a1a;
     border-radius: 4px;
 }
-
 .bill-input-number {
     width: 60px;
     background-color: #1a1a1a;
     color: #fff;
     border: 1px solid #444;
 }
-
 .bill-create-no-items {
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 4px;
     min-height: 50px;
 }
-
 .bill-txt-no-items {
     color: #999;
     margin: 0;

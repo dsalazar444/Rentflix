@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (hasErrors && hasErrors.value === "1") {
         const lastForm = lastFormSubmitted.value;
-        let modalIdToOpen = "movieModal"; // por defecto
+        let modalIdToOpen = "movieModal";
 
         if (lastForm === "formEdit") {
             modalIdToOpen = "modalEdit";

@@ -1,3 +1,5 @@
+<!-- Laura Andrea Castrillón Fajardo -->
+
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content movie-modal-content">
@@ -11,7 +13,6 @@
                 <form id="formEdit" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-
                     <div class="movie-form-group mb-3">
                         <label for="title">Título</label>
                         <input type="text" id="title" name="title"

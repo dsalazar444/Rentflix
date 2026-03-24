@@ -1,13 +1,10 @@
 <!-- Made by: Samuel Martínez Arteaga -->
 
 @extends('layouts.app')
-
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/auth/auth.index.css') }}">
 @endsection
-
-@section('content_container_class', 'container-fluid px-0 my-0')
-
+@section('content-container-class', 'container-fluid px-0 my-0')
 @section('content')
 <div class="login-container">
     <!-- Left Section -->

@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 namespace App\Services;
 
 use App\Models\LibraryItem;
@@ -7,11 +9,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class LibraryItemService
 {
-    public function add(int $userId, int $movieId): void
-    {
-        LibraryItem::create(['user_id' => $userId, 'movie_id' => $movieId]);
-    }
-
     public function notify(int $userId): Collection
     {
         $expiringToday = LibraryItem::where('user_id', $userId)

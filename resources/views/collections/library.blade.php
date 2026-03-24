@@ -1,3 +1,5 @@
+<!-- Laura Andrea Castrillón Fajardo -->
+
 @extends('layouts.collection')
 @section('collectionContent')
 <link rel="stylesheet" href="{{ asset('css/collections/collections.css') }}">

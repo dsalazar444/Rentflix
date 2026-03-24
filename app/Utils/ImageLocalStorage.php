@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 namespace App\Utils;
 
 use App\Interfaces\ImageStorage;
@@ -20,6 +22,6 @@ class ImageLocalStorage implements ImageStorage
 
             return $fileName;
         }
-        throw new \Exception("No file uploaded for input: $idInputFile");
+        throw new \Exception("No se pudo cargar la imagen: $idInputFile");
     }
 }

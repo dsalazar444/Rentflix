@@ -1,3 +1,5 @@
+<!-- Daniela Salazar Amaya -->
+
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/movie/result.css') }}">

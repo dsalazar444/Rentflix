@@ -1,6 +1,6 @@
 <?php
 
-/** Made by: Samuel Martínez Arteaga */
+// Made by: Samuel Martínez Arteaga
 
 namespace App\Http\Controllers;
 

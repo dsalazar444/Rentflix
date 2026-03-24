@@ -1,3 +1,5 @@
+<!-- Laura Andrea Castrillón Fajardo -->
+
 @extends('layouts.app')
 @section('content')
 <h1 class="collection-title">Mi Colección</h1>

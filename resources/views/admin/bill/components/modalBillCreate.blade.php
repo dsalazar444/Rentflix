@@ -23,7 +23,6 @@
                 
                 <form id="billForm" action="{{ route('admin.bill.save') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
                     <div class="movie-form-group mb-3">
                         <label for="user_id">Usuario</label>
                         <select id="user_id" name="user_id"
@@ -68,7 +67,7 @@
                             <select id="movieSelect" class="movie-input" style="flex: 1;">
                                 <option value="">Seleccionar película...</option>
                                 @foreach($movies as $movie)
-                                    <option value="{{ $movie->id }}" data-title="{{ $movie->getTitle() }}" data-price="{{ $movie->getPrice() }}">
+                                    <option value="{{ $movie->getId() }}" data-title="{{ $movie->getTitle() }}" data-price="{{ $movie->getPrice() }}">
                                         {{ $movie->title }}
                                     </option>
                                 @endforeach

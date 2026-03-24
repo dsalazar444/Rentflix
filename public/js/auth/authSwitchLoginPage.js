@@ -1,10 +1,7 @@
-/** Made by: Samuel Martínez Arteaga */
+// Made by: Samuel Martínez Arteaga
 
-/**
- * Authentication Panel Switcher
- * Handles toggling between login and register panels
- */
-
+/* Authentication Panel Switcher
+   Handles toggling between login and register panels*/
 document.addEventListener("DOMContentLoaded", function () {
     const switchButtons = document.querySelectorAll(".auth-switch-btn");
     const panels = document.querySelectorAll(".auth-panel");

@@ -1,5 +1,6 @@
 // Made by: Daniela Salazar
 
+// Fill edit bill modal with bill data
 function fillEditModal(event) {
     const bill = JSON.parse(event.relatedTarget.dataset.bill);
     const form = document.getElementById("formBillEdit");
@@ -17,7 +18,6 @@ function fillEditModal(event) {
         `;
     });
 
-    // Asigne action atributte to form
     form.action = window.movieUpdateRoute.replace(":id", bill.id);
 }
 

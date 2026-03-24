@@ -1,18 +1,16 @@
 <?php
 
-// Made by: Daniela Salazar
+// Made by: Daniela Salazar Amaya
 
 namespace App\Models;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Response;
-use Barryvdh\DomPDF\Facade\Pdf;
-
-
-// models are PHP classes that represent and interact with your database tables using the built-in Eloquent ORM.
 
 class Bill extends Model
 {
@@ -25,6 +23,7 @@ class Bill extends Model
      * $this->attributes['created_at'] - timestamp - contains the date it was created
      * $this->attributes['updated_at'] - timestamp - contains the date it was last modified
      */
+    protected $fillable = ['price', 'address', 'user_id'];
 
     public function items(): HasMany
     {
@@ -36,8 +35,6 @@ class Bill extends Model
         return $this->belongsTo(User::class)->withDefault();
     }
 
-    protected $fillable = ['price', 'address', 'user_id'];
-
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -46,11 +43,6 @@ class Bill extends Model
     public function getIdWithNumeral(): string
     {
         return '#'.$this->attributes['id'];
-    }
-
-    public function setId(int $id): void
-    {
-        $this->attributes['id'] = $id;
     }
 
     public function getPrice(): int
@@ -85,8 +77,8 @@ class Bill extends Model
 
     public function getUserFirstName(): string
     {
-        if ($this->user && $this->user->name) {
-            return explode(' ', trim($this->user->name))[0];
+        if ($this->user && $this->user->getName()) {
+            return explode(' ', trim($this->user->getName()))[0];
         }
 
         return '';
@@ -102,19 +94,9 @@ class Bill extends Model
         return $this->created_at ? $this->created_at->format('M d, Y') : '';
     }
 
-    public function setCreatedAt($created_at)
-    {
-        $this->attributes['created_at'] = $created_at;
-    }
-
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
-    }
-
-    public function setUpdatedAt($updated_at)
-    {
-        $this->attributes['updated_at'] = $updated_at;
     }
 
     public function getItems(): Collection
@@ -128,7 +110,7 @@ class Bill extends Model
 
     public function calculateTotalPrice(): int
     {
-        return $this->items->sum(function($item) {
+        return $this->items->sum(function ($item) {
             return $item->getPrice() * $item->getQuantity();
         });
     }
@@ -173,14 +155,12 @@ class Bill extends Model
 
     public function generatePdf(): Response
     {
-        if (!$this->relationLoaded('items')) {
+        if (! $this->relationLoaded('items')) {
             $this->load('items.movie');
         }
 
         $pdf = Pdf::loadView('bill.pdf', ['bill' => $this]);
-        
-        return $pdf->download('factura_id_' . $this->id . '.pdf');
+
+        return $pdf->download('factura_id_'.$this->id.'.pdf');
     }
-
-
 }

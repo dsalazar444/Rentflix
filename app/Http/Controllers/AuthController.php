@@ -1,6 +1,6 @@
 <?php
 
-/** Made by: Samuel Martínez Arteaga */
+// Made by: Samuel Martínez Arteaga
 
 namespace App\Http\Controllers;
 
@@ -10,10 +10,11 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('auth.index');
     }
@@ -51,10 +52,10 @@ class AuthController extends Controller
         return redirect()->route('catalog.index');
     }
 
-    public function logout(Request $request): RedirectResponse
+    public function logout(Request $request): View
     {
         $request->session()->flush();
 
-        return redirect()->route('catalog.index');
+        return view('catalog.index');
     }
 }

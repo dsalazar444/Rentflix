@@ -6,6 +6,7 @@ $cartMovieItems = $cartMovieItems ?? collect();
 $cartCount = $cartCount ?? 0;
 $cartSubtotal = $cartSubtotal ?? 0;
 @endphp
+
 <link rel="stylesheet" href="{{ asset('css/catalog/index.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <header class="rentflix-header client-header">

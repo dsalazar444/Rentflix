@@ -1,17 +1,14 @@
 <?php
 
-/** Made by: Samuel Martínez Arteaga */
+// Made by: Samuel Martínez Arteaga
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WishlistItem extends Model
 {
-    use HasFactory;
-
     /**
      * Wishlist ATTRIBUTES
      * $this->attributes['id'] - int - contains the Wishlist primary key (id)
@@ -22,14 +19,19 @@ class WishlistItem extends Model
      */
     protected $fillable = ['user_id', 'movie_id'];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function movie(): BelongsTo
+    {
+        return $this->belongsTo(Movie::class);
+    }
+
     public function getId(): int
     {
         return $this->attributes['id'];
-    }
-
-    public function setId(int $id): void
-    {
-        $this->attributes['id'] = $id;
     }
 
     public function getUserId(): int
@@ -52,23 +54,13 @@ class WishlistItem extends Model
         $this->attributes['movie_id'] = $movieId;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): string
     {
-        return $this->attributes['created_at'] ?? null;
+        return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): string
     {
-        return $this->attributes['updated_at'] ?? null;
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function movie(): BelongsTo
-    {
-        return $this->belongsTo(Movie::class);
+        return $this->attributes['updated_at'];
     }
 }

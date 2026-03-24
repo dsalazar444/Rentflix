@@ -1,4 +1,5 @@
 <!-- Made by: Daniela Salazar -->
+
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/admin/movie.index.css') }}">
@@ -14,7 +15,7 @@
             <h1>Panel de Administración</h1>
             <p>Gestiona el catálogo de facturas</p>
         </div>
-        <button class="btn-add" data-bs-toggle="modal" data-bs-target="#modalBillCreate"> <!--  CAMBIARRRRRRRRRRRR-->
+        <button class="btn-add" data-bs-toggle="modal" data-bs-target="#modalBillCreate"> 
             <span>+</span> Agregar Factura
         </button>
     </div>
@@ -113,5 +114,4 @@
 <script src="{{ asset('js/admin/bill/modalListItems.js') }}"></script>
 <script src="{{ asset('js/admin/bill/modalBillCreate.js') }}"></script>
 <script src="{{ asset('js/admin/bill/modalBillEdit.js') }}"></script>
-
 @endsection

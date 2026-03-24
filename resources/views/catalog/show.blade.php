@@ -1,3 +1,5 @@
+<!-- Laura Andrea Castrillón Fajardo -->
+
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/catalog/show.css') }}">
@@ -94,7 +96,7 @@
                         </svg>
                         Genero
                     </span>
-                    <span class="spec-value">{{ $viewData['movie']->getGenre() }}</span>
+                    <span class="spec-value">{{ $viewData['movie']->getGenreCapitalized() }}</span>
                 </div>
 
                 <div class="spec-item">

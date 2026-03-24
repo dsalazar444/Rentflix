@@ -1,6 +1,6 @@
-/** Made by: Samuel Martínez Arteaga */
-
 <?php
+
+// Made by: Samuel Martinez Arteaga
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

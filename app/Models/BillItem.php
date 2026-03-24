@@ -1,13 +1,11 @@
 <?php
 
-// Made by: Daniela Salazar
+// Made by: Daniela Salazar Amaya
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-// models are PHP classes that represent and interact with your database tables using the built-in Eloquent ORM.
 
 class BillItem extends Model
 {
@@ -21,10 +19,7 @@ class BillItem extends Model
      * $this->attributes['created_at'] - timestamp - contains the creation date
      * $this->attributes['updated_at'] - timestamp - contains the last modification date
      */
-
     protected $fillable = ['price', 'quantity', 'movie_id'];
-
-    // relationships
 
     public function bill(): BelongsTo
     {
@@ -36,16 +31,9 @@ class BillItem extends Model
         return $this->belongsTo(Movie::class)->withDefault();
     }
 
-    // getters y setters
-
     public function getId(): int
     {
         return $this->attributes['id'];
-    }
-
-    public function setId(int $id): void
-    {
-        $this->attributes['id'] = $id;
     }
 
     public function getPrice(): int
@@ -93,19 +81,9 @@ class BillItem extends Model
         return $this->attributes['created_at'];
     }
 
-    public function setCreatedAt($created_at)
-    {
-        $this->attributes['created_at'] = $created_at;
-    }
-
     public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
-    }
-
-    public function setUpdatedAt($updated_at)
-    {
-        $this->attributes['updated_at'] = $updated_at;
     }
 
     public function getTotalPrice(): int

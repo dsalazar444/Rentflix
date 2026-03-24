@@ -1,3 +1,5 @@
+<!-- Samuel Martínez Arteaga -->
+
 <!-- Modal de Checkout -->
 <div class="modal fade" id="checkoutModal" tabindex="-1">
     <div class="modal-dialog">

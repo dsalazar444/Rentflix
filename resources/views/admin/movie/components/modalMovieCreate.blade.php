@@ -1,3 +1,5 @@
+<!-- Laura Andrea Castrillón Fajardo -->
+
 <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content movie-modal-content">
@@ -11,7 +13,6 @@
             <div class="modal-body">
                 <form id="movieForm" action="{{ route('admin.movie.save') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
                     <div class="movie-form-group mb-3">
                         <label for="title">Título</label>
                         <input type="text" id="title" name="title"

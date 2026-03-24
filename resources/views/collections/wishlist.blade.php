@@ -1,6 +1,6 @@
+<!-- Samuel Martinez Arteaga -->
+
 @extends('layouts.collection')
-
-
 @section('collectionContent')
 <link rel="stylesheet" href="{{ asset('css/collections/collections.css') }}">
 <div class="library-wrapper">

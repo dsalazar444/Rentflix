@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 namespace App\Mail;
 
 use App\Models\Bill;

@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMovieRequest;
@@ -51,7 +53,6 @@ class MovieController extends Controller
     {
         $movie = Movie::find($id);
         if (! $movie) {
-
             return redirect()->route('admin.movie.index');
         }
         $movie->delete();
@@ -66,7 +67,7 @@ class MovieController extends Controller
             return redirect()->route('admin.movie.index');
         }
 
-        $data = $request->only([
+        $updatedMovieData = $request->only([
             'title',
             'director',
             'genre',
@@ -82,23 +83,24 @@ class MovieController extends Controller
 
         if ($request->hasFile('movie_image')) {
             $imageName = $this->imageStorage->store($request, 'movie_image');
-            $data['file_name'] = $imageName;
+            $updatedMovieData['file_name'] = $imageName;
         }
 
-        $movie->update($data);
+        $movie->update($updatedMovieData);
 
         return redirect()->route('admin.movie.index');
     }
 
     public function search(Request $request): View
     {
-        $query = $request->get('movie_name', '');
+        $query = $request->input('movie_name');
         $result = Movie::searchMovieByName($query);
 
-        return view('movie.result')->with('viewData', [
-            'movies' => $result['movies'],
-            'query' => $query,
-            'not_found' => $result['not_found'],
-        ]);
+        $viewData = [];
+        $viewData['movies'] = $result['movies'];
+        $viewData['query'] = $query;
+        $viewData['not_found'] = $result['not_found'];
+
+        return view('movie.result')->with('viewData', $viewData);
     }
 }

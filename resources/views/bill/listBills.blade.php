@@ -1,4 +1,5 @@
 <!-- Made by: Daniela Salzazar -->
+ 
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/admin/movie.index.css') }}">

@@ -13,7 +13,6 @@
                 <form id="formBillEdit" method="POST" enctype="multipart/form-data" >
                     @csrf
                     @method('PUT')
-
                     <!--Items edition -> edit quantity and delete items-->
                     <div class="movie-form-group mb-3">
                         <label>Items de la factura</label>

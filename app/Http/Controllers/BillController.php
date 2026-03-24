@@ -1,6 +1,6 @@
 <?php
 
-// Made by: Daniela Salazar
+// Made by: Daniela Salazar Amaya
 
 namespace App\Http\Controllers;
 
@@ -101,7 +101,7 @@ class BillController extends Controller
         $userId = session('user_id');
         $viewData = [];
         $viewData['bills'] = Bill::where('user_id', $userId)->with('items.movie')->get();
-        
+
         return view('bill.listBills')->with('viewData', $viewData);
     }
 
@@ -109,10 +109,15 @@ class BillController extends Controller
     {
         $bill = Bill::with('items.movie', 'user')->find($id);
 
-        if (!$bill) {
+        if (! $bill) {
             abort(404, 'Factura no encontrada');
         }
 
         return $bill->generatePDF();
+    }
+
+    public function sendMail(string $id): RedirectResponse
+    {
+        return redirect()->back()->with('success', 'Correo enviado correctamente');
     }
 }

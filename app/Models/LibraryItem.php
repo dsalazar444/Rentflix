@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -81,7 +83,6 @@ class LibraryItem extends Model
     public static function synchLibraryAfterPurchase(Bill $bill): void
     {
         try {
-
             // Add purchased movies to user's library
             foreach ($bill->items as $billItem) {
 
@@ -92,7 +93,6 @@ class LibraryItem extends Model
                     ]
                 );
             }
-
         } catch (\Exception $e) {
             throw $e;
         }

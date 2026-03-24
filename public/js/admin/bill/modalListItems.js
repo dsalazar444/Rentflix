@@ -1,4 +1,6 @@
 // Made by: Daniela Salazar
+
+// Show bill items in modal
 function showItemsModal(button) {
     const itemsJson = button.getAttribute("data-items");
     const items = JSON.parse(itemsJson);

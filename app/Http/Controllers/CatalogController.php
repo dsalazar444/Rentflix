@@ -1,6 +1,6 @@
 <?php
 
-// Made By: 
+// Made by: Laura Andrea Castrillón Fajardo
 
 namespace App\Http\Controllers;
 
@@ -48,11 +48,12 @@ class CatalogController extends Controller
 
     public function show(string $id): View|RedirectResponse
     {
-        $viewData = [];
         $movie = Movie::find($id);
         if (! $movie) {
             return redirect()->route('catalog.index');
         }
+
+        $viewData = [];
         $viewData['movie'] = $movie;
         $viewData['isInWishlist'] = false;
         $viewData['isInLibrary'] = false;

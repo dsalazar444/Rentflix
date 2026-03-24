@@ -4,12 +4,10 @@
     text-align: center;
     padding: 40px 20px;
 }
-
 .no-results-text {
     font-size: 18px;
     color: #666;
 }
-
 .btn-return {
     background: #e63946;
     color: white;

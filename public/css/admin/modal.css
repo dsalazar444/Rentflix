@@ -1,3 +1,4 @@
+/* Made by: Daniela Salazar Amaya*/
 .movie-modal-content {
     background: #111;
     border: 1px solid #222;
@@ -86,8 +87,6 @@
 .alert-notify-m {
     background: #1a1a1a !important;
 }
-
-/* estilo para modal en bills */
 .bill-items-modal {
     position: fixed;
     top: 0;
@@ -99,14 +98,12 @@
     align-items: center;
     justify-content: center;
 }
-
 .bill-items-modal-content {
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
     min-width: 300px;
 }
-
 .bill-items-close {
     float: right;
     cursor: pointer;

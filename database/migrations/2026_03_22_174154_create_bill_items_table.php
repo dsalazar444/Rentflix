@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('bill_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('price');
-            $table->integer('quantity');
             $table->foreignId('bill_id')->constrained()->cascadeOnDelete();
             $table->foreignId('movie_id')->constrained()->cascadeOnDelete();
+            $table->integer('price');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

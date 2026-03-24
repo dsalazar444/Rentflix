@@ -1,6 +1,6 @@
-/** Made by: Samuel Martínez Arteaga */
+// Made by: Samuel Martínez Arteaga
 
-/** Profile dropdown for logout action */
+// Profile dropdown for logout action
 document.addEventListener("DOMContentLoaded", function () {
     var wrappers = document.querySelectorAll(".profile-menu-wrapper");
 

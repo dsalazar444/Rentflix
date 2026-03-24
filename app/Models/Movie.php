@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +21,9 @@ class Movie extends Model
      * $this->attributes['quantity'] - int - contains the available movie quantity
      * $this->attributes['quantity_views'] - int - contains the number of times the movie has been viewed
      * $this->attributes['file_name'] - string - contains the movie image path or filename
-     * $this->attributes['classification'] - string - contains the movie classification (e.g., PG-13)
+     * $this->attributes['classification'] - string - contains the movie classification
+     * $this->attributes['description'] - string - contains the movie description
+     * $this->attributes['trailer_link'] - string - contains the movie trailer link
      * $this->attributes['year'] - int - contains the movie release year
      * $this->attributes['created_at'] - timestamp - contains the movie creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the movie update timestamp
@@ -213,7 +217,6 @@ class Movie extends Model
 
     public static function searchMovieByName(string $movie_name)
     {
-
         $movies = collect();
         $not_found = false;
 
@@ -229,6 +232,5 @@ class Movie extends Model
             'movies' => $movies,
             'not_found' => $not_found,
         ];
-
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Samuel Martínez Arteaga
+
 namespace App\Services;
 
 use App\Models\Movie;
@@ -13,6 +15,7 @@ class CartService
 
         $cartMovieItems = $this->getMovieItems($shoppingCart);
         $cartSubtotal = $cartMovieItems->sum(function (Movie $movie) {
+
             return $movie->getPrice();
         });
 

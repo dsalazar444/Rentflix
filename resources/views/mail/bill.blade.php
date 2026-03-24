@@ -1,3 +1,5 @@
+<!-- Laura Andrea Castrillón Fajardo -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -80,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="section-title">Recumen de la factura</div>
+            <div class="section-title">Resumen de la factura</div>
             <table class="items-table">
                 <thead>
                     <tr>

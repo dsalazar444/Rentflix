@@ -1,3 +1,5 @@
+<!-- Samuel Martinez Arteaga -->
+
 <!doctype html>
 <html lang="en">
 
@@ -16,7 +18,7 @@
 
     @include('components.header.dispatcher')
 
-    <div class="@yield('content_container_class', 'container my-4')">
+    <div class="@yield('content-container-class', 'container my-4')">
         @yield('content')
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
