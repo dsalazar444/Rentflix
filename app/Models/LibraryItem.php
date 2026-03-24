@@ -1,15 +1,14 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Movie;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LibraryItem extends Model
 {
-
     /**
      * LIBRARY ITEM ATTRIBUTES
      * $this->attributes['id'] - int - contains the library item primary key (id)
@@ -18,7 +17,7 @@ class LibraryItem extends Model
      * $this->attributes['created_at'] - timestamp - contains the library item creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the library item update timestamp
      */
-    protected $fillable = ['user_id', 'movie_id'];
+    protected $fillable = ['user_id', 'movie_id', 'expiration_date'];
 
     public function user(): BelongsTo
     {
@@ -54,5 +53,48 @@ class LibraryItem extends Model
     {
         $this->attributes['movie_id'] = $movie_id;
     }
-}
 
+    public function getCreatedAt(): string
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function getExpirationDate(): string
+    {
+        return $this->created_at->addMonth()->format('d-m-Y');
+    }
+
+    public function getDaysUntilExpiration(): int
+    {
+        $expirationDate = $this->created_at->addMonth();
+        $now = now();
+        if ($expirationDate->isPast()) {
+            return 0;
+        }
+
+        return $now->diffInDays($expirationDate);
+    }
+
+    public function getUpdatedAt(): string
+    {
+        return $this->attributes['updated_at'];
+    }
+
+    public static function synchLibraryAfterPurchase(Bill $bill): void
+    {
+        try {
+            // Add purchased movies to user's library
+            foreach ($bill->items as $billItem) {
+
+                $libraryItem = self::firstOrCreate(
+                    [
+                        'user_id' => $bill->user_id,
+                        'movie_id' => $billItem->movie_id,
+                    ]
+                );
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+}

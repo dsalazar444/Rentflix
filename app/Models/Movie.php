@@ -1,45 +1,49 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\LibraryItem;
 
 class Movie extends Model
 {
-
     /**
      * MOVIE ATTRIBUTES
      * $this->attributes['id'] - int - contains the movie primary key (id)
      * $this->attributes['title'] - string - contains the movie title
      * $this->attributes['director'] - string - contains the movie director name
      * $this->attributes['genre'] - string - contains the movie genre
-     * $this->attributes['format'] - string - indicates the movie format (e.g., physical/digital)
+     * $this->attributes['format'] - string - indicates the movie format (e.g., dvd/digital)
      * $this->attributes['location'] - string - contains the movie storage/location
      * $this->attributes['price'] - int - contains the movie price
      * $this->attributes['quantity'] - int - contains the available movie quantity
      * $this->attributes['quantity_views'] - int - contains the number of times the movie has been viewed
-     * $this->attributes['image'] - string - contains the movie image path or filename
+     * $this->attributes['file_name'] - string - contains the movie image path or filename
+     * $this->attributes['classification'] - string - contains the movie classification
+     * $this->attributes['description'] - string - contains the movie description
+     * $this->attributes['trailer_link'] - string - contains the movie trailer link
+     * $this->attributes['year'] - int - contains the movie release year
      * $this->attributes['created_at'] - timestamp - contains the movie creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the movie update timestamp
      */
-    protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'image'];
+    protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year', 'description', 'trailer_link'];
 
-    // public function items(): HasMany
-    // {
-    //     return $this->hasMany(Item::class);
-    // }
+    public function items(): HasMany
+    {
+        return $this->hasMany(BillItem::class);
+    }
 
     public function libraryItems(): HasMany
     {
         return $this->hasMany(LibraryItem::class);
     }
 
-    // public function wishlistItems(): HasMany
-    // {
-    //     return $this->hasMany(WishlistItem::class);
-    // }
+    public function wishlistItems(): HasMany
+    {
+        return $this->hasMany(WishlistItem::class);
+    }
 
     public function getId(): int
     {
@@ -71,6 +75,11 @@ class Movie extends Model
         return $this->attributes['genre'];
     }
 
+    public function getGenreCapitalized(): string
+    {
+        return ucfirst($this->attributes['genre']);
+    }
+
     public function setGenre(string $genre): void
     {
         $this->attributes['genre'] = $genre;
@@ -84,6 +93,36 @@ class Movie extends Model
     public function setFormat(string $format): void
     {
         $this->attributes['format'] = $format;
+    }
+
+    public function getFormatCapitalized(): string
+    {
+        return ucfirst($this->attributes['format']);
+    }
+
+    public function getClassification(): string
+    {
+        return $this->attributes['classification'];
+    }
+
+    public function getClassificationCapitalized(): string
+    {
+        return ucfirst($this->attributes['classification']);
+    }
+
+    public function setClassification(string $classification): void
+    {
+        $this->attributes['classification'] = $classification;
+    }
+
+    public function getYear(): int
+    {
+        return (int) $this->attributes['year'];
+    }
+
+    public function setYear(int $year): void
+    {
+        $this->attributes['year'] = $year;
     }
 
     public function getLocation(): string
@@ -101,6 +140,12 @@ class Movie extends Model
         return (int) $this->attributes['price'];
     }
 
+    public function getPriceFormatted(): string
+    {
+        return number_format($this->getPrice(), 2);
+    }
+
+
     public function setPrice(int $price): void
     {
         $this->attributes['price'] = $price;
@@ -116,14 +161,14 @@ class Movie extends Model
         $this->attributes['quantity'] = $quantity;
     }
 
-    public function getImage(): string
+    public function getFileName(): string
     {
-        return $this->attributes['image'];
+        return $this->attributes['file_name'];
     }
 
-    public function setImage(string $image): void
+    public function setFileName(string $file_name): void
     {
-        $this->attributes['image'] = $image;
+        $this->attributes['file_name'] = $file_name;
     }
 
     public function getQuantityViews(): int
@@ -134,5 +179,64 @@ class Movie extends Model
     public function setQuantityViews(int $quantity_views): void
     {
         $this->attributes['quantity_views'] = $quantity_views;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function getMonthCreatedAt(): string
+    {
+        return date('F', strtotime($this->attributes['created_at']));
+    }
+
+    public function getDayCreatedAt(): string
+    {
+        return date('d', strtotime($this->attributes['created_at']));
+    }
+
+    public function getDescription(): string
+    {
+        return $this->attributes['description'];
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->attributes['description'] = $description;
+    }
+
+    public function getUpdatedAt(): string
+    {
+        return $this->attributes['updated_at'];
+    }
+
+    public function getTrailerLink(): string
+    {
+        return $this->attributes['trailer_link'];
+    }
+
+    public function setTrailerLink(string $trailer_link): void
+    {
+        $this->attributes['trailer_link'] = $trailer_link;
+    }
+
+    public static function searchMovieByName(string $movie_name)
+    {
+        $movies = collect();
+        $notFound = false;
+
+        if ($movie_name) {
+            $movies = Movie::whereRaw('LOWER(title) LIKE ?', ['%'.strtolower($movie_name).'%'])->get();
+
+            if ($movies->isEmpty()) {
+                $notFound = true;
+            }
+        }
+
+        return [
+            'movies' => $movies,
+            'notFound' => $notFound,
+        ];
     }
 }

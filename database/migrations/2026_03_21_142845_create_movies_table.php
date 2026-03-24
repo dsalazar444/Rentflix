@@ -1,5 +1,7 @@
 <?php
 
+// Made by: Laura Andrea Castrillón Fajardo
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,11 +19,15 @@ return new class extends Migration
             $table->string('director');
             $table->string('genre');
             $table->string('format');
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->integer('price');
             $table->integer('quantity');
             $table->integer('quantity_views')->default(0);
-            $table->string('image');
+            $table->string('classification');
+            $table->integer('year');
+            $table->string('description');
+            $table->string('trailer_link')->nullable();
+            $table->string('file_name')->nullable();
             $table->timestamps();
         });
     }

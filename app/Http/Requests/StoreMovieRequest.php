@@ -1,0 +1,39 @@
+<?php
+
+// Made by: Laura Andrea Castrillón Fajardo
+
+namespace App\Http\Requests;
+
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreMovieRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'title' => 'required|string',
+            'director' => 'required|string',
+            'genre' => 'required|in:accion,aventuras,animacion,comedia,drama,fantasia,terror,ciencia ficcion',
+            'classification' => 'required|string',
+            'year' => 'required|integer|min:1900|max:'.date('Y'),
+            'format' => 'required|in:DVD,digital',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:0',
+            'movie_image' => 'required|image|mimes:jpeg,png,jpg',
+            'description' => 'required|string',
+            'trailer_link' => 'required|url',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        session(['lastForm' => 'movieForm']);
+        parent::failedValidation($validator);
+    }
+}
