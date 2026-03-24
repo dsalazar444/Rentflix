@@ -1,17 +1,6 @@
 <?php
 
-use App\Mail\InvoiceMail;
-use App\Models\Bill;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/test-mail', function () {
-    $bill = Bill::with(['user', 'items.movie'])->find(1);
-
-    Mail::to($bill->user->email)->send(new InvoiceMail($bill));
-
-    return 'Correo enviado!';
-});
 
 // Admin routes
 Route::get('/admin/movie', 'App\Http\Controllers\MovieController@index')->name('admin.movie.index');
@@ -47,6 +36,7 @@ Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->nam
 // bill routes
 Route::get('/bill/list', 'App\Http\Controllers\BillController@listBills')->name('bill.list');
 Route::get('/bills/download/{id}', 'App\Http\Controllers\BillController@download')->name('bill.download');
+Route::get('/bills/send/{id}', 'App\Http\Controllers\BillController@send')->name('bill.send');
 
 // Wishlist routes
 Route::post('/catalog/wishlist/add/{id}', 'App\Http\Controllers\WishlistItemController@add')->name('collections.wishlist.add');

@@ -56,7 +56,7 @@
             <div class="header-logo">Rent<span>Flix</span></div>
             <div class="header-invoice">
                 <div class="label">Invoice</div>
-                <div class="number">#{{ $bill->getIdFormatted() }}</div>
+                <div class="number">#{{ $bill->getIdWithNumeral() }}</div>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
             <div class="info-row">
                 <div class="info-box">
                     <div class="info-label">Fecha</div>
-                    <div class="info-value">{{ $bill->getCreatedAtFormatted() }}</div>
+                    <div class="info-value">{{ $bill->getCreatedAtWithFormat() }}</div>
                 </div>
                 <div class="info-box">
                     <div class="info-label">Customer</div>

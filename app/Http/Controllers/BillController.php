@@ -4,13 +4,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateBillRequest;
+use Exception;
+use App\Mail\InvoiceMail;
 use App\Models\Bill;
 use App\Models\LibraryItem;
-use App\Models\Movie;
 use App\Models\User;
-use Exception;
+use App\Models\Movie;
+use App\Http\Requests\CreateBillRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
@@ -116,8 +118,16 @@ class BillController extends Controller
         return $bill->generatePDF();
     }
 
-    public function sendMail(string $id): RedirectResponse
+    public function send(string $id): RedirectResponse
     {
+        $bill = Bill::with('user')->find($id);
+        
+        if (! $bill) {
+            abort(404, 'Factura no encontrada');
+        }
+
+        Mail::to($bill->user->getEmail())->send(new InvoiceMail($bill));
+
         return redirect()->back()->with('success', 'Correo enviado correctamente');
     }
 }
