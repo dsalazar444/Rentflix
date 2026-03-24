@@ -114,7 +114,23 @@ En phpMyAdmin, confirme que las tablas se hayan creado correctamente dentro de l
 
 ---
 
-## Paso 6: Importar Base de Datos (si aplica)
+## Paso 6: Crear el Enlace de Almacenamiento
+
+Ejecute el siguiente comando para crear un enlace simbólico desde `public/storage` a `storage/app/public`:
+
+```bash
+php artisan storage:link
+```
+
+Este paso es necesario para que la aplicación pueda acceder correctamente a los archivos almacenados (imágenes).
+
+### ℹ️ Si se proporciona contenido de la carpeta storage
+
+Si ha recibido los archivos de la carpeta `storage/` para acelerar la evaluación, copie el contenido proporcionado en la carpeta `storage/app/public` del proyecto. Esto incluye imágenes y otros archivos necesarios para la aplicación.
+
+---
+
+## Paso 7: Importar Base de Datos (si aplica)
 
 Si recibió un archivo `.sql` exportado con datos de prueba, impórtelo en phpMyAdmin:
 
@@ -127,7 +143,7 @@ Si recibió un archivo `.sql` exportado con datos de prueba, impórtelo en phpMy
 
 ---
 
-## Paso 7: Iniciar el Servidor
+## Paso 8: Iniciar el Servidor
 
 Inicie el servidor de desarrollo con:
 
@@ -137,7 +153,7 @@ php artisan serve
 
 ---
 
-## Paso 8: Acceder a la Aplicación
+## Paso 9: Acceder a la Aplicación
 
 Abra su navegador y visite:
 
