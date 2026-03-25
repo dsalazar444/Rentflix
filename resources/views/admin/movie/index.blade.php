@@ -11,11 +11,11 @@
     <!-- Header Panel -->
     <div class="panel-header">
         <div class="panel-title">
-            <h1>Panel de Administración</h1>
-            <p>Gestiona el catálogo de películas</p>
+            <h1>{{ __('adminMovieIndex.titlePage') }}</h1>
+            <p>{{ __('adminMovieIndex.subtitle') }}</p>
         </div>
         <button class="btn-add" data-bs-toggle="modal" data-bs-target="#movieModal">
-            <span>+</span> Agregar Película
+            <span>+</span> {{ __('adminMovieIndex.addButton') }}
         </button>
     </div>
 
@@ -26,7 +26,7 @@
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
         </svg>
-        <input type="text" placeholder="Buscar películas..." id="searchInput">
+        <input type="text" placeholder="{{ __('adminMovieIndex.searchPlaceholder') }}" id="searchInput">
     </div>
 
     <!-- Table  -->
@@ -34,13 +34,13 @@
         <table class="table-movies">
             <thead>
                 <tr>
-                    <th>Película</th>
-                    <th>Género</th>
-                    <th>Año</th>
-                    <th>Formato</th>
-                    <th>Precio</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th>{{ __('adminMovieIndex.tableHeaders.movie') }}</th>
+                    <th>{{ __('adminMovieIndex.tableHeaders.genre') }}</th>
+                    <th>{{ __('adminMovieIndex.tableHeaders.year') }}</th>
+                    <th>{{ __('adminMovieIndex.tableHeaders.format') }}</th>
+                    <th>{{ __('adminMovieIndex.tableHeaders.price') }}</th>
+                    <th>{{ __('adminMovieIndex.tableHeaders.status') }}</th>
+                    <th>{{ __('adminMovieIndex.tableHeaders.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,15 +64,15 @@
                     <td>
                         <span class="badge-status available">
                             @if ($movie->getQuantity() > 0)
-                            Disponible
+                            {{ __('adminMovieIndex.statusAvailable') }}
                             @else
-                            Agotada
+                            {{ __('adminMovieIndex.statusSoldOut') }}
                             @endif
                         </span>
                     </td>
 
                     <td class="actions">
-                        <button class="btn-action btn-edit" title="Editar" 
+                        <button class="btn-action btn-edit" title="{{ __('adminMovieIndex.editButtonTitle') }}" 
                             data-bs-toggle="modal"
                             data-bs-target="#modalEdit"
                             data-movie="{{ $movie->toJson() }}">
@@ -83,10 +83,10 @@
                             </svg>
                         </button>
 
-                        <form action="{{ route('admin.movie.delete', ['id' => $movie->getId()]) }}" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta película?')">
+                        <form action="{{ route('admin.movie.delete', ['id' => $movie->getId()]) }}" method="POST" style="display:inline" >
                             @csrf
                             @method('DELETE')
-                            <button class="btn-action btn-delete" type="submit" title="Eliminar">
+                            <button class="btn-action btn-delete" type="submit" title="{{ __('adminMovieIndex.deleteButtonTitle') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                     fill="none" stroke="#e63946" stroke-width="2">
                                     <polyline points="3 6 5 6 21 6" />

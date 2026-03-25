@@ -20,9 +20,9 @@
                 <line x1="17" y1="7" x2="22" y2="7"/>
             </svg>
         </div>
-        <h3 class="empty-title">Tu libreria esta vacia</h3>
-        <p class="empty-subtitle">Las peliculas que alquilas apareceran aqui</p>
-        <a href="{{ route('catalog.index') }}" class="btn-explore">Explorar Catalogo</a>
+        <h3 class="empty-title">{{ __('libraryIndex.emptyLibrary') }}</h3>
+        <p class="empty-subtitle">{{ __('libraryIndex.emptyDescription') }}</p>
+        <a href="{{ route('catalog.index') }}" class="btn-explore">{{ __('libraryIndex.exploreCatalog') }}</a>
     </div>
     @else
 
@@ -37,7 +37,7 @@
         </svg>
         <div class="notifications-list">
             @foreach($viewData['expiringSoon'] as $item)
-            <div class="alert-expiring"> En {{ $item->getDaysUntilExpiration() }} dias expira: {{ $item->movie->getTitle() }}</div>
+            <div class="alert-expiring">{{ __('libraryIndex.expiringNotification') }} {{ $item->getDaysUntilExpiration() }} {{ __('libraryIndex.expiresLabel') }} {{ $item->movie->getTitle() }}</div>
             @endforeach
         </div>
     </div>
@@ -60,7 +60,7 @@
                         <circle cx="12" cy="12" r="10"/>
                         <polyline points="12 6 12 12 16 14"/>
                     </svg>
-                    Expira en {{ $item->getDaysUntilExpiration() }} dias
+                    {{ __('libraryIndex.expiresIn') }} {{ $item->getDaysUntilExpiration() }} {{ __('libraryIndex.days') }}
                 </div>
 
                 <span class="card-expiry-date">{{ $item->getExpirationDate() }}</span>

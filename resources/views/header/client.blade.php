@@ -11,7 +11,7 @@ $cartSubtotal = $cartSubtotal ?? 0;
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <header class="rentflix-header client-header">
     <div class="header-container">
-        <a href="{{ route('catalog.index') }}" class="header-logo" aria-label="Ir al catalogo">
+        <a href="{{ route('catalog.index') }}" class="header-logo" aria-label="{{ __('headerClient.goCatalog') }}">
             <img src="{{ asset('images/logoRentflix.png') }}" alt="RentFlix Logo" class="logo-img">
         </a>
 
@@ -23,14 +23,14 @@ $cartSubtotal = $cartSubtotal ?? 0;
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                <span>Catalogo</span>
+                <span>{{ __('headerClient.catalog') }}</span>
             </a>
             <a href="{{ route('collections.library') }}" class="nav-item">
                 <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4l2-3h2l2 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
                     <circle cx="12" cy="13" r="3"></circle>
                 </svg>
-                <span>Mi Biblioteca</span>
+                <span>{{ __('headerClient.library') }}</span>
             </a>
         </nav>
 
@@ -40,19 +40,19 @@ $cartSubtotal = $cartSubtotal ?? 0;
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                 </svg>
-                <input type="text" name="movie_name" class="search-input" placeholder="Buscar peliculas..." required>
+                <input type="text" name="movie_name" class="search-input" placeholder="{{ __('headerClient.searchPlaceholder') }}" required>
             </div>
         </form>
 
         <div class="header-actions">
             <a href="{{ route('collections.wishlist') }}">
-                <button class="action-btn favorites-btn" aria-label="Favoritos">
+                <button class="action-btn favorites-btn" aria-label="{{ __('headerClient.favorites') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                     </svg>
                 </button>
             </a>
-            <button class="action-btn cart-btn" aria-label="Carrito" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
+            <button class="action-btn cart-btn" aria-label="{{ __('headerClient.cart') }}" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
@@ -67,8 +67,8 @@ $cartSubtotal = $cartSubtotal ?? 0;
                 </button>
 
                 <div class="profile-menu" role="menu" aria-hidden="true">
-                    <a href="{{ route('bill.list') }}" class="profile-menu-item" role="menuitem">Tus facturas</a>
-                    <a href="{{ route('auth.logout') }}" class="profile-menu-item" role="menuitem">Cerrar sesion</a>
+                    <a href="{{ route('bill.list') }}" class="profile-menu-item" role="menuitem">{{ __('headerClient.myBills') }}</a>
+                    <a href="{{ route('auth.logout') }}" class="profile-menu-item" role="menuitem">{{ __('headerClient.logout') }}</a>
                 </div>
             </div>
         </div>
@@ -83,16 +83,16 @@ $cartSubtotal = $cartSubtotal ?? 0;
 
 <div class="offcanvas offcanvas-end cart-offcanvas" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
     <div class="offcanvas-header cart-offcanvas-header">
-        <h5 class="offcanvas-title" id="cartOffcanvasLabel">Mi carrito</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        <h5 class="offcanvas-title" id="cartOffcanvasLabel">{{ __('headerClient.myCart') }}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="{{ __('headerClient.close') }}"></button>
     </div>
 
     <div class="offcanvas-body cart-offcanvas-body">
         <div class="cart-items" aria-live="polite">
             @if($cartMovieItems->isEmpty())
             <div class="cart-empty-state">
-                <p class="cart-empty-title">Tu carrito esta vacio</p>
-                <p class="cart-empty-subtitle">Agrega peliculas para verlas aqui.</p>
+                <p class="cart-empty-title">{{ __('headerClient.emptyCart') }}</p>
+                <p class="cart-empty-subtitle">{{ __('headerClient.emptyCartSubtitle') }}</p>
             </div>
             @else
             <div class="cart-item-list">
@@ -107,7 +107,7 @@ $cartSubtotal = $cartSubtotal ?? 0;
                             <form action="{{ route('cart.remove', ['id' => $movie->getId()]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="cart-item-remove">Quitar</button>
+                                <button type="submit" class="cart-item-remove">{{ __('headerClient.remove') }}</button>
                             </form>
                         </div>
                     </div>
@@ -119,14 +119,14 @@ $cartSubtotal = $cartSubtotal ?? 0;
 
         <div class="cart-summary">
             <div class="cart-summary-row">
-                <span>Subtotal</span>
+                <span>{{ __('headerClient.subtotal') }}</span>
                 <strong>${{ number_format($cartSubtotal, 2) }}</strong>
             </div>
             <div class="cart-summary-row">
-                <span>Total</span>
+                <span>{{ __('headerClient.total') }}</span>
                 <strong>${{ number_format($cartSubtotal, 2) }}</strong>
             </div>
-            <button class="cart-checkout-btn" type="button" data-bs-toggle="modal" data-bs-target="#checkoutModal" {{ $cartMovieItems->isEmpty() ? 'disabled' : '' }}>Finalizar compra</button>
+            <button class="cart-checkout-btn" type="button" data-bs-toggle="modal" data-bs-target="#checkoutModal" {{ $cartMovieItems->isEmpty() ? 'disabled' : '' }}>{{ __('headerClient.checkout') }}</button>
         </div>
     </div>
 </div>

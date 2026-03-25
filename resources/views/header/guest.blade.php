@@ -2,7 +2,7 @@
 
 <header class="rentflix-header guest-header">
     <div class="header-container">
-        <a href="{{ route('catalog.index') }}" class="header-logo" aria-label="Ir al inicio">
+        <a href="{{ route('catalog.index') }}" class="header-logo" aria-label="{{ __('headerGuest.goHome') }}">
             <img src="{{ asset('images/logoRentflix.png') }}" alt="RentFlix Logo" class="logo-img">
         </a>
 
@@ -14,12 +14,12 @@
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
                 </svg>
-                <span>Catalogo</span>
+                <span>{{ __('headerGuest.catalog') }}</span>
             </a>
         </nav>
 
         <div class="header-actions">
-            <a href="{{ route('auth.index') }}" class="auth-link-btn">Iniciar sesion</a>
+            <a href="{{ route('auth.index') }}" class="auth-link-btn">{{ __('headerGuest.login') }}</a>
         </div>
     </div>
 </header>
