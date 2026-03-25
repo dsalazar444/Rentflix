@@ -5,8 +5,8 @@
         <div class="modal-content movie-modal-content">
 
             <div class="modal-header movie-modal-header">
-                <h5 class="modal-title" id="modalEditLabel">Editar Factura</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <h5 class="modal-title" id="modalEditLabel">{{ __('adminBillModalEdit.modalTitle') }}</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="{{ __('adminBillModalEdit.closeButtonLabel') }}"></button>
             </div>
 
             <div class="modal-body">
@@ -15,14 +15,14 @@
                     @method('PUT')
                     <!--Items edition -> edit quantity and delete items-->
                     <div class="movie-form-group mb-3">
-                        <label>Items de la factura</label>
+                        <label>{{ __('adminBillModalEdit.itemsLabel') }}</label>
                         <div id="bill-items-list">
                         </div>
                     </div>
                     
                     <div class="modal-footer movie-modal-footer">
-                        <button type="button" class="movie-btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="movie-btn-save">Guardar Cambios</button>
+                        <button type="button" class="movie-btn-cancel" data-bs-dismiss="modal">{{ __('adminBillModalEdit.cancelButton') }}</button>
+                        <button type="submit" class="movie-btn-save">{{ __('adminBillModalEdit.saveButton') }}</button>
                     </div>
                 </form>
             </div>

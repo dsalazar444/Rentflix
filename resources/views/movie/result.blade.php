@@ -8,14 +8,14 @@
 <div class="catalog-wrapper">
     <section class="movies-section">
         <div class="movies-header">
-            <h2 class="section-title">Resultados</h2>
-            <span class="movies-count">Coincidencias con {{ $viewData['query'] }} </span>
+            <h2 class="section-title">{{ __('movieResult.title') }}</h2>
+            <span class="movies-count">{{ __('movieResult.matchesWith') }} {{ $viewData['query'] }} </span>
         </div>
 
         @if($viewData['notFound'])
             <div class="no-results-message">
-                <p >No hay coincidencias para "{{ $viewData['query'] }}"</p>
-                <a href="{{ route('catalog.index') }}" class="btn-return">Volver al catálogo</a>
+                <p>{{ __('movieResult.noResults') }} "{{ $viewData['query'] }}"</p>
+                <a href="{{ route('catalog.index') }}" class="btn-return">{{ __('movieResult.backToCatalog') }}</a>
             </div>
         @else
         <div class="movies-grid">
@@ -35,7 +35,7 @@
                                 <line x1="8" y1="2" x2="8" y2="6"/>
                                 <line x1="3" y1="10" x2="21" y2="10"/>
                             </svg>
-                            Reservar
+                            {{ __('movieResult.reserve') }}
                         </span>
                     </div>
                 </div>
@@ -56,9 +56,9 @@
                         <span class="card-price">${{ $movie->getPrice() }}</span>
                         <span class="card-status available">
                             @if ($movie->getQuantity() > 0)
-                                Disponible
+                                {{ __('movieResult.available') }}
                             @else
-                                Agotada
+                                {{ __('movieResult.outOfStock') }}
                             @endif
                         </span>
                     </div>

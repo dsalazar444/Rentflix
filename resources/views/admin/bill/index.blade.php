@@ -12,11 +12,11 @@
     <!-- Panel header -->
     <div class="panel-header">
         <div class="panel-title">
-            <h1>Panel de Administración</h1>
-            <p>Gestiona el catálogo de facturas</p>
+            <h1>{{ __('adminBillIndex.titlePage') }}</h1>
+            <p>{{ __('adminBillIndex.subtitle') }}</p>
         </div>
         <button class="btn-add" data-bs-toggle="modal" data-bs-target="#modalBillCreate"> 
-            <span>+</span> Agregar Factura
+            <span>+</span> {{ __('adminBillIndex.addButton') }}
         </button>
     </div>
 
@@ -40,7 +40,7 @@
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
         </svg>
-        <input type="text" placeholder="Buscar facturas por id..." id="searchInput">
+        <input type="text" placeholder="{{ __('adminBillIndex.searchPlaceholder') }}" id="searchInput">
     </div>
 
     <!-- Table  -->
@@ -48,12 +48,12 @@
         <table class="table-movies">
             <thead>
                 <tr>
-                    <th>ID Factura</th>
-                    <th>Fecha</th>
-                    <th>Precio</th>
-                    <th>A nombre de</th>
-                    <th>Items</th>
-                    <th>Acciones</th>
+                    <th>{{ __('adminBillIndex.tableHeaders.billId') }}</th>
+                    <th>{{ __('adminBillIndex.tableHeaders.date') }}</th>
+                    <th>{{ __('adminBillIndex.tableHeaders.price') }}</th>
+                    <th>{{ __('adminBillIndex.tableHeaders.customer') }}</th>
+                    <th>{{ __('adminBillIndex.tableHeaders.items') }}</th>
+                    <th>{{ __('adminBillIndex.tableHeaders.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,13 +69,13 @@
                     <td>Id: {{ $bill->getUserId() }}, {{ $bill->getUserFirstName()}}</td>
                     <td>
                         <button class="btn-items" data-items='@json($bill->getItems())' onclick="showItemsModal(this)">
-                            <span>+</span> Ver items
+                            <span>+</span> {{ __('adminBillIndex.viewItemsButton') }}
                         </button>
                     </td>
             
                     <td class="actions">
 
-                        <button class="btn-action btn-edit" title="Editar" 
+                        <button class="btn-action btn-edit" title="{{ __('adminBillIndex.editButtonTitle') }}" 
                             data-bs-toggle="modal"
                             data-bs-target="#modalBillEdit"
                             data-bill="{{ $bill->toJson() }}">
@@ -86,10 +86,10 @@
                             </svg>
                         </button>
 
-                        <form action="{{ route('admin.bill.delete', ['id' => $bill->getId()]) }}" method="POST" style="display:inline" onsubmit="return confirm('¿Seguro que quieres eliminar esta factura?')">
+                        <form action="{{ route('admin.bill.delete', ['id' => $bill->getId()]) }}" method="POST" style="display:inline">
                             @csrf
                             @method('DELETE')
-                            <button class="btn-action btn-delete" type="submit" title="Eliminar">
+                            <button class="btn-action btn-delete" type="submit" title="{{ __('adminBillIndex.deleteButtonTitle') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                     fill="none" stroke="#e63946" stroke-width="2">
                                     <polyline points="3 6 5 6 21 6" />
