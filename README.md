@@ -177,17 +177,6 @@ php artisan db:seed
 
 ---
 
-# 💡 Recomendación
-
-Para futuros desarrollos:
-
-* Usa **migraciones** → estructura
-* Usa **seeders** → datos
-
-Esto facilita despliegues y mantenimiento.
-
----
-
 # 🎉 ¡Listo!
 
 Tu proyecto debería estar corriendo correctamente.
@@ -195,7 +184,31 @@ Si tienes problemas, revisa los logs en:
 
 ```bash
 storage/logs/laravel.log
+
 ```
+
+# Rutas principales
+
+**- Principal Page**
+http://34.28.34.65/Rentflix/public/
+
+**- Show Movie**
+http://34.28.34.65/Rentflix/public/catalog/movie/4
+
+**- Wishlist**
+http://34.28.34.65/Rentflix/public/collections/wishlist
+
+**- Library**
+http://34.28.34.65/Rentflix/public/collections/whishlist
+
+**- CRUD Movies**
+http://34.28.34.65/Rentflix/public/admin/movie
+    
+**- CRUD Bill**
+http://34.28.34.65/Rentflix/public/admin/bill
+
+**- Login**
+http://34.28.34.65/Rentflix/auth/
 
 ---
 
