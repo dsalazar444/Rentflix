@@ -1,61 +1,202 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎬 Rentflix - Guía de Instalación y Ejecución
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Bienvenido a **Rentflix**, un proyecto desarrollado con Laravel.
+Sigue estos pasos para levantar el proyecto en tu entorno local o servidor 🚀
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# 📦 Requisitos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Antes de comenzar, asegúrate de tener instalado:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* PHP >= 8.x
+* Composer
+* MySQL / MariaDB
+* Apache o Nginx
+* Node.js y npm (opcional, para assets)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+# ⚙️ Instalación
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 1. Clonar el repositorio
 
-## Laravel Sponsors
+```bash
+git clone <URL_DEL_REPO>
+cd Rentflix
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 2. Instalar dependencias de PHP
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+```
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 3. Configurar variables de entorno
 
-## Code of Conduct
+Copia el archivo `.env`:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+Edita `.env` con tus datos:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=rentflix
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_password
+```
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 4. Generar clave de la aplicación
 
-# Rentflix
+```bash
+php artisan key:generate
+```
+
+---
+
+## 5. Configurar permisos (Linux)
+
+```bash
+sudo chown -R www-data:www-data storage bootstrap/cache
+sudo chmod -R 775 storage bootstrap/cache
+```
+
+---
+
+## 6. Crear enlace simbólico para almacenamiento
+
+Esto permite guardar y acceder a imágenes:
+
+```bash
+php artisan storage:link
+```
+
+---
+
+# 🧪 Opciones de ejecución
+
+A continuación tienes dos formas de correr el proyecto según lo que necesites:
+
+---
+
+## 🟢 Opción 1: Base de datos con datos de prueba (IMPORTANDO `.sql`)
+
+> ⚠️ **Este archivo ya contiene estructura + datos. NO ejecutar migraciones.**
+
+### 1. Crear la base de datos
+
+```bash
+mysql -u usuario -p
+```
+
+```sql
+CREATE DATABASE rentflix;
+EXIT;
+```
+
+---
+
+### 2. Importar el archivo `.sql`
+
+```bash
+mysql -u usuario -p rentflix < Rentflix.sql
+```
+
+---
+
+## 🔵 Opción 2: Base de datos limpia (usando migraciones)
+
+> Usa esta opción solo si NO vas a importar el `.sql`.
+
+```bash
+php artisan migrate
+```
+
+---
+
+# 🚀 Ejecutar el servidor
+
+```bash
+php artisan serve
+```
+
+Luego abre en el navegador:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+# 🧹 Limpieza de caché (si algo falla)
+
+```bash
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+```
+
+---
+
+# 🛠️ Comandos útiles
+
+```bash
+# Ver rutas
+php artisan route:list
+
+# Crear migraciones
+php artisan make:migration
+
+# Crear seeders
+php artisan make:seeder
+
+# Ejecutar seeders manualmente
+php artisan db:seed
+```
+
+---
+
+# ⚠️ Notas importantes
+
+* ❗ No mezclar migraciones con el `.sql` (puede generar conflictos).
+* No uses el usuario `root` en producción.
+* Asegúrate de que el servicio de MySQL/MariaDB esté activo.
+* Verifica permisos si Laravel no puede escribir en `storage/`.
+
+---
+
+# 💡 Recomendación
+
+Para futuros desarrollos:
+
+* Usa **migraciones** → estructura
+* Usa **seeders** → datos
+
+Esto facilita despliegues y mantenimiento.
+
+---
+
+# 🎉 ¡Listo!
+
+Tu proyecto debería estar corriendo correctamente.
+Si tienes problemas, revisa los logs en:
+
+```bash
+storage/logs/laravel.log
+```
+
+---
+
+Hecho con ❤️ usando Laravel 🚀
