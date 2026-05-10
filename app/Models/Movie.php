@@ -221,7 +221,7 @@ class Movie extends Model
         $this->attributes['trailer_link'] = $trailer_link;
     }
 
-    public static function searchMovieByName(string $movie_name)
+    public static function searchMovieByName(string $movie_name): array
     {
         $movies = collect();
         $notFound = false;

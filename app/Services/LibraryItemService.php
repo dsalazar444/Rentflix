@@ -36,7 +36,7 @@ class LibraryItemService
         LibraryItem::where('created_at', '<', now()->subMonth())->delete();
     }
 
-    public static function synchLibraryAfterPurchase(Bill $bill): void
+    public function synchLibraryAfterPurchase(Bill $bill): void
     {
         try {
             // Add purchased movies to user's library

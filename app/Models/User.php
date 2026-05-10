@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->libraryItems()->get();
     }
 
+    public function getWishlistItems(): Collection
+    {
+        return $this->wishlistItems()->get();
+    } 
+
     public function getId(): int
     {
         return $this->attributes['id'];

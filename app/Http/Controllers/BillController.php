@@ -7,10 +7,10 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Mail\InvoiceMail;
 use App\Models\Bill;
-use App\Models\LibraryItem;
 use App\Models\User;
 use App\Models\Movie;
 use App\Http\Requests\CreateBillRequest;
+use App\Services\LibraryItemService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -19,6 +19,13 @@ use Illuminate\View\View;
 
 class BillController extends Controller
 {
+    private LibraryItemService $libraryItemService;
+
+    public function __construct(LibraryItemService $libraryItemService)
+    {
+        $this->libraryItemService = $libraryItemService;
+    }
+
     public function index(): View
     {
         $viewData = [];
@@ -87,7 +94,7 @@ class BillController extends Controller
             );
 
             // Sync purchased movies to user's library
-            LibraryItem::synchLibraryAfterPurchase($bill);
+            $this->libraryItemService->synchLibraryAfterPurchase($bill);
 
             // Clean shopping cart from session
             session()->forget('cart');
