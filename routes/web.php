@@ -23,9 +23,8 @@ Route::get('/movie', 'App\Http\Controllers\Admin\MovieController@search')->name(
 Route::get('/users', 'App\Http\Controllers\UserController@index')->name('user.index');
 Route::post('/users', 'App\Http\Controllers\UserController@create')->name('user.create');
 
-// Collection routes
-Route::get('/collections/library', 'App\Http\Controllers\LibraryItemController@index')->name('collections.library');
-Route::get('/collections/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('collections.wishlist');
+// Library routes
+Route::get('/library', 'App\Http\Controllers\LibraryItemController@index')->name('library.index');
 
 // Authentication routes
 Route::get('/auth', 'App\Http\Controllers\AuthController@index')->name('auth.index');
@@ -41,6 +40,7 @@ Route::get('/bills/send/{id}', 'App\Http\Controllers\BillController@send')->name
 // Wishlist routes
 Route::post('/catalog/wishlist/add/{id}', 'App\Http\Controllers\WishlistItemController@add')->name('collections.wishlist.add');
 Route::delete('/catalog/wishlist/delete/{id}', 'App\Http\Controllers\WishlistItemController@delete')->name('collections.wishlist.delete');
+Route::get('/collections/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('collections.wishlist');
 
 // Shopping cart routes
 Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');

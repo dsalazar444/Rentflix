@@ -12,6 +12,7 @@
                 <img src="{{ asset('storage/' . $viewData['movie']->getFileName()) }}" alt="{{ $viewData['movie']->getTitle() }}" class="poster-img">
             </div>
 
+            @if(!$viewData['isInLibrary'])
             <form action="{{ route('cart.add', ['id' => $viewData['movie']->getId()]) }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit" class="btn-rent {{ $viewData['isInShoppingCart'] ? 'btn-rent-disabled' : '' }}" {{ $viewData['isInShoppingCart'] ? 'disabled' : '' }} aria-disabled="{{ $viewData['isInShoppingCart'] ? 'true' : 'false' }}">
@@ -24,6 +25,7 @@
                     {{ $viewData['isInShoppingCart'] ? __('movieShow.alreadyInCartButton') : __('movieShow.addToCartButton') }}
                 </button>
             </form>
+            @endif
 
             <a href="{{ $viewData['movie']->getTrailerLink() }}" target="_blank" class="btn-trailer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"

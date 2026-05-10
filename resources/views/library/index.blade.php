@@ -22,7 +22,7 @@
         </div>
         <h3 class="empty-title">{{ __('libraryIndex.emptyLibrary') }}</h3>
         <p class="empty-subtitle">{{ __('libraryIndex.emptyDescription') }}</p>
-        <a href="{{ route('catalog.index') }}" class="btn-explore">{{ __('libraryIndex.exploreCatalog') }}</a>
+        <a href="{{ route('movie.index') }}" class="btn-explore">{{ __('libraryIndex.exploreCatalog') }}</a>
     </div>
     @else
 
@@ -44,7 +44,7 @@
     @endif
     <div class="library-grid">
         @foreach ($viewData['libraryItems'] as $item)
-        <a href="{{ route('catalog.show', ['id' => $item->movie->getId()]) }}" target="_blank" class="library-card {{ $item->getDaysUntilExpiration() <= 3 ? 'card-expiring' : '' }}" style="text-decoration: none; color: inherit;">
+        <a href="{{ route('movie.show', ['id' => $item->movie->getId()]) }}" target="_blank" class="library-card {{ $item->getDaysUntilExpiration() <= 3 ? 'card-expiring' : '' }}" style="text-decoration: none; color: inherit;">
             <div class="card-poster">
                 <img src="{{ asset('storage/' . $item->movie->getFileName()) }}" alt="Sample Movie" class="card-img">
                 <span class="card-badge">{{ $item->movie->getClassificationCapitalized() }}</span>
