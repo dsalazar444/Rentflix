@@ -7,16 +7,16 @@ $cartCount = $cartCount ?? 0;
 $cartSubtotal = $cartSubtotal ?? 0;
 @endphp
 
-<link rel="stylesheet" href="{{ asset('css/catalog/index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/movie/index.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <header class="rentflix-header client-header">
     <div class="header-container">
-        <a href="{{ route('catalog.index') }}" class="header-logo" aria-label="{{ __('headerClient.goCatalog') }}">
+        <a href="{{ route('movie.index') }}" class="header-logo" aria-label="{{ __('headerClient.goCatalog') }}">
             <img src="{{ asset('images/logoRentflix.png') }}" alt="RentFlix Logo" class="logo-img">
         </a>
 
         <nav class="header-nav">
-            <a href="{{ route('catalog.index') }}" class="nav-item">
+            <a href="{{ route('movie.index') }}" class="nav-item">
                 <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="3" width="7" height="7"></rect>
                     <rect x="14" y="3" width="7" height="7"></rect>

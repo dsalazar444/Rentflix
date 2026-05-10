@@ -2,16 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Admin routes
-Route::get('/admin/movie', 'App\Http\Controllers\MovieController@index')->name('admin.movie.index');
-Route::post('/admin/movie/save', 'App\Http\Controllers\MovieController@save')->name('admin.movie.save');
-Route::delete('/admin/movie/delete/{id}', 'App\Http\Controllers\MovieController@delete')->name('admin.movie.delete');
-Route::put('/admin/movie/update/{id}', 'App\Http\Controllers\MovieController@update')->name('admin.movie.update');
-Route::get('/admin/bill', 'App\Http\Controllers\BillController@index')->name('admin.bill.index');
+// Admin movie routes
+Route::get('/admin/movie', 'App\Http\Controllers\Admin\MovieManagmentController@index')->name('admin.movie.index');
+Route::post('/admin/movie/save', 'App\Http\Controllers\Admin\MovieManagmentController@save')->name('admin.movie.save');
+Route::delete('/admin/movie/delete/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@delete')->name('admin.movie.delete');
+Route::put('/admin/movie/update/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@update')->name('admin.movie.update');
 
-// Catalog routes
-Route::get('/', 'App\Http\Controllers\CatalogController@index')->name('catalog.index');
-Route::get('/catalog/movie/{id}', 'App\Http\Controllers\CatalogController@show')->name('catalog.show');
+// Admin bill routes
+Route::get('/admin/bill', 'App\Http\Controllers\BillController@index')->name('admin.bill.index');
+Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\BillController@delete')->name('admin.bill.delete');
+Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\BillController@update')->name('admin.bill.update');
+Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->name('admin.bill.save');
+
+// Movie routes
+Route::get('/', 'App\Http\Controllers\MovieController@index')->name('movie.index');
+Route::get('/movie/{id}', 'App\Http\Controllers\MovieController@show')->name('movie.show');
+Route::get('/movie', 'App\Http\Controllers\Admin\MovieController@search')->name('movie.search');
 
 // User routes
 Route::get('/users', 'App\Http\Controllers\UserController@index')->name('user.index');
@@ -27,13 +33,7 @@ Route::post('/auth/register', 'App\Http\Controllers\AuthController@create')->nam
 Route::post('/auth/login', 'App\Http\Controllers\AuthController@login')->name('auth.login');
 Route::get('/auth/logout', 'App\Http\Controllers\AuthController@logout')->name('auth.logout');
 
-// Admin bill routes
-Route::get('/admin/bill', 'App\Http\Controllers\BillController@index')->name('admin.bill.index');
-Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\BillController@delete')->name('admin.bill.delete');
-Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\BillController@update')->name('admin.bill.update');
-Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->name('admin.bill.save');
-
-// bill routes
+// Bill routes
 Route::get('/bill/list', 'App\Http\Controllers\BillController@listBills')->name('bill.list');
 Route::get('/bills/download/{id}', 'App\Http\Controllers\BillController@download')->name('bill.download');
 Route::get('/bills/send/{id}', 'App\Http\Controllers\BillController@send')->name('bill.send');
@@ -48,5 +48,4 @@ Route::delete('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@
 Route::get('/cart/clean', 'App\Http\Controllers\ShoppingCartController@clean')->name('cart.clean');
 Route::post('/cart/process', 'App\Http\Controllers\BillController@processPayment')->name('cart.process');
 
-// Movie routes
-Route::get('/movie', 'App\Http\Controllers\MovieController@search')->name('movie.search');
+
