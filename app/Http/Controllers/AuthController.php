@@ -52,10 +52,11 @@ class AuthController extends Controller
         return redirect()->route('catalog.index');
     }
 
-    public function logout(Request $request): View
+    public function logout(Request $request): RedirectResponse
     {
-        $request->session()->flush();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return view('auth.index');
+        return redirect()->route('auth.index');
     }
 }

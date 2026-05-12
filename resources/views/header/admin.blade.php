@@ -1,9 +1,5 @@
 <!-- Made by: Samuel Martínez Arteaga -->
 
-@php
-    $profileInitial = session()->has('user_id') ? 'A' : 'R';
-@endphp
-
 <header class="rentflix-header admin-header">
     <div class="header-container">
         <a href="{{ route('admin.movie.index') }}" class="header-logo" aria-label="{{ __('headerAdmin.goAdminPanel') }}">
@@ -54,7 +50,10 @@
                 </button>
 
                 <div class="profile-menu" role="menu" aria-hidden="true">
-                    <a href="{{ route('auth.logout') }}" class="profile-menu-item" role="menuitem">{{ __('headerAdmin.logout') }}</a>
+                    <form action="{{ route('auth.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="profile-menu-item" role="menuitem">{{ __('headerAdmin.logout') }}</button>
+                    </form>
                 </div>
             </div>
         </div>

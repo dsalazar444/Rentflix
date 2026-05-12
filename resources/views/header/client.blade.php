@@ -1,12 +1,5 @@
 <!-- Made by: Samuel Martínez Arteaga -->
 
-@php
-$profileInitial = $profileInitial ?? 'R';
-$cartMovieItems = $cartMovieItems ?? collect();
-$cartCount = $cartCount ?? 0;
-$cartSubtotal = $cartSubtotal ?? 0;
-@endphp
-
 <link rel="stylesheet" href="{{ asset('css/catalog/index.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <header class="rentflix-header client-header">
@@ -68,7 +61,10 @@ $cartSubtotal = $cartSubtotal ?? 0;
 
                 <div class="profile-menu" role="menu" aria-hidden="true">
                     <a href="{{ route('bill.list') }}" class="profile-menu-item" role="menuitem">{{ __('headerClient.myBills') }}</a>
-                    <a href="{{ route('auth.logout') }}" class="profile-menu-item" role="menuitem">{{ __('headerClient.logout') }}</a>
+                    <form action="{{ route('auth.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="profile-menu-item" role="menuitem">{{ __('headerClient.logout') }}</button>
+                    </form>
                 </div>
             </div>
         </div>

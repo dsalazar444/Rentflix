@@ -20,5 +20,11 @@ class AppServiceProvider extends ServiceProvider
         View::composer('header.client', function ($view) {
             $view->with(app(CartService::class)->getSummary());
         });
+        View::composer('header.dispatcher', function ($view) {
+            $view->with([
+                'role' => session('role'),
+                'isAuthenticated' => session()->has('user_id'),
+            ]);
+        });
     }
 }
