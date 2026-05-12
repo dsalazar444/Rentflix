@@ -23,8 +23,19 @@ class LibraryItemController extends Controller
         $viewData['libraryItems'] = LibraryItem::where('user_id', session('user_id'))
             ->with('user', 'movie')
             ->get();
-        $viewData['expiringSoon'] = $this->libraryItemService->notify(session('user_id'));
+        $viewData['expiringSoon'] = $this->libraryItemService->soonToExpire(session('user_id'));
 
-        return view('collections.library')->with('viewData', $viewData);
+        return view('library.index')->with('viewData', $viewData);
     }
+
+    // public function index(): View
+    // {
+    //     $user = User::find(session('user_id'));
+
+    //     $viewData = [];
+    //     $viewData['libraryItems'] = $user->getLibraryItems(); 
+    //     $viewData['expiringSoon'] = $this->libraryItemService->soonToExpire(session('user_id'));
+
+    //     return view('library.index')->with('viewData', $viewData);
+    // }
 }

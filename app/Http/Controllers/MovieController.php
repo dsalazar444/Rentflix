@@ -4,103 +4,73 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMovieRequest;
-use App\Http\Requests\UpdateMovieRequest;
-use App\Interfaces\ImageStorage;
+use App\Models\LibraryItem;
 use App\Models\Movie;
+use App\Models\WishlistItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class MovieController extends Controller
 {
-    private ImageStorage $imageStorage;
-
-    public function __construct()
+    public function index(Request $request): View
     {
-        $this->imageStorage = app(ImageStorage::class);
-    }
+        $selectedGenre = $request->query('genre', 'all');
+        $selectedSort = $request->query('sort', 'priceAsc');
 
-    public function index(): View
-    {
+        $moviesQuery = Movie::query();
+
+        if ($selectedGenre !== 'all') {
+            $moviesQuery->where('genre', $selectedGenre);
+        }
+
+        if ($selectedSort === 'priceDesc') {
+            $moviesQuery->orderBy('price', 'desc');
+        } elseif ($selectedSort === 'available') {
+            $moviesQuery->where('quantity', '>', 0);
+            $moviesQuery->orderBy('title', 'asc');
+        } else {
+            $moviesQuery->orderBy('price', 'asc');
+        }
+
+        $movies = $moviesQuery->get();
+
         $viewData = [];
-        $viewData['movies'] = Movie::all();
+        $viewData['movies'] = $movies;
+        $viewData['moviesCount'] = $movies->count();
+        $viewData['newdlyAdded'] = Movie::orderBy('created_at', 'desc')->take(5)->get();
+        $viewData['featured'] = Movie::orderBy('quantity_views', 'desc')->take(4)->get();
+        $viewData['selectedGenre'] = $selectedGenre;
+        $viewData['selectedSort'] = $selectedSort;
 
-        return view('admin.movie.index')->with('viewData', $viewData);
+        return view('movie.index')->with('viewData', $viewData);
     }
 
-    public function save(StoreMovieRequest $request): RedirectResponse
-    {
-        $imageName = $this->imageStorage->store($request, 'movie_image');
-        Movie::create($request->only([
-            'title',
-            'director',
-            'genre',
-            'format',
-            'price',
-            'quantity',
-            'description',
-            'classification',
-            'trailer_link',
-            'year',
-            'location',
-        ]) + ['file_name' => $imageName]);
-
-        return redirect()->route('admin.movie.index');
-    }
-
-    public function delete(string $id): RedirectResponse
+    public function show(string $id): View|RedirectResponse
     {
         $movie = Movie::find($id);
         if (! $movie) {
-            return redirect()->route('admin.movie.index');
+            return redirect()->route('movie.index');
         }
-        $movie->delete();
-
-        return redirect()->route('admin.movie.index');
-    }
-
-    public function update(UpdateMovieRequest $request, string $id): RedirectResponse
-    {
-        $movie = Movie::find($id);
-        if (! $movie) {
-            return redirect()->route('admin.movie.index');
-        }
-
-        $updatedMovieData = $request->only([
-            'title',
-            'director',
-            'genre',
-            'format',
-            'price',
-            'quantity',
-            'description',
-            'classification',
-            'trailer_link',
-            'year',
-            'location',
-        ]);
-
-        if ($request->hasFile('movie_image')) {
-            $imageName = $this->imageStorage->store($request, 'movie_image');
-            $updatedMovieData['file_name'] = $imageName;
-        }
-
-        $movie->update($updatedMovieData);
-
-        return redirect()->route('admin.movie.index');
-    }
-
-    public function search(Request $request): View
-    {
-        $query = $request->input('movie_name');
-        $result = Movie::searchMovieByName($query);
 
         $viewData = [];
-        $viewData['movies'] = $result['movies'];
-        $viewData['query'] = $query;
-        $viewData['notFound'] = $result['notFound'];
+        $viewData['movie'] = $movie;
+        $viewData['isInWishlist'] = false;
+        $viewData['isInLibrary'] = false;
+        $viewData['isInShoppingCart'] = false;
 
-        return view('movie.result')->with('viewData', $viewData);
+        $shoppingCart = array_map('intval', session()->get('cart', []));
+        $viewData['isInShoppingCart'] = in_array($movie->getId(), $shoppingCart, true);
+
+        if (session('user_id')) {
+            $viewData['isInWishlist'] = WishlistItem::where('user_id', session('user_id'))
+                ->where('movie_id', $movie->getId())
+                ->exists();
+            $viewData['isInLibrary'] = LibraryItem::where('user_id', session('user_id'))
+                ->where('movie_id', $movie->getId())
+                ->exists();
+        }
+
+        return view('movie.show')->with('viewData', $viewData);
     }
 }

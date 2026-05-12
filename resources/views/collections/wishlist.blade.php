@@ -14,13 +14,13 @@
 		</div>
 		<h3 class="empty-title">{{ __('whishlistIndex.emptyWishlist') }}</h3>
 		<p class="empty-subtitle">{{ __('whishlistIndex.emptyDescription') }}</p>
-		<a href="{{ route('catalog.index') }}" class="btn-explore">{{ __('whishlistIndex.exploreCatalog') }}</a>
+		<a href="{{ route('movie.index') }}" class="btn-explore">{{ __('whishlistIndex.exploreCatalog') }}</a>
 	</div>
 	@else
 	<div class="library-grid">
 		@foreach($viewData['wishlistItems'] as $wishlistItem)
 			@if($wishlistItem->movie)
-			<a href="{{ route('catalog.show', ['id' => $wishlistItem->movie->getId()]) }}" class="library-card" style="text-decoration: none;">
+			<a href="{{ route('movie.show', ['id' => $wishlistItem->movie->getId()]) }}" class="library-card" style="text-decoration: none;">
 				<div class="card-poster">
 					<img src="{{ asset('storage/' . $wishlistItem->movie->getFileName()) }}" alt="{{ $wishlistItem->movie->getTitle() }}" class="card-img">
 					<span class="card-badge">{{ $wishlistItem->movie->getClassificationCapitalized() }}+</span>

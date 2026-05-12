@@ -49,7 +49,7 @@ class AuthController extends Controller
         $request->session()->put('user_id', $user->getID());
         $request->session()->put('role', $user->getRole());
 
-        return redirect()->route('catalog.index');
+        return redirect()->route('movie.index');
     }
 
     public function logout(Request $request): RedirectResponse
