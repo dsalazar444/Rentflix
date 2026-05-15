@@ -14,7 +14,7 @@
             @forelse ($viewData['featured'] as $movie)
             <a href="{{ route('movie.show', ['id' => $movie['id']]) }}" class="featured-card" title="{{ $movie->getTitle() }}">
                 <span class="featured-rank">{{ $loop->iteration }}</span>
-                <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="featured-img">
+                <img src="{{ $movie->getFileName() }}" alt="{{ $movie->getTitle() }}" class="featured-img">
             </a>
             @empty
             <div class="featured-card">
@@ -34,7 +34,7 @@
                     <span class="newdly-date-month">{{ $movie->getMonthCreatedAt() }}</span>
                     <span class="newdly-date-day">{{ $movie->getDayCreatedAt() }}</span>
                 </div>
-                <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="newdly-thumb">
+                <img src="{{ $movie->getFileName() }}" alt="{{ $movie->getTitle() }}" class="newdly-thumb">
                 <div class="newdly-info">
                     <span class="newdly-title">{{ $movie->getTitle() }}</span>
                     <span class="newdly-meta">{{ $movie->getGenreCapitalized() }} • {{ $movie->getClassificationCapitalized() }}</span>
@@ -97,7 +97,7 @@
                 <span class="rating-badge">{{ $movie->getClassificationCapitalized() }}</span>
 
                 <div class="card-poster">
-                    <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="card-img">
+                    <img src="{{ $movie->getFileName() }}" alt="{{ $movie->getTitle() }}" class="card-img">
                     <div class="card-overlay">
                         <span class="btn-reserve-overlay">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"

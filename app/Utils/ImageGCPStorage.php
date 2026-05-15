@@ -23,13 +23,18 @@ class ImageGCPStorage implements ImageStorage
                 $fileName,
                 file_get_contents($file->getRealPath())
             );
+
             if (! $stored) {
                 throw new Exception('La subida a GCP no se completó.');
             }
 
-            return $fileName;
+            $bucket = config('filesystems.disks.gcs.bucket');
+            $fileUrl = "https://storage.googleapis.com/{$bucket}/{$fileName}";
+
+            return $fileUrl;
         } catch (Exception $e) {
             throw new Exception("Error al cargar la imagen: " . $e->getMessage());
         }
     }
+
 }

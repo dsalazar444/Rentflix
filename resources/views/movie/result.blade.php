@@ -25,7 +25,7 @@
                 <span class="rating-badge">{{ $movie->getClassificationCapitalized() }}</span>
 
                 <div class="card-poster">
-                    <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="card-img">
+                    <img src="{{ $movie->getFileName() }}" alt="{{ $movie->getTitle() }}" class="card-img">
                     <div class="card-overlay">
                         <span class="btn-reserve-overlay">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"

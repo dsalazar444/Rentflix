@@ -9,7 +9,7 @@
 
         <div class="movie-poster-col">
             <div class="movie-poster">
-                <img src="{{ asset('storage/' . $viewData['movie']->getFileName()) }}" alt="{{ $viewData['movie']->getTitle() }}" class="poster-img">
+                <img src="{{ $viewData['movie']->getFileName() }}" alt="{{ $viewData['movie']->getTitle() }}" class="poster-img">
             </div>
 
             @if(!$viewData['isInLibrary'])
