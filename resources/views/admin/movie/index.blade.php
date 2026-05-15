@@ -59,7 +59,7 @@
                 @foreach ($viewData["movies"] as $movie)
                 <tr class="movie-row">
                     <td class="movie-info">
-                        <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="movie-thumb">
+                        <img src="{{ $movie->getFileName() }}" alt="{{ $movie->getTitle() }}" class="movie-thumb">
                         <div>
                             <span class="movie-title">{{ $movie->getTitle() }}</span>
                             <span class="movie-classification">{{ $movie->getClassificationCapitalized() }}+</span>
@@ -115,8 +115,8 @@
     </div>
 </div>
 
-@include('admin.movie.components.modalMovieCreate')
-@include('admin.movie.components.modalMovieEdit')
+@include('admin.components.movie.modalMovieCreate')
+@include('admin.components.movie.modalMovieEdit')
 @push('scripts')
     <script src="{{ asset('js/admin/modalErrors.js') }}"></script>
     <script src="{{ asset('js/admin/modalMovieEdit.js') }}"></script>

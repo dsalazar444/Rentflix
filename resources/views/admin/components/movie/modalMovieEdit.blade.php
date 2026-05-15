@@ -13,6 +13,19 @@
                 <form id="formEdit" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
+                    <div class="movie-form-group mb-3">
+                        <label for="storage">{{ __('adminMovieModalEdit.storageLabel') }}</label>
+                        <select id="storage" name="storage"
+                            class="movie-input @error('storage') is-invalid @enderror">
+                            <option value="gcp" {{ old('storage', 'gcp') === 'gcp' ? 'selected' : '' }}>{{ __('adminMovieModalEdit.storageOptions.gcp') }}</option>
+                            <option value="local" {{ old('storage') === 'local' ? 'selected' : '' }}>{{ __('adminMovieModalEdit.storageOptions.local') }}</option>
+                        </select>
+                        @error('storage')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="movie-form-group mb-3">
                         <label for="title">{{ __('adminMovieModalEdit.titleLabel') }}</label>
                         <input type="text" id="title" name="title"

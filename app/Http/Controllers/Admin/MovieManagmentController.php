@@ -11,16 +11,9 @@ use App\Interfaces\ImageStorage;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-
-// TODO. Poner mensaje a todo salio bien o todo salio mal
 class MovieManagmentController extends Controller
 {
     private ImageStorage $imageStorage;
-
-    public function __construct()
-    {
-        $this->imageStorage = app(ImageStorage::class);
-    }
 
     public function index(): View
     {
@@ -32,7 +25,9 @@ class MovieManagmentController extends Controller
 
     public function save(StoreMovieRequest $request): RedirectResponse
     {
-        $imageName = $this->imageStorage->store($request, 'movie_image');
+        $storage = $request->get('storage', 'gcp');
+        $imageStorage = app(ImageStorage::class, ['storage' => $storage]);
+        $imageName = $imageStorage->store($request, 'movie_image');
         Movie::create($request->only([
             'title',
             'director',
@@ -87,7 +82,9 @@ class MovieManagmentController extends Controller
         ]);
 
         if ($request->hasFile('movie_image')) {
-            $imageName = $this->imageStorage->store($request, 'movie_image');
+            $storage = $request->get('storage', 'gcp');
+            $imageStorage = app(ImageStorage::class, ['storage' => $storage]);
+            $imageName = $imageStorage->store($request, 'movie_image');
             $updatedMovieData['file_name'] = $imageName;
         }
 
