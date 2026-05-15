@@ -7,13 +7,20 @@ namespace App\Http\Controllers;
 use App\Models\LibraryItem;
 use App\Models\Movie;
 use App\Models\WishlistItem;
+use App\Services\MovieService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-// TODO. Poner mensaje a todo salio bien o todo salio mal
 class MovieController extends Controller
 {
+    private MovieService $movieService;
+
+    public function __construct(MovieService $movieService)
+    {
+        $this->movieService = $movieService;
+    }
+
     public function index(Request $request): View
     {
         // TODO. Cambiar a service
@@ -75,5 +82,18 @@ class MovieController extends Controller
         }
 
         return view('movie.show')->with('viewData', $viewData);
+    }
+
+    public function search(Request $request): View
+    {
+        $query = $request->input('movie_name');
+        $result = $this->movieService->searchMovieByName($query);
+
+        $viewData = [];
+        $viewData['movies'] = $result['movies'];
+        $viewData['query'] = $query;
+        $viewData['notFound'] = $result['notFound'];
+
+        return view('movie.result')->with('viewData', $viewData);
     }
 }

@@ -17,7 +17,7 @@ Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->nam
 // Movie routes
 Route::get('/', 'App\Http\Controllers\MovieController@index')->name('movie.index');
 Route::get('/movie/{id}', 'App\Http\Controllers\MovieController@show')->name('movie.show');
-Route::get('/movie', 'App\Http\Controllers\Admin\MovieController@search')->name('movie.search');
+Route::get('/movie', 'App\Http\Controllers\MovieController@search')->name('movie.search');
 
 // User routes
 Route::get('/users', 'App\Http\Controllers\UserController@index')->name('user.index');

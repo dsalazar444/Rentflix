@@ -4,7 +4,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LibraryItem;
 use App\Services\LibraryItemService;
 use Illuminate\View\View;
 use App\Models\User;

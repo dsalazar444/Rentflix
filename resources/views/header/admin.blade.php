@@ -46,7 +46,7 @@
 
             <div class="profile-menu-wrapper">
                 <button class="action-btn profile-btn profile-menu-toggle" aria-label="{{ __('headerAdmin.adminProfile') }}" aria-expanded="false">
-                    <span class="profile-initial">{{ $profileInitial }}</span>
+                    <span class="profile-initial">{{ 'A' }}</span>
                 </button>
 
                 <div class="profile-menu" role="menu" aria-hidden="true">

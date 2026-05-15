@@ -21,4 +21,23 @@ return [
     'editButtonTitle' => 'Editar',
     'deleteButtonTitle' => 'Eliminar',
     'deleteConfirmMessage' => '¿Seguro que quieres eliminar esta película?',
+
+    'statusModal' => [
+        'save' => [
+            'title' => 'Guardar película',
+            'success' => 'La película se guardó correctamente.',
+        ],
+        'delete' => [
+            'title' => 'Eliminar película',
+            'success' => 'La película se eliminó correctamente.',
+        ],
+        'update' => [
+            'title' => 'Actualizar película',
+            'success' => 'La película se actualizó correctamente.',
+        ],
+        'notFound' => [
+            'title' => 'Película no encontrada',
+            'error' => 'La película no existe.',
+        ],
+    ],
 ];

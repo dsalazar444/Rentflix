@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <input type="hidden" id="hasErrors" value="{{ $errors->any() ? '1' : '0' }}">
 <input type="hidden" id="lastFormSubmitted" value="{{ session('lastForm', '') }}">
+
 <div class="admin-panel">
 
     <!-- Header Panel -->
@@ -18,6 +19,17 @@
             <span>+</span> {{ __('adminMovieIndex.addButton') }}
         </button>
     </div>
+
+    @if(session('success'))
+        <div class="alert alert-success alert-notify-m">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger alert-notify-m">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <!-- Search Bar -->
     <div class="search-box">
@@ -102,6 +114,7 @@
         </table>
     </div>
 </div>
+
 @include('admin.movie.components.modalMovieCreate')
 @include('admin.movie.components.modalMovieEdit')
 @push('scripts')

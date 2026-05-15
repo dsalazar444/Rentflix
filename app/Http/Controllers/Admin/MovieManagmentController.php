@@ -5,15 +5,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Interfaces\ImageStorage;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+// TODO. Poner mensaje a todo salio bien o todo salio mal
 class MovieManagmentController extends Controller
 {
     private ImageStorage $imageStorage;
@@ -48,25 +47,29 @@ class MovieManagmentController extends Controller
             'location',
         ]) + ['file_name' => $imageName]);
 
-        return redirect()->route('admin.movie.index');
+        return redirect()->route('admin.movie.index')
+            ->with('success', __('adminMovieIndex.statusModal.save.success'));
     }
 
     public function delete(string $id): RedirectResponse
     {
         $movie = Movie::find($id);
         if (! $movie) {
-            return redirect()->route('admin.movie.index');
+
+            return redirect()->route('admin.movie.index')
+                ->with('error', __('adminMovieIndex.statusModal.notFound.error'));
         }
         $movie->delete();
 
-        return redirect()->route('admin.movie.index');
+        return redirect()->route('admin.movie.index')
+            ->with('success', __('adminMovieIndex.statusModal.delete.success'));
     }
 
     public function update(UpdateMovieRequest $request, string $id): RedirectResponse
     {
         $movie = Movie::find($id);
         if (! $movie) {
-            return redirect()->route('admin.movie.index');
+            return redirect()->route('admin.movie.index')->with('error', __('adminMovieIndex.statusModal.notFound.error'));
         }
 
         $updatedMovieData = $request->only([
@@ -90,20 +93,6 @@ class MovieManagmentController extends Controller
 
         $movie->update($updatedMovieData);
 
-        return redirect()->route('admin.movie.index');
-    }
-
-    // TODO. Cambiar a service
-    public function search(Request $request): View
-    {
-        $query = $request->input('movie_name');
-        $result = Movie::searchMovieByName($query);
-
-        $viewData = [];
-        $viewData['movies'] = $result['movies'];
-        $viewData['query'] = $query;
-        $viewData['notFound'] = $result['notFound'];
-
-        return view('movie.result')->with('viewData', $viewData);
+        return redirect()->route('admin.movie.index')->with('success', __('adminMovieIndex.statusModal.update.success'));
     }
 }
