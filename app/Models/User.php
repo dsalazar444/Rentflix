@@ -27,6 +27,7 @@ class User extends Authenticatable
      * $this->attributes['remember_token'] - string - contains the remember token for authentication
      * $this->attributes['created_at'] - datetime - contains the user creation timestamp
      * $this->attributes['updated_at'] - datetime - contains the user update timestamp
+     * 
      */
     protected $fillable = ['name', 'email', 'password', 'role'];
 
@@ -73,9 +74,12 @@ class User extends Authenticatable
     public function getWishlistItems(): Collection
     {
         return $this->wishlistItems()->get();
-    } 
+    }
 
-    // TODO. Get of bills of the user
+    public function getBills(): Collection
+    {
+        return $this->bills()->with('items')->get();
+    }
 
     public function getId(): int
     {

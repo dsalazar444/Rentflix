@@ -369,11 +369,6 @@
 }
 
 /* Header variants */
-.guest-header .header-search,
-.admin-header .header-search {
-    display: none;
-}
-
 .auth-link-btn {
     display: inline-flex;
     align-items: center;

@@ -32,8 +32,18 @@
                     <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4l2-3h2l2 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
                     <circle cx="12" cy="13" r="3"></circle>
                 </svg>
-                <span>{{ __('headerAdmin.catalog') }}</span>
+                <span>{{ __('headerAdmin.movies') }}</span>
             </a>
+
+            <form action="{{ route('movie.search') }}" method="GET" class="header-search-form">
+                <div class="header-search">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" name="movie_name" class="search-input" placeholder="{{ __('headerClient.searchPlaceholder') }}" required>
+                </div>
+            </form>
         </nav>
 
         <div class="header-actions">

@@ -3,7 +3,7 @@
 return [
     'moviesPanel' => 'Panel de Peliculas',
     'billsPanel' => 'Panel de Facturas',
-    'catalog' => 'Catalogo',
+    'movies' => 'Películas',
     'notifications' => 'Notificaciones',
     'adminProfile' => 'Perfil administrador',
     'logout' => 'Cerrar sesion',

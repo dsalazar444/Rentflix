@@ -3,7 +3,7 @@
 return [
     'moviesPanel' => 'Movies Panel',
     'billsPanel' => 'Invoices Panel',
-    'catalog' => 'Catalog',
+    'movies' => 'Movies',
     'notifications' => 'Notifications',
     'adminProfile' => 'Admin Profile',
     'logout' => 'Log Out',

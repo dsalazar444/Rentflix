@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'catalog' => 'Catalogo',
+    'movies' => 'Películas',
     'login' => 'Iniciar sesion',
     'goHome' => 'Ir al inicio',
 ];

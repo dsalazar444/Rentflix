@@ -84,7 +84,7 @@ class MovieController extends Controller
         return view('movie.show')->with('viewData', $viewData);
     }
 
-    public function search(Request $request): View
+    public function searchMovieByName(Request $request): View
     {
         $query = $request->input('movie_name');
         $result = $this->movieService->searchMovieByName($query);
