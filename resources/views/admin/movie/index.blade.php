@@ -115,8 +115,8 @@
     </div>
 </div>
 
-@include('admin.movie.components.modalMovieCreate')
-@include('admin.movie.components.modalMovieEdit')
+@include('admin.components.movie.modalMovieCreate')
+@include('admin.components.movie.modalMovieEdit')
 @push('scripts')
     <script src="{{ asset('js/admin/modalErrors.js') }}"></script>
     <script src="{{ asset('js/admin/modalMovieEdit.js') }}"></script>

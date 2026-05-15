@@ -60,6 +60,15 @@ return [
             'report' => false,
         ],
 
+        'gcs' => [
+            'driver' => 'gcs',
+            'project_id' => env('GCP_PROJECT_ID'),
+            'key_file' => env('GCP_KEY_FILE_PATH')
+                ? json_decode(file_get_contents(env('GCP_KEY_FILE_PATH')), true)
+                : null,
+            'bucket' => env('GCP_STORAGE_BUCKET'),
+        ],
+
     ],
 
     /*
