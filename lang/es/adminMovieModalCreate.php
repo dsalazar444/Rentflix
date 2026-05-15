@@ -6,6 +6,11 @@ return [
     'titleLabel' => 'Título',
     'titlePlaceholder' => 'Ej: The Dark Knight',
     'imageLabel' => 'Imagen de Portada',
+    'storageLabel' => 'Almacenamiento de imagen',
+    'storageOptions' => [
+        'gcp' => 'Google Cloud Storage',
+        'local' => 'Almacenamiento local',
+    ],
     'genreLabel' => 'Género',
     'genreSelectPlaceholder' => 'Seleccionar...',
     'genres' => [
