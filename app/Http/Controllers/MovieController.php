@@ -11,10 +11,12 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+// TODO. Poner mensaje a todo salio bien o todo salio mal
 class MovieController extends Controller
 {
     public function index(Request $request): View
     {
+        // TODO. Cambiar a service
         $selectedGenre = $request->query('genre', 'all');
         $selectedSort = $request->query('sort', 'priceAsc');
 
@@ -32,6 +34,7 @@ class MovieController extends Controller
         } else {
             $moviesQuery->orderBy('price', 'asc');
         }
+        //
 
         $movies = $moviesQuery->get();
 

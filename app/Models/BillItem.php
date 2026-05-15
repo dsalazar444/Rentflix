@@ -91,6 +91,7 @@ class BillItem extends Model
         return $this->attributes['updated_at'];
     }
 
+    // TODO. Cambiar a service porque esto es lógica de negocio
     public function getTotalPrice(): string
     {
         return number_format($this->attributes['price'] * $this->attributes['quantity'], 2);

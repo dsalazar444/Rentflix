@@ -221,6 +221,7 @@ class Movie extends Model
         $this->attributes['trailer_link'] = $trailer_link;
     }
 
+    // TODO. Cambiar a service
     public static function searchMovieByName(string $movie_name): array
     {
         $movies = collect();

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class ShoppingCartController extends Controller
 {
+    // TODO. Cambiar el nombre
     public function add(Request $request): RedirectResponse
     {
         $id = $request->route('id');
@@ -19,6 +20,7 @@ class ShoppingCartController extends Controller
             session()->put('cart', $cart);
         }
 
+        // TODO. Poner con variable en la vista porque esto puede estar en distintos idiomas
         return redirect()->back()->with('success', 'Película añadida al carrito');
     }
 

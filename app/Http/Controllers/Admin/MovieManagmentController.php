@@ -93,6 +93,7 @@ class MovieManagmentController extends Controller
         return redirect()->route('admin.movie.index');
     }
 
+    // TODO. Cambiar a service
     public function search(Request $request): View
     {
         $query = $request->input('movie_name');

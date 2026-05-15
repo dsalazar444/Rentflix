@@ -75,6 +75,8 @@ class User extends Authenticatable
         return $this->wishlistItems()->get();
     } 
 
+    // TODO. Get of bills of the user
+
     public function getId(): int
     {
         return $this->attributes['id'];

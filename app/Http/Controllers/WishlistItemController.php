@@ -11,6 +11,7 @@ use Illuminate\View\View;
 
 class WishlistItemController extends Controller
 {
+    // TODO. Cambiar a getWhishlistItems del user
     public function index(): View
     {
         $viewData = [];
@@ -24,6 +25,7 @@ class WishlistItemController extends Controller
     public function add(Request $request): RedirectResponse
     {
 
+        // TODO. Cambiar a variable
         if (! session('user_id')) {
             return redirect()->route('auth.index')->with('error', 'Debes iniciar sesión para añadir películas a tu lista de deseos');
         }

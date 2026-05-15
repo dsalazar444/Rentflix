@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class LibraryItemService
 {
-    public function soonToExpire(int $userId): Collection
+    public function notifyMovieSoonToExpire(int $userId): Collection
     {
         $expiringToday = LibraryItem::where('user_id', $userId)
             ->where('created_at', '<=', now()->subDays(24))
@@ -21,7 +21,7 @@ class LibraryItemService
         return $expiringToday;
     }
 
-    public function removeExpired(): void
+    public function removeMovieExpired(): void
     {
         $expiredItems = LibraryItem::where('created_at', '<', now()->subMonth())
             ->with('movie')
