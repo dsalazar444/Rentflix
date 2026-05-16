@@ -38,9 +38,9 @@ Route::get('/bills/download/{id}', 'App\Http\Controllers\BillController@download
 Route::get('/bills/send/{id}', 'App\Http\Controllers\BillController@send')->name('bill.send');
 
 // Wishlist routes
-Route::post('/catalog/wishlist/add/{id}', 'App\Http\Controllers\WishlistItemController@add')->name('collections.wishlist.add');
-Route::delete('/catalog/wishlist/delete/{id}', 'App\Http\Controllers\WishlistItemController@delete')->name('collections.wishlist.delete');
-Route::get('/collections/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('collections.wishlist');
+Route::post('/catalog/wishlist/add/{id}', 'App\Http\Controllers\WishlistItemController@add')->name('wishlist.add');
+Route::delete('/catalog/wishlist/delete/{id}', 'App\Http\Controllers\WishlistItemController@delete')->name('wishlist.delete');
+Route::get('/wishlist', 'App\Http\Controllers\WishlistItemController@index')->name('wishlist.index');
 
 // Shopping cart routes
 Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')->name('cart.add');

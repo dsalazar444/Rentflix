@@ -18,6 +18,7 @@ return [
     
     'loginTitle' => 'Log In',
     'loginSubtitle' => 'Sign in with your email and password',
+    'loginError' => 'Invalid credentials.',
     'emailLabel' => 'Email',
     'emailPlaceholder' => 'you@email.com',
     'passwordLabel' => 'Password',

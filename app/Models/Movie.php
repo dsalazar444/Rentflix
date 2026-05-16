@@ -27,6 +27,9 @@ class Movie extends Model
      * $this->attributes['year'] - int - contains the movie release year
      * $this->attributes['created_at'] - timestamp - contains the movie creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the movie update timestamp
+     * $this->items - Collection of BillItem - contains the bill items associated with this movie
+     * $this->libraryItems - Collection of LibraryItem - contains the library items associated with this movie
+     * $this->wishlistItems - Collection of WishlistItem - contains the wishlist items associated with this movie
      */
     protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year', 'description', 'trailer_link'];
 

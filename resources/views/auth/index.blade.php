@@ -48,6 +48,12 @@
                 <h2>{{ __('authIndex.loginTitle') }}</h2>
                 <p class="form-subtitle">{{ __('authIndex.loginSubtitle') }}</p>
 
+                @if (session('error'))
+                    <div class="alert-error">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <form class="login-form" method="POST" action="{{ route('auth.login') }}">
                     @csrf
                     <div class="form-group">
@@ -87,10 +93,6 @@
             <div id="register-panel" class="auth-panel" aria-hidden="true">
                 <h2>{{ __('authIndex.registerTitle') }}</h2>
                 <p class="form-subtitle">{{ __('authIndex.registerSubtitle') }}</p>
-
-                @if (session('success'))
-                    <div class="alert-success">{{ session('success') }}</div>
-                @endif
 
                 @if ($errors->any())
                     <div class="alert-error">

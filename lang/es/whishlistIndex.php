@@ -7,4 +7,7 @@ return [
     'exploreCatalog' => 'Explorar Catálogo',
     'available' => 'Disponible',
     'outOfStock' => 'Sin stock',
+    'addSuccess' => 'Película añadida a la lista de deseos',
+    'removeSuccess' => 'Película eliminada de la lista de deseos',
+    'notFound' => 'Película no encontrada en la lista de deseos',
 ];

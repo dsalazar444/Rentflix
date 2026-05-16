@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Closure;
+use Guard;
 class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
