@@ -15,7 +15,7 @@
             <h1>{{ __('adminMovieIndex.titlePage') }}</h1>
             <p>{{ __('adminMovieIndex.subtitle') }}</p>
         </div>
-        <button class="btn-add" data-bs-toggle="modal" data-bs-target="#movieModal">
+        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#movieModal">
             <span>+</span> {{ __('adminMovieIndex.addButton') }}
         </button>
     </div>

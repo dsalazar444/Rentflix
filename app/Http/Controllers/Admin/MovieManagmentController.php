@@ -7,10 +7,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Http\Resources\ExternalMovieApiResource;
 use App\Interfaces\ImageStorage;
 use App\Models\Movie;
+use App\Services\MovieService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+
 class MovieManagmentController extends Controller
 {
     private ImageStorage $imageStorage;
@@ -91,5 +95,15 @@ class MovieManagmentController extends Controller
         $movie->update($updatedMovieData);
 
         return redirect()->route('admin.movie.index')->with('success', __('adminMovieIndex.statusModal.update.success'));
+    }
+
+
+    public function getMovieDataFromExternalApi (Request $request): View{
+        $title = $request->input('title');
+        $movie = ExternalMovieApiResource::make(MovieService::searchMovieExternalApi($title))->resolve();
+        $viewData = [];
+        $viewData['movie'] = $movie;
+
+        return view('admin.movie.create')->with('viewData', $viewData);
     }
 }
