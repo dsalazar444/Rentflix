@@ -15,9 +15,9 @@
             <h1>{{ __('adminMovieIndex.titlePage') }}</h1>
             <p>{{ __('adminMovieIndex.subtitle') }}</p>
         </div>
-        <button type="button" class="btn-add" data-bs-toggle="modal" data-bs-target="#movieModal">
+        <a href="{{ route('admin.movie.create') }}" class="btn-add text-decoration-none">
             <span>+</span> {{ __('adminMovieIndex.addButton') }}
-        </button>
+        </a>
     </div>
 
     @if(session('success'))
@@ -115,7 +115,6 @@
     </div>
 </div>
 
-@include('admin.components.movie.modalMovieCreate')
 @include('admin.components.movie.modalMovieEdit')
 @push('scripts')
     <script src="{{ asset('js/admin/modalErrors.js') }}"></script>

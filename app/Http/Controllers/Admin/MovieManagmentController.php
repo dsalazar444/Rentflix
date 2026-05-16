@@ -97,6 +97,11 @@ class MovieManagmentController extends Controller
         return redirect()->route('admin.movie.index')->with('success', __('adminMovieIndex.statusModal.update.success'));
     }
 
+    public function create(): View
+    {
+        return view('admin.movie.create');
+    }
+
 
     public function getMovieDataFromExternalApi (Request $request): View{
         $title = $request->input('title');
