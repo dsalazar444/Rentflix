@@ -16,7 +16,7 @@ class MovieService
         $notFound = false;
 
         if ($query) {
-            $movies = Movie::whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($query) . '%'])->get();
+            $movies = Movie::whereRaw('LOWER(title) LIKE ?', ['%'.strtolower($query).'%'])->get();
             $notFound = $movies->isEmpty();
         }
 
@@ -26,13 +26,15 @@ class MovieService
         ];
     }
 
-    static public function searchMostPopularMoviesLimited(int $limit): Collection
+    public static function searchMostPopularMoviesLimited(int $limit): Collection
     {
         if ($limit <= 0) {
             $movies = Movie::orderBy('quantity_views', 'desc')->get();
+
             return $movies;
         }
         $movies = Movie::orderBy('quantity_views', 'desc')->take($limit)->get();
+
         return $movies;
     }
 

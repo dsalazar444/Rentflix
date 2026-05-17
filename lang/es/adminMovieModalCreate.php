@@ -1,7 +1,8 @@
-<?php 
+<?php
 
 return [
     'modalTitle' => 'Agregar Nueva Película',
+    'movieNotFound' => 'No se encontró la película en la API externa.',
     'closeButtonLabel' => 'Cerrar',
     'titleLabel' => 'Título',
     'titlePlaceholder' => 'Ej: The Dark Knight',

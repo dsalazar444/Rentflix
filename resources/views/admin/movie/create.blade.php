@@ -27,7 +27,6 @@
 			{{ session('error') }}
 		</div>
 	@endif
-
 	<div class="movie-modal-content">
 		<div class="modal-header movie-modal-header">
 			<h5 class="modal-title" id="movieModalLabel">{{ __('adminMovieModalCreate.modalTitle') }}</h5>

@@ -39,18 +39,8 @@
                     <div class="row mb-3">
                         <div class="col movie-form-group">
                             <label for="genre">{{ __('adminMovieModalEdit.genreLabel') }}</label>
-                            <select id="genre" name="genre"
+                            <input type="text" id="genre" name="genre"
                                 class="movie-input @error('genre') is-invalid @enderror">
-                                <option value="">{{ __('adminMovieModalEdit.genreSelectPlaceholder') }}</option>
-                                <option value="accion">{{ __('adminMovieModalEdit.genres.action') }}</option>
-                                <option value="aventuras">{{ __('adminMovieModalEdit.genres.adventure') }}</option>
-                                <option value="animacion">{{ __('adminMovieModalEdit.genres.animation') }}</option>
-                                <option value="comedia">{{ __('adminMovieModalEdit.genres.comedy') }}</option>
-                                <option value="drama">{{ __('adminMovieModalEdit.genres.drama') }}</option>
-                                <option value="fantasia">{{ __('adminMovieModalEdit.genres.fantasy') }}</option>
-                                <option value="terror">{{ __('adminMovieModalEdit.genres.horror') }}</option>
-                                <option value="ciencia ficcion">{{ __('adminMovieModalEdit.genres.scifi') }}</option>
-                            </select>
                             @error('genre')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -58,13 +48,8 @@
 
                         <div class="col movie-form-group">
                             <label for="classification">{{ __('adminMovieModalEdit.classificationLabel') }}</label>
-                            <select id="classification" name="classification"
+                            <input type="text" id="classification" name="classification"
                                 class="movie-input @error('classification') is-invalid @enderror">
-                                <option value="ATP">{{ __('adminMovieModalEdit.classifications.ATP') }}</option>
-                                <option value="7">{{ __('adminMovieModalEdit.classifications.7') }}</option>
-                                <option value="13">{{ __('adminMovieModalEdit.classifications.13') }}</option>
-                                <option value="18">{{ __('adminMovieModalEdit.classifications.18') }}</option>
-                            </select>
                             @error('classification')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

@@ -1,6 +1,6 @@
 <?php
 
-//Made by: Samuel Martinez Arteaga
+// Made by: Samuel Martinez Arteaga
 
 namespace App\Http\Resources;
 

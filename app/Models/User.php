@@ -27,7 +27,6 @@ class User extends Authenticatable
      * $this->attributes['remember_token'] - string - contains the remember token for authentication
      * $this->attributes['created_at'] - datetime - contains the user creation timestamp
      * $this->attributes['updated_at'] - datetime - contains the user update timestamp
-     * 
      */
     protected $fillable = ['name', 'email', 'password', 'role'];
 

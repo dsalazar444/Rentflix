@@ -1,7 +1,8 @@
-<?php 
+<?php
 
 return [
     'modalTitle' => 'Add New Movie',
+    'movieNotFound' => 'Movie was not found in the external API.',
     'closeButtonLabel' => 'Close',
     'titleLabel' => 'Title',
     'titlePlaceholder' => 'E.g: The Dark Knight',

@@ -4,17 +4,17 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
+use App\Http\Requests\CreateBillRequest;
 use App\Mail\InvoiceMail;
 use App\Models\Bill;
-use App\Models\User;
 use App\Models\Movie;
-use App\Http\Requests\CreateBillRequest;
+use App\Models\User;
 use App\Services\LibraryItemService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class BillController extends Controller
@@ -28,7 +28,7 @@ class BillController extends Controller
 
     public function index(): View
     {
-        // TODO. Cambiar a usar metodo del modelo 
+        // TODO. Cambiar a usar metodo del modelo
         $viewData = [];
         $viewData['bills'] = Bill::with('items.movie')->get();
         $viewData['users'] = User::all();
@@ -134,7 +134,7 @@ class BillController extends Controller
     public function send(string $id): RedirectResponse
     {
         $bill = Bill::with('user')->find($id);
-        
+
         if (! $bill) {
             abort(404, 'Factura no encontrada');
         }

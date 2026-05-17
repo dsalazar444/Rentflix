@@ -145,7 +145,6 @@ class Movie extends Model
         return number_format($this->getPrice(), 2);
     }
 
-
     public function setPrice(int $price): void
     {
         $this->attributes['price'] = $price;
@@ -220,5 +219,4 @@ class Movie extends Model
     {
         $this->attributes['trailer_link'] = $trailer_link;
     }
-
 }
