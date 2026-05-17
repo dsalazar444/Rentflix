@@ -29,9 +29,8 @@ class MovieManagmentController extends Controller
 
     public function save(StoreMovieRequest $request): RedirectResponse
     {
-        $storage = $request->get('storage', 'gcp');
-        $imageStorage = app(ImageStorage::class, ['storage' => $storage]);
-        $imageName = $imageStorage->store($request, 'movie_image');
+        $imageName = $request->resolvedImageName();
+
         Movie::create($request->only([
             'title',
             'director',
@@ -103,9 +102,13 @@ class MovieManagmentController extends Controller
     }
 
 
-    public function getMovieDataFromExternalApi (Request $request): View{
-        $title = $request->input('title');
-        $movie = ExternalMovieApiResource::make(MovieService::searchMovieExternalApi($title))->resolve();
+    public function getMovieDataFromExternalApi(Request $request): View|RedirectResponse
+    {
+        $validated = $request->validate([
+            'title' => ['required', 'string'],
+        ]);
+
+        $movie = ExternalMovieApiResource::make(MovieService::searchMovieExternalApi($validated['title']))->resolve();
         $viewData = [];
         $viewData['movie'] = $movie;
 

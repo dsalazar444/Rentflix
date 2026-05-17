@@ -13,12 +13,19 @@ class ExternalMovieApiResource extends JsonResource
             'id' => $this['imdbID'],
             'title' => $this['Title'],
             'director' => $this['Director'],
-            'genre' => $this['Genre'],
+            'genre' => $this->firstGenre($this['Genre']),
             'file_name' => $this['Poster'],
             'classification' => $this['Rated'],
             'description' => $this['Plot'],
-            'trailer_link' => null,
             'year' => (int) $this['Year'],
         ];
+    }
+
+    private function firstGenre(string $genre): string
+    {
+        $parts = explode(',', $genre);
+        $firstGenre = trim($parts[0] ?? '');
+
+        return $firstGenre;
     }
 }

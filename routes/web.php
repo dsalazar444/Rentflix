@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin/movie', 'App\Http\Controllers\Admin\MovieManagmentController@index')->name('admin.movie.index');
 Route::post('/admin/movie/save', 'App\Http\Controllers\Admin\MovieManagmentController@save')->name('admin.movie.save');
 Route::get('/admin/movie/create', 'App\Http\Controllers\Admin\MovieManagmentController@create')->name('admin.movie.create');
-Route::post('/admin/movie/searchMovieExternalApi', 'App\Http\Controllers\Admin\MovieManagmentController@getMovieDataFromExternalApi')->name('admin.movie.searchMovieExternalApi');
+Route::match(['get', 'post'], '/admin/movie/searchMovieExternalApi', 'App\Http\Controllers\Admin\MovieManagmentController@getMovieDataFromExternalApi')->name('admin.movie.searchMovieExternalApi');
 Route::delete('/admin/movie/delete/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@delete')->name('admin.movie.delete');
 Route::put('/admin/movie/update/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@update')->name('admin.movie.update');
 
