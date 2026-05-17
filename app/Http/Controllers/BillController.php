@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use App\Services\BillService;
 
 class BillController extends Controller
 {
@@ -28,7 +29,7 @@ class BillController extends Controller
 
     public function index(): View
     {
-        // TODO. Cambiar a usar metodo del modelo 
+        // TODO. Cambiar a usar metodo del modelo -> debo poner un getItemsWithMovie con esa consulta?
         $viewData = [];
         $viewData['bills'] = Bill::with('items.movie')->get();
         $viewData['users'] = User::all();
@@ -107,7 +108,7 @@ class BillController extends Controller
         }
     }
 
-    // TODO. Usar la funcioncita del modo de user (getBills) en vez de hacer la consulta aca
+    // TODO. Usar la funcioncita del modo de user (getBills) en vez de hacer la consulta aca -> no se hace consulta de items.movie, sino de items, creo otra función?
     public function listBills(): View
     {
         $userId = session('user_id');
@@ -117,19 +118,14 @@ class BillController extends Controller
         return view('bill.listBills')->with('viewData', $viewData);
     }
 
-    // TODO. Cambiar a service (download)
-
-    // TODO. Cambiar a service y cambiar el nombre
-    public function send(string $id): RedirectResponse
+    public function download(Bill $bill, BillService $service): Response
     {
-        $bill = Bill::with('user')->find($id);
-        
-        if (! $bill) {
-            abort(404, 'Factura no encontrada');
-        }
+        return $service->downloadBill($bill);
+    }
 
-        Mail::to($bill->user->getEmail())->send(new InvoiceMail($bill));
-
-        return redirect()->back()->with('success', 'Correo enviado correctamente');
+    public function send(string $id, BillService $service): RedirectResponse
+    {
+        return $service->sendBill();
+       
     }
 }

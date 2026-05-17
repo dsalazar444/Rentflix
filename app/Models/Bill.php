@@ -115,15 +115,11 @@ class Bill extends Model
         return $this->items;
     }
 
-    // TODO. Cambiar a service porque esto es lógica de negocio
-    // public function calculateTotalPrice(): int
-    // {
-    //     return $this->items->sum(function ($item) {
-    //         return $item->getPrice() * $item->getQuantity();
-    //     });
-    // }
+    // TODO. Cambiar a service calculateTotalPrice porque esto es lógica de negocio
+    // Verificar donde se llama, y actualizar para que use service
+ 
 
-    // Synchronizes bill items: updates existing items and deletes those not in the provided list
+    // Synchronizes bill items after update in Bill: updates existing items and deletes those not in the provided list
     public function syncItems(array $items): void
     {
         $requestItemIds = collect($items ?? [])->pluck('id')->filter()->map(fn ($id) => (int) $id)->toArray();
@@ -160,16 +156,4 @@ class Bill extends Model
             throw $e;
         }
     }
-
-    // TODO. Cambiar a service porque esto es lógica de negocio
-//     public function generatePdf(): Response
-//     {
-//         if (! $this->relationLoaded('items')) {
-//             $this->load('items.movie');
-//         }
-
-//         $pdf = Pdf::loadView('bill.pdf', ['bill' => $this]);
-
-//         return $pdf->download('factura_id_'.$this->id.'.pdf');
-//     }
 }

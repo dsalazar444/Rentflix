@@ -27,7 +27,7 @@ class BillService
         return $this->generatePdf($bill);
     }
 
-   public function generatePdf(Bill $bill): Response
+    public function generatePdf(Bill $bill): Response
     {
         if (! $bill->relationLoaded('items')) {
             $bill->load('items.movie');
@@ -38,5 +38,17 @@ class BillService
         return $pdf->download('factura_id_'.$bill->getId().'.pdf');
     }
 
+    public function sendBill(string $id): RedirectResponse
+    {
+        $bill = Bill::with('user')->find($id);
+        
+        if (! $bill) {
+            abort(404, 'Factura no encontrada');
+        }
+
+        Mail::to($bill->user->getEmail())->send(new InvoiceMail($bill));
+
+        return redirect()->back()->with('success', 'Correo enviado correctamente');
+    }
  
 }
