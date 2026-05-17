@@ -117,18 +117,7 @@ class BillController extends Controller
         return view('bill.listBills')->with('viewData', $viewData);
     }
 
-    // TODO. Cambiar a service
-    public function download(string $id): Response
-    {
-        $bill = Bill::with('items.movie', 'user')->find($id);
-
-        if (! $bill) {
-            // TODO. Tambien poner en una variablita en view
-            abort(404, 'Factura no encontrada');
-        }
-
-        return $bill->generatePDF();
-    }
+    // TODO. Cambiar a service (download)
 
     // TODO. Cambiar a service y cambiar el nombre
     public function send(string $id): RedirectResponse

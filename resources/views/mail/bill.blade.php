@@ -103,7 +103,7 @@
                             <span class="qty-badge">x{{ $item->getQuantity() }}</span>
                         </td>
                         <td>${{ $item->getPrice() }}</td>
-                        <td>${{ $item->getTotalPrice() }}</td>
+                        <td>${{ $item->getSubtotalFormatted() }}</td>
                     </tr>
                     @endforeach
                 </tbody>

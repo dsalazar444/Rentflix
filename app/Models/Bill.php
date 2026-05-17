@@ -116,12 +116,12 @@ class Bill extends Model
     }
 
     // TODO. Cambiar a service porque esto es lógica de negocio
-    public function calculateTotalPrice(): int
-    {
-        return $this->items->sum(function ($item) {
-            return $item->getPrice() * $item->getQuantity();
-        });
-    }
+    // public function calculateTotalPrice(): int
+    // {
+    //     return $this->items->sum(function ($item) {
+    //         return $item->getPrice() * $item->getQuantity();
+    //     });
+    // }
 
     // Synchronizes bill items: updates existing items and deletes those not in the provided list
     public function syncItems(array $items): void
@@ -140,14 +140,13 @@ class Bill extends Model
     }
 
     // Creates a new bill with its associated items in a single transaction
-    // TODO. Revisar que pasa porqe no se usa index
     public static function createWithItems(array $billData, array $items): self
     {
         try {
             $bill = self::create($billData);
 
             if ($items) {
-                foreach ($items as $index => $itemData) {
+                foreach ($items as $itemData) {
                     $createdItem = $bill->items()->create([
                         'movie_id' => $itemData['movie_id'],
                         'quantity' => $itemData['quantity'],
@@ -163,14 +162,14 @@ class Bill extends Model
     }
 
     // TODO. Cambiar a service porque esto es lógica de negocio
-    public function generatePdf(): Response
-    {
-        if (! $this->relationLoaded('items')) {
-            $this->load('items.movie');
-        }
+//     public function generatePdf(): Response
+//     {
+//         if (! $this->relationLoaded('items')) {
+//             $this->load('items.movie');
+//         }
 
-        $pdf = Pdf::loadView('bill.pdf', ['bill' => $this]);
+//         $pdf = Pdf::loadView('bill.pdf', ['bill' => $this]);
 
-        return $pdf->download('factura_id_'.$this->id.'.pdf');
-    }
+//         return $pdf->download('factura_id_'.$this->id.'.pdf');
+//     }
 }
