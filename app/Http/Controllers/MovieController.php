@@ -23,27 +23,10 @@ class MovieController extends Controller
 
     public function index(Request $request): View
     {
-        // TODO. Cambiar a service
+
+        $movies = MovieService::getMovies($request);
         $selectedGenre = $request->query('genre', 'all');
         $selectedSort = $request->query('sort', 'priceAsc');
-
-        $moviesQuery = Movie::query();
-
-        if ($selectedGenre !== 'all') {
-            $moviesQuery->where('genre', $selectedGenre);
-        }
-
-        if ($selectedSort === 'priceDesc') {
-            $moviesQuery->orderBy('price', 'desc');
-        } elseif ($selectedSort === 'available') {
-            $moviesQuery->where('quantity', '>', 0);
-            $moviesQuery->orderBy('title', 'asc');
-        } else {
-            $moviesQuery->orderBy('price', 'asc');
-        }
-        //
-
-        $movies = $moviesQuery->get();
 
         $viewData = [];
         $viewData['movies'] = $movies;

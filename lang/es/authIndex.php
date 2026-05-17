@@ -18,6 +18,7 @@ return [
 
     'loginTitle' => 'Iniciar Sesión',
     'loginSubtitle' => 'Ingresa con tu email y contraseña',
+    'loginError' => 'Credenciales inválidas.',
     'emailLabel' => 'Email',
     'emailPlaceholder' => 'tu@email.com',
     'passwordLabel' => 'Contraseña',

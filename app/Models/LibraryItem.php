@@ -16,6 +16,8 @@ class LibraryItem extends Model
      * $this->attributes['movie_id'] - int - contains the movie id associated with this library item
      * $this->attributes['created_at'] - timestamp - contains the library item creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the library item update timestamp
+     * $this->user - User - contains the user associated with this library item
+     * $this->movie - Movie - contains the movie associated with this library item
      */
     protected $fillable = ['user_id', 'movie_id', 'expiration_date'];
 

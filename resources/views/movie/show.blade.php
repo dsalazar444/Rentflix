@@ -39,7 +39,7 @@
                 @endif
             </a>
 
-            <form action="{{ route($viewData['isInWishlist'] ? 'collections.wishlist.delete' : 'collections.wishlist.add', ['id' => $viewData['movie']->getId()]) }}" method="POST" style="display: inline;">
+            <form action="{{ route($viewData['isInWishlist'] ? 'wishlist.delete' : 'wishlist.add', ['id' => $viewData['movie']->getId()]) }}" method="POST" style="display: inline;">
                 @csrf
                 @if($viewData['isInWishlist'])
                     @method('DELETE')

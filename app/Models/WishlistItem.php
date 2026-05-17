@@ -16,6 +16,8 @@ class WishlistItem extends Model
      * $this->attributes['movie_id'] - int - contains the movie ID
      * $this->attributes['created_at'] - datetime - contains the Wishlist creation timestamp
      * $this->attributes['updated_at'] - datetime - contains the Wishlist update timestamp
+     * $this->user - User - contains the user associated with this wishlist item
+     * $this->movie - Movie - contains the movie associated with this wishlist item
      */
     protected $fillable = ['user_id', 'movie_id'];
 

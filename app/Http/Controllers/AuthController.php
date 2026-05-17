@@ -43,7 +43,7 @@ class AuthController extends Controller
         $user = User::where('email', $validated['email'])->first();
 
         if (! $user || ! Hash::check($validated['password'], $user->getPassword())) {
-            return redirect()->route('auth.index')->with('error', 'Credenciales inválidas.');
+            return redirect()->route('auth.index')->with('error', __('authIndex.loginError'));
         }
 
         $request->session()->put('user_id', $user->getID());
