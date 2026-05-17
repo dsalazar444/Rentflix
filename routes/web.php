@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::middleware('admin')->group(function () {
 	// Admin movie routes
 	Route::get('/admin/movie', 'App\Http\Controllers\Admin\MovieManagmentController@index')->name('admin.movie.index');

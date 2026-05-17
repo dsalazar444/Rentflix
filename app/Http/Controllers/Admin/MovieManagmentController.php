@@ -119,7 +119,6 @@ class MovieManagmentController extends Controller
         }
 
         $movie = ExternalMovieApiResource::make($movieApiData)->resolve();
-
         $viewData = [];
         $viewData['movie'] = $movie;
 
