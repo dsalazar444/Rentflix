@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('profilePhotoURL')->nullable()->after('role');
+            $table->string('profile_photo_url')->nullable()->after('role');
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('profilePhotoURL');
+            $table->dropColumn('profile_photo_url');
         });
     }
 };
