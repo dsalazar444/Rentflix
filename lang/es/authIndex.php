@@ -30,6 +30,7 @@ return [
     'registerSubtitle' => 'Completa los datos para registrar un usuario',
     'nameLabel' => 'Nombre',
     'namePlaceholder' => 'Tu nombre',
+    'profilePhotoLabel' => 'Foto de perfil',
     'roleLabel' => 'Rol',
     'roleOptions' => [
         'client' => 'client',

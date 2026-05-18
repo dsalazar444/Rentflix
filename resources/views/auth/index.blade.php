@@ -139,6 +139,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="profile_photo">{{ __('authIndex.profilePhotoLabel') }}</label>
+                        <input
+                            type="file"
+                            id="profile_photo"
+                            name="profile_photo"
+                            accept="image/*"
+                        >
+                    </div>
+
+                    <div class="form-group">
                         <label for="password">{{ __('authIndex.passwordLabel') }}</label>
                         <div class="password-input-wrapper">
                             <input
