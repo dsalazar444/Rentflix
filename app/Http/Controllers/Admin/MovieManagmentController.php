@@ -11,6 +11,7 @@ use App\Interfaces\ImageStorage;
 use App\Models\Movie;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+
 class MovieManagmentController extends Controller
 {
     private ImageStorage $imageStorage;

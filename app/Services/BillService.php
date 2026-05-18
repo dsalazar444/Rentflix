@@ -15,13 +15,12 @@ use App\Mail\InvoiceMail;
 class BillService
 {
 
-    public function downloadBill(string $id): Response
+    public function downloadBill(string $id): Response|RedirectResponse
     {
         $bill = Bill::with('items.movie', 'user')->find($id);
 
         if (! $bill) {
-            // TODO. Tambien poner en una variablita en view
-            abort(404, 'Factura no encontrada');
+            return redirect()->back()->with('error', __('billService.statusModal.notFound.error'));
         }
 
         return $this->generatePdf($bill);
@@ -43,12 +42,17 @@ class BillService
         $bill = Bill::with('user')->find($id);
         
         if (! $bill) {
-            abort(404, 'Factura no encontrada');
+            return redirect()->back()->with('error', __('billService.statusModal.notFound.error'));
         }
 
-        Mail::to($bill->user->getEmail())->send(new InvoiceMail($bill));
+        try {
 
-        return redirect()->back()->with('success', 'Correo enviado correctamente');
+            Mail::to($bill->user->getEmail())->send(new InvoiceMail($bill));
+            return redirect()->back()->with('success', __('billService.statusModal.send.success'));
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('billService.statusModal.send.error'));
+        }
     }
  
 }

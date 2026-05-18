@@ -2,29 +2,20 @@
 
 // Made by: Daniela Salazar Amaya
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Exception;
 use App\Models\Bill;
 use App\Models\User;
 use App\Models\Movie;
 use App\Http\Requests\CreateBillRequest;
-use App\Services\LibraryItemService;
-use App\Services\BillService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class BillManagmentController extends Controller
 {
-    private LibraryItemService $libraryItemService;
-
-    public function __construct(LibraryItemService $libraryItemService)
-    {
-        $this->libraryItemService = $libraryItemService;
-    }
-
     public function index(): View
     {
         $viewData = [];
@@ -47,9 +38,9 @@ class BillManagmentController extends Controller
                 $request->items ?? []
             );
 
-            return redirect()->back()->with('success', 'Factura creada correctamente');
+            return redirect()->route('admin.bill.index')->with('success', __('adminBillIndex.statusModal.save.success'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al crear la factura. Por favor, intenta de nuevo.');
+            return redirect()->route('admin.bill.index')->with('error', __('adminBillIndex.statusModal.save.error'));
         }
     }
 
@@ -57,11 +48,11 @@ class BillManagmentController extends Controller
     {
         $bill = Bill::find($id);
         if (! $bill) {
-            return redirect()->route('admin.bill.index');
+            return redirect()->route('admin.bill.index')->with('error', __('adminBillIndex.statusModal.notFound.error'));
         }
         $bill->delete();
 
-        return redirect()->route('admin.bill.index')->with('success', 'Factura eliminada correctamente');
+        return redirect()->route('admin.bill.index')->with('success', __('adminBillIndex.statusModal.delete.success'));
     }
 
     public function update(Request $request, int $id): RedirectResponse
@@ -70,13 +61,13 @@ class BillManagmentController extends Controller
         $bill = Bill::find($id);
 
         if (! $bill) {
-            return redirect()->route('admin.bill.index')->with('failure', 'Factura no existe');
+            return redirect()->route('admin.bill.index')->with('error', __('adminBillIndex.statusModal.update.error'));
         }
 
         if ($request->has('items')) {
             $bill->syncItems($request->items);
         }
 
-        return redirect()->route('admin.bill.index')->with('success', 'Factura actualizada correctamente');
+        return redirect()->route('admin.bill.index')->with('success', __('adminBillIndex.statusModal.update.success'));
     }
 }

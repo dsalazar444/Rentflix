@@ -10,10 +10,10 @@ Route::middleware('admin')->group(function () {
 	Route::put('/admin/movie/update/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@update')->name('admin.movie.update');
 
 	// Admin bill routes
-	Route::get('/admin/bill', 'App\Http\Controllers\BillController@index')->name('admin.bill.index');
-	Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\BillController@delete')->name('admin.bill.delete');
-	Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\BillController@update')->name('admin.bill.update');
-	Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->name('admin.bill.save');
+	Route::get('/admin/bill', 'App\Http\Controllers\Admin\BillManagmentController@index')->name('admin.bill.index');
+	Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\Admin\BillManagmentController@delete')->name('admin.bill.delete');
+	Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\Admin\BillManagmentController@update')->name('admin.bill.update');
+	Route::post('/admin/bill/save', 'App\Http\Controllers\Admin\BillManagmentController@save')->name('admin.bill.save');
 });
 
 // Movie routes
