@@ -115,10 +115,6 @@ class Bill extends Model
         return $this->items;
     }
 
-    // TODO. Cambiar a service calculateTotalPrice porque esto es lógica de negocio
-    // Verificar donde se llama, y actualizar para que use service
- 
-
     // Synchronizes bill items after update in Bill: updates existing items and deletes those not in the provided list
     public function syncItems(array $items): void
     {

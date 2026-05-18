@@ -14,12 +14,6 @@ use App\Mail\InvoiceMail;
 
 class BillService
 {
-    public function calculateTotalPrice(Bill $bill): int
-    {
-        return $bill->items->sum(function ($item) {
-            return $item->getSubtotal();
-        });
-    }
 
     public function downloadBill(string $id): Response
     {

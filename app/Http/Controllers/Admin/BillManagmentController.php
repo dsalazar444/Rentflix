@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
-class BillController extends Controller
+class BillManagmentController extends Controller
 {
     private LibraryItemService $libraryItemService;
 
@@ -78,49 +78,5 @@ class BillController extends Controller
         }
 
         return redirect()->route('admin.bill.index')->with('success', 'Factura actualizada correctamente');
-    }
-
-    public function processPayment(CreateBillRequest $request): RedirectResponse
-    {
-        try {
-            $bill = Bill::createWithItems(
-                [
-                    'user_id' => $request->user_id,
-                    'price' => $request->price,
-                    'address' => $request->address,
-                ],
-                $request->items ?? []
-            );
-
-            // Sync purchased movies to user's library
-            $this->libraryItemService->synchLibraryAfterPurchase($bill);
-
-            // Clean shopping cart from session
-            session()->forget('cart');
-
-            // TODO. Poner con variable en la vista porque esto puede estar en distintos idiomas
-            return redirect()->back()->with('success', 'Pago procesado correctamente');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al procesar pago. Por favor, intenta de nuevo.');
-        }
-    }
-
-    public function listBills(): View
-    {
-        $userId = session('user_id');
-        $viewData = [];
-        $viewData['bills'] = Bill::where('user_id', $userId)->with('items.movie')->get();
-
-        return view('bill.listBills')->with('viewData', $viewData);
-    }
-
-    public function download(string $id, BillService $service): Response
-    {
-        return $service->downloadBill($id);
-    }
-
-    public function send(string $id, BillService $service): RedirectResponse
-    {
-        return $service->sendBill($id);
     }
 }
