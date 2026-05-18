@@ -25,6 +25,11 @@
             {{ session('success') }}
         </div>
     @endif
+    @if(session('error'))
+        <div class="alert alert-danger alert-notify-m">
+            {{ session('error') }}
+        </div>
+    @endif
     @if($errors->any())
         <ul id="errors" class="alert alert-danger alert-notify-m list-unstyled">
             @foreach($errors->all() as $error)

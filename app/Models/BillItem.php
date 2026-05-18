@@ -93,9 +93,13 @@ class BillItem extends Model
         return $this->attributes['updated_at'];
     }
 
-    // TODO. Cambiar a service porque esto es lógica de negocio
-    public function getTotalPrice(): string
+    public function getSubtotal(): int
     {
-        return number_format($this->attributes['price'] * $this->attributes['quantity'], 2);
+        return $this->attributes['price'] * $this->attributes['quantity'];
+    }
+    
+    public function getSubtotalFormatted(): string
+    {
+        return number_format($this->getSubtotal(), 2);
     }
 }
