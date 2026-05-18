@@ -39,4 +39,17 @@ class MovieServiceTest extends TestCase
         // Assert
         $this->assertCount(3, $movies);
     }
+
+    public function test_returns_movie_data_information_from_external_api(){
+        // Arrange
+        $titleMovie = 'Cars';
+
+        // Act
+        $movieData = MovieService::searchMovieExternalApi($titleMovie);
+
+        // Assert
+        $this->assertIsArray($movieData);
+        $this->assertArrayHasKey('title', $movieData);
+        $this->assertArrayHasKey('overview', $movieData);
+    }
 }
