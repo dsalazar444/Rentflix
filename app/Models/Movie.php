@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Movie extends Model
 {
@@ -33,6 +34,7 @@ class Movie extends Model
      */
     protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year', 'description', 'trailer_link'];
 
+    use HasFactory;
     public function items(): HasMany
     {
         return $this->hasMany(BillItem::class);
@@ -148,7 +150,6 @@ class Movie extends Model
         return number_format($this->getPrice(), 2);
     }
 
-
     public function setPrice(int $price): void
     {
         $this->attributes['price'] = $price;
@@ -223,5 +224,4 @@ class Movie extends Model
     {
         $this->attributes['trailer_link'] = $trailer_link;
     }
-
 }

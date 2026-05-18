@@ -21,7 +21,7 @@ class WishlistItemController extends Controller
         $viewData = [];
         $viewData['wishlistItems'] = $user->getWishlistItems();
 
-        return view('wishlist.wishlist')->with('viewData', $viewData);
+        return view('wishlist.index')->with('viewData', $viewData);
     }
 
     public function add(Request $request): RedirectResponse

@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\ImageStorage;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
@@ -22,12 +23,19 @@ class AuthController extends Controller
     public function create(RegisterUserRequest $request): RedirectResponse
     {
         $validated = $request->validated();
+        $profilePhotoURL = null;
+
+        if ($request->hasFile('profile_photo')) {
+            $imageStorage = app(ImageStorage::class, ['storage' => 'local']);
+            $profilePhotoURL = $imageStorage->store($request, 'profile_photo');
+        }
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
+            'profile_photo_url' => $profilePhotoURL,
         ]);
 
         $request->session()->put('user_id', $user->getID());

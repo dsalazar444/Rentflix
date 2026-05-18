@@ -11,6 +11,7 @@ use App\Services\LibraryItemService;
 use App\Services\BillService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class BillController extends Controller

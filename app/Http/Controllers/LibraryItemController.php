@@ -4,9 +4,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\LibraryItemService;
 use Illuminate\View\View;
-use App\Models\User;
 
 class LibraryItemController extends Controller
 {
@@ -22,7 +22,7 @@ class LibraryItemController extends Controller
         $user = User::find(session('user_id'));
 
         $viewData = [];
-        $viewData['libraryItems'] = $user->getLibraryItems(); 
+        $viewData['libraryItems'] = $user->getLibraryItems();
         $viewData['expiringSoon'] = $this->libraryItemService->notifyMovieSoonToExpire(session('user_id'));
 
         return view('library.index')->with('viewData', $viewData);

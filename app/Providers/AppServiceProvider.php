@@ -8,8 +8,8 @@ use App\Services\CartService;
 use Google\Cloud\Storage\StorageClient;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Filesystem as Flysystem;
 use League\Flysystem\GoogleCloudStorage\GoogleCloudStorageAdapter;
@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             $adapter = new GoogleCloudStorageAdapter(
                 $bucket,
                 '',
-                new UniformBucketLevelAccessVisibility(),
+                new UniformBucketLevelAccessVisibility,
                 '',
             );
 

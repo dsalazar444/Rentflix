@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 return [
     'titlePage' => 'Administration Panel',
     'subtitle' => 'Manage movie catalog',
     'addButton' => 'Add Movie',
     'searchPlaceholder' => 'Search movies...',
-    
+
     'tableHeaders' => [
         'movie' => 'Movie',
         'genre' => 'Genre',
@@ -15,7 +15,7 @@ return [
         'status' => 'Status',
         'actions' => 'Actions',
     ],
-    
+
     'statusAvailable' => 'Available',
     'statusSoldOut' => 'Sold Out',
     'editButtonTitle' => 'Edit',

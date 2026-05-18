@@ -1,12 +1,12 @@
-<?php 
+<?php
 
 return [
     'featuredTitle' => 'Destacados',
     'recentlyAddedTitle' => 'Recien Agregadas',
     'exploreButton' => 'EXPLORAR',
-    
+
     'filtersButton' => 'Filtros',
-    
+
     'genreFilters' => [
         'all' => 'Todos',
         'accion' => 'Acción',
@@ -19,18 +19,18 @@ return [
         'scifi' => 'Sci-Fi',
         'policiales' => 'Policiales',
     ],
-    
+
     'sortOptions' => [
         'priceAsc' => 'Precio: menor a mayor',
         'priceDesc' => 'Precio: mayor a menor',
         'available' => 'Disponibles',
     ],
-    
+
     'allMoviesTitle' => 'Todas las Películas',
     'moviesFoundText' => 'películas encontradas',
-    
+
     'reserveButton' => 'Reservar',
-    
+
     'statusAvailable' => 'Disponible',
     'statusSoldOut' => 'Agotada',
 ];

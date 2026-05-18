@@ -23,6 +23,7 @@ class User extends Authenticatable
      * $this->attributes['email'] - string - contains the user email
      * $this->attributes['password'] - string - contains the user password
      * $this->attributes['role'] - string - contains the user role
+    * $this->attributes['profilePhotoURL'] - string - contains the user profile photo URL
      * $this->attributes['email_verified_at'] - datetime - contains the email verification timestamp
      * $this->attributes['remember_token'] - string - contains the remember token for authentication
      * $this->attributes['created_at'] - datetime - contains the user creation timestamp
@@ -31,7 +32,7 @@ class User extends Authenticatable
      * $this->libraryItems - Collection of LibraryItem - contains the library items associated with the user
      * $this->wishlistItems - Collection of WishlistItem - contains the wishlist items associated with the user
      */
-    protected $fillable = ['name', 'email', 'password', 'role'];
+    protected $fillable = ['name', 'email', 'password', 'role', 'profilePhotoURL'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -126,6 +127,16 @@ class User extends Authenticatable
     public function setRole(string $role): void
     {
         $this->attributes['role'] = $role;
+    }
+
+    public function getProfilePhotoURL(): string
+    {
+        return $this->attributes['profilePhotoURL'];
+    }
+
+    public function setProfilePhotoURL(string $profilePhotoURL): void
+    {
+        $this->attributes['profilePhotoURL'] = $profilePhotoURL;
     }
 
     public function getEmailVerifiedAt(): ?\DateTime

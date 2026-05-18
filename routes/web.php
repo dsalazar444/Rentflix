@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('admin')->group(function () {
-	// Admin movie routes
-	Route::get('/admin/movie', 'App\Http\Controllers\Admin\MovieManagmentController@index')->name('admin.movie.index');
-	Route::post('/admin/movie/save', 'App\Http\Controllers\Admin\MovieManagmentController@save')->name('admin.movie.save');
-	Route::delete('/admin/movie/delete/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@delete')->name('admin.movie.delete');
-	Route::put('/admin/movie/update/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@update')->name('admin.movie.update');
+    // Admin movie routes
+    Route::get('/admin/movie', 'App\Http\Controllers\Admin\MovieManagmentController@index')->name('admin.movie.index');
+    Route::post('/admin/movie/save', 'App\Http\Controllers\Admin\MovieManagmentController@save')->name('admin.movie.save');
+    Route::delete('/admin/movie/delete/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@delete')->name('admin.movie.delete');
+    Route::put('/admin/movie/update/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@update')->name('admin.movie.update');
+    Route::get('/admin/movie/create', 'App\Http\Controllers\Admin\MovieManagmentController@create')->name('admin.movie.create');
+    Route::match(['get', 'post'], '/admin/movie/searchMovieExternalApi', 'App\Http\Controllers\Admin\MovieManagmentController@getMovieDataFromExternalApi')->name('admin.movie.searchMovieExternalApi');
 
 	// Admin bill routes
 	Route::get('/admin/bill', 'App\Http\Controllers\Admin\BillManagmentController@index')->name('admin.bill.index');
@@ -49,5 +51,3 @@ Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')
 Route::delete('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
 Route::get('/cart/clean', 'App\Http\Controllers\ShoppingCartController@clean')->name('cart.clean');
 Route::post('/cart/process', 'App\Http\Controllers\BillController@processPayment')->name('cart.process');
-
-

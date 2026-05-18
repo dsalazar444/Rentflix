@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 return [
     'titlePage' => 'Panel de Administración',
     'subtitle' => 'Gestiona el catálogo de películas',
     'addButton' => 'Agregar Película',
     'searchPlaceholder' => 'Buscar películas...',
-    
+
     'tableHeaders' => [
         'movie' => 'Película',
         'genre' => 'Género',
@@ -15,7 +15,7 @@ return [
         'status' => 'Estado',
         'actions' => 'Acciones',
     ],
-    
+
     'statusAvailable' => 'Disponible',
     'statusSoldOut' => 'Agotada',
     'editButtonTitle' => 'Editar',

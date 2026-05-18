@@ -11,9 +11,10 @@ use Illuminate\Http\JsonResponse;
 
 class MoviesApiController extends Controller
 {
-    public function returnMovies() : JsonResponse
+    public function returnMovies(): JsonResponse
     {
         $movies = MovieApiResource::collection(MovieService::searchMostPopularMoviesLimited(5));
+
         return response()->json($movies);
     }
 }

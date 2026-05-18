@@ -5,17 +5,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchMovieExternalRequest;
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Http\Resources\ExternalMovieApiResource;
 use App\Interfaces\ImageStorage;
 use App\Models\Movie;
+use App\Services\MovieService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Exception;
 
 class MovieManagmentController extends Controller
 {
-    private ImageStorage $imageStorage;
-
     public function index(): View
     {
         $viewData = [];
@@ -26,9 +28,8 @@ class MovieManagmentController extends Controller
 
     public function save(StoreMovieRequest $request): RedirectResponse
     {
-        $storage = $request->get('storage', 'gcp');
-        $imageStorage = app(ImageStorage::class, ['storage' => $storage]);
-        $imageName = $imageStorage->store($request, 'movie_image');
+        $imageName = $request->resolvedImageName();
+
         Movie::create($request->only([
             'title',
             'director',
@@ -51,10 +52,19 @@ class MovieManagmentController extends Controller
     {
         $movie = Movie::find($id);
         if (! $movie) {
-
             return redirect()->route('admin.movie.index')
                 ->with('error', __('adminMovieIndex.statusModal.notFound.error'));
         }
+
+        if ($movie->file_name) {
+            try {
+                $imageStorage = app(ImageStorage::class, ['storage' => 'gcp']);
+                $imageStorage->delete($movie->file_name);
+            } catch (Exception $e) {
+                throw $e;
+            }
+        }
+
         $movie->delete();
 
         return redirect()->route('admin.movie.index')
@@ -83,7 +93,7 @@ class MovieManagmentController extends Controller
         ]);
 
         if ($request->hasFile('movie_image')) {
-            $storage = $request->get('storage', 'gcp');
+            $storage = $request->input('storage', 'gcp');
             $imageStorage = app(ImageStorage::class, ['storage' => $storage]);
             $imageName = $imageStorage->store($request, 'movie_image');
             $updatedMovieData['file_name'] = $imageName;
@@ -92,5 +102,26 @@ class MovieManagmentController extends Controller
         $movie->update($updatedMovieData);
 
         return redirect()->route('admin.movie.index')->with('success', __('adminMovieIndex.statusModal.update.success'));
+    }
+
+    public function create(): View
+    {
+        return view('admin.movie.create');
+    }
+
+    public function getMovieDataFromExternalApi(SearchMovieExternalRequest $request): View|RedirectResponse
+    {
+        $title = $request->input('title');
+        $movieApiData = MovieService::searchMovieExternalApi($title);
+
+        if ($movieApiData['Response']  === 'False') {
+            return redirect()->route('admin.movie.create')->with('error', __('adminMovieModalCreate.movieNotFound'));
+        }
+
+        $movie = ExternalMovieApiResource::make($movieApiData)->resolve();
+        $viewData = [];
+        $viewData['movie'] = $movie;
+
+        return view('admin.movie.create')->with('viewData', $viewData);
     }
 }

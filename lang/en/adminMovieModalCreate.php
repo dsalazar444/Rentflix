@@ -1,11 +1,13 @@
-<?php 
+<?php
 
 return [
     'modalTitle' => 'Add New Movie',
+    'movieNotFound' => 'Movie was not found in the external API.',
     'closeButtonLabel' => 'Close',
     'titleLabel' => 'Title',
     'titlePlaceholder' => 'E.g: The Dark Knight',
     'imageLabel' => 'Cover Image',
+    'noImageYet' => 'No image yet',
     'storageLabel' => 'Image storage',
     'storageOptions' => [
         'gcp' => 'Google Cloud Storage',

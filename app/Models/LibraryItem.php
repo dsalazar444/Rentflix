@@ -6,7 +6,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Exception;
 
 class LibraryItem extends Model
 {
@@ -82,5 +81,4 @@ class LibraryItem extends Model
     {
         return $this->attributes['updated_at'];
     }
-
 }
