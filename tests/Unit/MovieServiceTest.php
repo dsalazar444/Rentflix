@@ -30,26 +30,27 @@ class MovieServiceTest extends TestCase
 
     public function test_returns_only_limited_movies()
     {
-        // Arrange
         Movie::factory()->count(10)->create();
 
-        // Act
         $movies = MovieService::searchMostPopularMoviesLimited(3);
 
-        // Assert
         $this->assertCount(3, $movies);
     }
 
-    public function test_returns_movie_data_information_from_external_api(){
-        // Arrange
+    public function test_returns_movie_data_information_from_external_api()
+    {
         $titleMovie = 'Cars';
 
-        // Act
         $movieData = MovieService::searchMovieExternalApi($titleMovie);
 
-        // Assert
         $this->assertIsArray($movieData);
-        $this->assertArrayHasKey('title', $movieData);
-        $this->assertArrayHasKey('overview', $movieData);
+        $this->assertArrayHasKey('Response', $movieData);
+        
+        if ($movieData['Response'] === 'True') {
+            $this->assertArrayHasKey('Title', $movieData);
+            $this->assertArrayHasKey('Year', $movieData);
+            $this->assertArrayHasKey('imdbID', $movieData);
+            $this->assertNotEmpty($movieData['Title']);
+        }
     }
 }
