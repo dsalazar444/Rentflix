@@ -1,11 +1,13 @@
-<?php 
+<?php
 
 return [
     'modalTitle' => 'Agregar Nueva Película',
+    'movieNotFound' => 'No se encontró la película en la API externa.',
     'closeButtonLabel' => 'Cerrar',
     'titleLabel' => 'Título',
     'titlePlaceholder' => 'Ej: The Dark Knight',
     'imageLabel' => 'Imagen de Portada',
+    'noImageYet' => 'No hay imagen aún',
     'storageLabel' => 'Almacenamiento de imagen',
     'storageOptions' => [
         'gcp' => 'Google Cloud Storage',

@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 return [
     'titlePage' => 'Administration Panel',
     'subtitle' => 'Manage invoice catalog',
     'addButton' => 'Add Invoice',
     'searchPlaceholder' => 'Search invoices by id...',
-    
+
     'tableHeaders' => [
         'billId' => 'Invoice ID',
         'date' => 'Date',
@@ -14,7 +14,7 @@ return [
         'items' => 'Items',
         'actions' => 'Actions',
     ],
-    
+
     'viewItemsButton' => 'View items',
     'editButtonTitle' => 'Edit',
     'deleteButtonTitle' => 'Delete',
