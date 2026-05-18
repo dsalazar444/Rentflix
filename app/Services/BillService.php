@@ -5,6 +5,12 @@
 namespace App\Services;
 
 use Illuminate\Support\Collection;
+use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Bill;
+use App\Mail\InvoiceMail;
 
 class BillService
 {

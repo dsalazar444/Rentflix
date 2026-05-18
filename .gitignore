@@ -15,8 +15,9 @@
 /node_modules
 /public/build
 /public/hot
-/public/storage/
-/storage/*
+/public/storage
+bootstrap/
+/storage
 /storage/*.key
 /storage/pail
 /vendor
@@ -24,3 +25,7 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 proyectolaravel-494103-d874a2087779.json
+Dockerfile
+*.yml
+
+/bootstrap/cache

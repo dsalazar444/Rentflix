@@ -11,12 +11,13 @@ use App\Models\User;
 use App\Models\Movie;
 use App\Http\Requests\CreateBillRequest;
 use App\Services\LibraryItemService;
+use App\Services\BillService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\View\View;
-use App\Services\BillService;
 
 class BillController extends Controller
 {
@@ -29,7 +30,6 @@ class BillController extends Controller
 
     public function index(): View
     {
-        // TODO. Cambiar a usar metodo del modelo -> debo poner un getItemsWithMovie con esa consulta?
         $viewData = [];
         $viewData['bills'] = Bill::with('items.movie')->get();
         $viewData['users'] = User::all();
@@ -108,7 +108,6 @@ class BillController extends Controller
         }
     }
 
-    // TODO. Usar la funcioncita del modo de user (getBills) en vez de hacer la consulta aca -> no se hace consulta de items.movie, sino de items, creo otra función?
     public function listBills(): View
     {
         $userId = session('user_id');
@@ -118,14 +117,13 @@ class BillController extends Controller
         return view('bill.listBills')->with('viewData', $viewData);
     }
 
-    public function download(Bill $bill, BillService $service): Response
+    public function download(string $id, BillService $service): Response
     {
-        return $service->downloadBill($bill);
+        return $service->downloadBill($id);
     }
 
     public function send(string $id, BillService $service): RedirectResponse
     {
-        return $service->sendBill();
-       
+        return $service->sendBill($id);
     }
 }

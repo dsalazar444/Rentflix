@@ -100,6 +100,6 @@ class BillItem extends Model
     
     public function getSubtotalFormatted(): string
     {
-        return number_format($this->calculateSubtotal(), 2);
+        return number_format($this->getSubtotal(), 2);
     }
 }
