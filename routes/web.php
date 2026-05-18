@@ -51,3 +51,6 @@ Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')
 Route::delete('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
 Route::get('/cart/clean', 'App\Http\Controllers\ShoppingCartController@clean')->name('cart.clean');
 Route::post('/cart/process', 'App\Http\Controllers\BillController@processPayment')->name('cart.process');
+
+// External Api
+Route::get('/allied-products', 'App\Http\Controllers\Api\ExternalVenekaApiController@index')->name('allied_products.index');
