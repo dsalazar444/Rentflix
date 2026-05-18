@@ -3,17 +3,19 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('admin')->group(function () {
-	// Admin movie routes
-	Route::get('/admin/movie', 'App\Http\Controllers\Admin\MovieManagmentController@index')->name('admin.movie.index');
-	Route::post('/admin/movie/save', 'App\Http\Controllers\Admin\MovieManagmentController@save')->name('admin.movie.save');
-	Route::delete('/admin/movie/delete/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@delete')->name('admin.movie.delete');
-	Route::put('/admin/movie/update/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@update')->name('admin.movie.update');
+    // Admin movie routes
+    Route::get('/admin/movie', 'App\Http\Controllers\Admin\MovieManagmentController@index')->name('admin.movie.index');
+    Route::post('/admin/movie/save', 'App\Http\Controllers\Admin\MovieManagmentController@save')->name('admin.movie.save');
+    Route::delete('/admin/movie/delete/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@delete')->name('admin.movie.delete');
+    Route::put('/admin/movie/update/{id}', 'App\Http\Controllers\Admin\MovieManagmentController@update')->name('admin.movie.update');
+    Route::get('/admin/movie/create', 'App\Http\Controllers\Admin\MovieManagmentController@create')->name('admin.movie.create');
+    Route::match(['get', 'post'], '/admin/movie/searchMovieExternalApi', 'App\Http\Controllers\Admin\MovieManagmentController@getMovieDataFromExternalApi')->name('admin.movie.searchMovieExternalApi');
 
-	// Admin bill routes
-	Route::get('/admin/bill', 'App\Http\Controllers\BillController@index')->name('admin.bill.index');
-	Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\BillController@delete')->name('admin.bill.delete');
-	Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\BillController@update')->name('admin.bill.update');
-	Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->name('admin.bill.save');
+    // Admin bill routes
+    Route::get('/admin/bill', 'App\Http\Controllers\BillController@index')->name('admin.bill.index');
+    Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\BillController@delete')->name('admin.bill.delete');
+    Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\BillController@update')->name('admin.bill.update');
+    Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->name('admin.bill.save');
 });
 
 // Movie routes

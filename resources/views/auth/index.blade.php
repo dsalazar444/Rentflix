@@ -104,7 +104,7 @@
                     </div>
                 @endif
 
-                <form class="login-form" method="POST" action="{{ route('auth.create') }}">
+                <form class="login-form" method="POST" action="{{ route('auth.create') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">{{ __('authIndex.nameLabel') }}</label>
