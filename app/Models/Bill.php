@@ -22,6 +22,8 @@ class Bill extends Model
      * $this->attributes['user_id'] - int - contains the foreign key to the user
      * $this->attributes['created_at'] - timestamp - contains the date it was created
      * $this->attributes['updated_at'] - timestamp - contains the date it was last modified
+     * $this->items - Collection of BillItem - contains the items associated with the bill
+     * $this->user - User - contains the user associated with the bill
      */
     protected $fillable = ['price', 'address', 'user_id'];
 
@@ -113,6 +115,7 @@ class Bill extends Model
         return $this->items;
     }
 
+    // TODO. Cambiar a service porque esto es lógica de negocio
     public function calculateTotalPrice(): int
     {
         return $this->items->sum(function ($item) {
@@ -121,7 +124,7 @@ class Bill extends Model
     }
 
     // Synchronizes bill items: updates existing items and deletes those not in the provided list
-    public function syncItems($items): void
+    public function syncItems(array $items): void
     {
         $requestItemIds = collect($items ?? [])->pluck('id')->filter()->map(fn ($id) => (int) $id)->toArray();
 
@@ -137,6 +140,7 @@ class Bill extends Model
     }
 
     // Creates a new bill with its associated items in a single transaction
+    // TODO. Revisar que pasa porqe no se usa index
     public static function createWithItems(array $billData, array $items): self
     {
         try {
@@ -158,6 +162,7 @@ class Bill extends Model
         }
     }
 
+    // TODO. Cambiar a service porque esto es lógica de negocio
     public function generatePdf(): Response
     {
         if (! $this->relationLoaded('items')) {

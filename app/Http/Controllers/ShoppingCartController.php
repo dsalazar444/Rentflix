@@ -19,7 +19,7 @@ class ShoppingCartController extends Controller
             session()->put('cart', $cart);
         }
 
-        return redirect()->back()->with('success', 'Película añadida al carrito');
+        return redirect()->back()->with('success', __('cartController.addSuccess'));
     }
 
     public function remove(Request $request): RedirectResponse

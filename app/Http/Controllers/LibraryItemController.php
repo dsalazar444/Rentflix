@@ -4,7 +4,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LibraryItem;
+use App\Models\User;
 use App\Services\LibraryItemService;
 use Illuminate\View\View;
 
@@ -19,12 +19,12 @@ class LibraryItemController extends Controller
 
     public function index(): View
     {
-        $viewData = [];
-        $viewData['libraryItems'] = LibraryItem::where('user_id', session('user_id'))
-            ->with('user', 'movie')
-            ->get();
-        $viewData['expiringSoon'] = $this->libraryItemService->notify(session('user_id'));
+        $user = User::find(session('user_id'));
 
-        return view('collections.library')->with('viewData', $viewData);
+        $viewData = [];
+        $viewData['libraryItems'] = $user->getLibraryItems();
+        $viewData['expiringSoon'] = $this->libraryItemService->notifyMovieSoonToExpire(session('user_id'));
+
+        return view('library.index')->with('viewData', $viewData);
     }
 }

@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\ImageStorage;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
@@ -22,18 +23,25 @@ class AuthController extends Controller
     public function create(RegisterUserRequest $request): RedirectResponse
     {
         $validated = $request->validated();
+        $profilePhotoURL = null;
+
+        if ($request->hasFile('profile_photo')) {
+            $imageStorage = app(ImageStorage::class, ['storage' => 'local']);
+            $profilePhotoURL = $imageStorage->store($request, 'profile_photo');
+        }
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
+            'profile_photo_url' => $profilePhotoURL,
         ]);
 
         $request->session()->put('user_id', $user->getID());
         $request->session()->put('role', $user->getRole());
 
-        return redirect()->route('catalog.index');
+        return redirect()->route('movie.index');
     }
 
     public function login(LoginUserRequest $request): RedirectResponse
@@ -43,19 +51,20 @@ class AuthController extends Controller
         $user = User::where('email', $validated['email'])->first();
 
         if (! $user || ! Hash::check($validated['password'], $user->getPassword())) {
-            return redirect()->route('auth.index')->with('error', 'Credenciales inválidas.');
+            return redirect()->route('auth.index')->with('error', __('authIndex.loginError'));
         }
 
         $request->session()->put('user_id', $user->getID());
         $request->session()->put('role', $user->getRole());
 
-        return redirect()->route('catalog.index');
+        return redirect()->route('movie.index');
     }
 
-    public function logout(Request $request): View
+    public function logout(Request $request): RedirectResponse
     {
-        $request->session()->flush();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return view('auth.index');
+        return redirect()->route('auth.index');
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 
 class User extends Authenticatable
 {
@@ -22,12 +23,16 @@ class User extends Authenticatable
      * $this->attributes['email'] - string - contains the user email
      * $this->attributes['password'] - string - contains the user password
      * $this->attributes['role'] - string - contains the user role
+    * $this->attributes['profilePhotoURL'] - string - contains the user profile photo URL
      * $this->attributes['email_verified_at'] - datetime - contains the email verification timestamp
      * $this->attributes['remember_token'] - string - contains the remember token for authentication
      * $this->attributes['created_at'] - datetime - contains the user creation timestamp
      * $this->attributes['updated_at'] - datetime - contains the user update timestamp
+     * $this->bills - Collection of Bill - contains the bills associated with the user
+     * $this->libraryItems - Collection of LibraryItem - contains the library items associated with the user
+     * $this->wishlistItems - Collection of WishlistItem - contains the wishlist items associated with the user
      */
-    protected $fillable = ['name', 'email', 'password', 'role'];
+    protected $fillable = ['name', 'email', 'password', 'role', 'profilePhotoURL'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,6 +67,21 @@ class User extends Authenticatable
     public function wishlistItems(): HasMany
     {
         return $this->hasMany(WishlistItem::class);
+    }
+
+    public function getLibraryItems(): Collection
+    {
+        return $this->libraryItems()->get();
+    }
+
+    public function getWishlistItems(): Collection
+    {
+        return $this->wishlistItems()->get();
+    }
+
+    public function getBills(): Collection
+    {
+        return $this->bills()->with('items')->get();
     }
 
     public function getId(): int
@@ -107,6 +127,16 @@ class User extends Authenticatable
     public function setRole(string $role): void
     {
         $this->attributes['role'] = $role;
+    }
+
+    public function getProfilePhotoURL(): string
+    {
+        return $this->attributes['profilePhotoURL'];
+    }
+
+    public function setProfilePhotoURL(string $profilePhotoURL): void
+    {
+        $this->attributes['profilePhotoURL'] = $profilePhotoURL;
     }
 
     public function getEmailVerifiedAt(): ?\DateTime

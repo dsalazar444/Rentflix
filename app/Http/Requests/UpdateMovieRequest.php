@@ -19,7 +19,7 @@ class UpdateMovieRequest extends FormRequest
         return [
             'title' => 'required|string',
             'director' => 'required|string',
-            'genre' => 'required|in:accion,aventuras,animacion,comedia,drama,fantasia,terror,ciencia ficcion',
+            'genre' => 'required|string',
             'classification' => 'required|string',
             'year' => 'required|integer|min:1900|max:'.date('Y'),
             'format' => 'required|in:DVD,digital',

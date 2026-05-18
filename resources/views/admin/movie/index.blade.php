@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{{ asset('css/admin/modal.css') }}">
 <input type="hidden" id="hasErrors" value="{{ $errors->any() ? '1' : '0' }}">
 <input type="hidden" id="lastFormSubmitted" value="{{ session('lastForm', '') }}">
+
 <div class="admin-panel">
 
     <!-- Header Panel -->
@@ -14,10 +15,21 @@
             <h1>{{ __('adminMovieIndex.titlePage') }}</h1>
             <p>{{ __('adminMovieIndex.subtitle') }}</p>
         </div>
-        <button class="btn-add" data-bs-toggle="modal" data-bs-target="#movieModal">
+        <a href="{{ route('admin.movie.create') }}" class="btn-add text-decoration-none">
             <span>+</span> {{ __('adminMovieIndex.addButton') }}
-        </button>
+        </a>
     </div>
+
+    @if(session('success'))
+        <div class="alert alert-success alert-notify-m">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger alert-notify-m">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <!-- Search Bar -->
     <div class="search-box">
@@ -47,7 +59,7 @@
                 @foreach ($viewData["movies"] as $movie)
                 <tr class="movie-row">
                     <td class="movie-info">
-                        <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="movie-thumb">
+                        <img src="{{ $movie->getFileName() }}" alt="{{ $movie->getTitle() }}" class="movie-thumb">
                         <div>
                             <span class="movie-title">{{ $movie->getTitle() }}</span>
                             <span class="movie-classification">{{ $movie->getClassificationCapitalized() }}+</span>
@@ -102,8 +114,8 @@
         </table>
     </div>
 </div>
-@include('admin.movie.components.modalMovieCreate')
-@include('admin.movie.components.modalMovieEdit')
+
+@include('admin.components.movie.modalMovieEdit')
 @push('scripts')
     <script src="{{ asset('js/admin/modalErrors.js') }}"></script>
     <script src="{{ asset('js/admin/modalMovieEdit.js') }}"></script>

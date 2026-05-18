@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'catalog' => 'Catalogo',
+    'movies' => 'Películas',
     'library' => 'Mi Biblioteca',
     'searchPlaceholder' => 'Buscar peliculas...',
     'favorites' => 'Favoritos',

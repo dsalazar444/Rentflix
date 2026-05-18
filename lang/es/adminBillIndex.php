@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 return [
     'titlePage' => 'Panel de Administración',
     'subtitle' => 'Gestiona el catálogo de facturas',
     'addButton' => 'Agregar Factura',
     'searchPlaceholder' => 'Buscar facturas por id...',
-    
+
     'tableHeaders' => [
         'billId' => 'ID Factura',
         'date' => 'Fecha',
@@ -14,7 +14,7 @@ return [
         'items' => 'Items',
         'actions' => 'Acciones',
     ],
-    
+
     'viewItemsButton' => 'Ver items',
     'editButtonTitle' => 'Editar',
     'deleteButtonTitle' => 'Eliminar',

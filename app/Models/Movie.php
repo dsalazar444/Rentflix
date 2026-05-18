@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Movie extends Model
 {
@@ -27,9 +28,13 @@ class Movie extends Model
      * $this->attributes['year'] - int - contains the movie release year
      * $this->attributes['created_at'] - timestamp - contains the movie creation timestamp
      * $this->attributes['updated_at'] - timestamp - contains the movie update timestamp
+     * $this->items - Collection of BillItem - contains the bill items associated with this movie
+     * $this->libraryItems - Collection of LibraryItem - contains the library items associated with this movie
+     * $this->wishlistItems - Collection of WishlistItem - contains the wishlist items associated with this movie
      */
     protected $fillable = ['title', 'director', 'genre', 'format', 'location', 'price', 'quantity', 'quantity_views', 'file_name', 'classification', 'year', 'description', 'trailer_link'];
 
+    use HasFactory;
     public function items(): HasMany
     {
         return $this->hasMany(BillItem::class);
@@ -145,7 +150,6 @@ class Movie extends Model
         return number_format($this->getPrice(), 2);
     }
 
-
     public function setPrice(int $price): void
     {
         $this->attributes['price'] = $price;
@@ -219,24 +223,5 @@ class Movie extends Model
     public function setTrailerLink(string $trailer_link): void
     {
         $this->attributes['trailer_link'] = $trailer_link;
-    }
-
-    public static function searchMovieByName(string $movie_name)
-    {
-        $movies = collect();
-        $notFound = false;
-
-        if ($movie_name) {
-            $movies = Movie::whereRaw('LOWER(title) LIKE ?', ['%'.strtolower($movie_name).'%'])->get();
-
-            if ($movies->isEmpty()) {
-                $notFound = true;
-            }
-        }
-
-        return [
-            'movies' => $movies,
-            'notFound' => $notFound,
-        ];
     }
 }

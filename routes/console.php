@@ -10,10 +10,10 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::call(function () {
-    app(LibraryItemService::class)->removeExpired();
+    app(LibraryItemService::class)->removeMovieExpired();
 })->daily();
 
 Artisan::command('library:clean', function () {
-    app(LibraryItemService::class)->removeExpired();
+    app(LibraryItemService::class)->removeMovieExpired();
     $this->info('Expired library items removed!');
 });
