@@ -46,7 +46,7 @@
         @foreach ($viewData['libraryItems'] as $item)
         <a href="{{ route('movie.show', ['id' => $item->movie->getId()]) }}" target="_blank" class="library-card {{ $item->getDaysUntilExpiration() <= 3 ? 'card-expiring' : '' }}" style="text-decoration: none; color: inherit;">
             <div class="card-poster">
-                <img src="{{ asset('storage/' . $item->movie->getFileName()) }}" alt="Sample Movie" class="card-img">
+                <img src="{{ $item->movie->getFileName() }}" alt="Sample Movie" class="card-img">
                 <span class="card-badge">{{ $item->movie->getClassificationCapitalized() }}</span>
             </div>
 

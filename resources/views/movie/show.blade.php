@@ -27,17 +27,20 @@
             </form>
             @endif
 
-            <a href="{{ $viewData['movie']->getTrailerLink() }}" target="_blank" class="btn-trailer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="5 3 19 12 5 21 5 3"/>
-                </svg>
-                @if($viewData['isInLibrary'])
-                    {{ __('movieShow.watchMovieButton') }}
-                @else
-                    {{ __('movieShow.watchTrailerButton') }}
-                @endif
-            </a>
+            <form action="{{ route('movie.watch', ['id' => $viewData['movie']->getId()]) }}" method="POST" target="_blank" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn-trailer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    @if($viewData['isInLibrary'])
+                        {{ __('movieShow.watchMovieButton') }}
+                    @else
+                        {{ __('movieShow.watchTrailerButton') }}
+                    @endif
+                </button>
+            </form>
 
             <form action="{{ route($viewData['isInWishlist'] ? 'wishlist.delete' : 'wishlist.add', ['id' => $viewData['movie']->getId()]) }}" method="POST" style="display: inline;">
                 @csrf

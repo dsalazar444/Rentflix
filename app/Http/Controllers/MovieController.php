@@ -67,6 +67,19 @@ class MovieController extends Controller
         return view('movie.show')->with('viewData', $viewData);
     }
 
+    public function watch(string $id): RedirectResponse
+    {
+        $movie = Movie::find($id);
+
+        if (! $movie) {
+            return redirect()->route('movie.index');
+        }
+
+        $movie->increment('quantity_views');
+
+        return redirect()->away($movie->getTrailerLink());
+    }
+
     public function searchMovieByName(Request $request): View
     {
         $query = $request->input('movie_name');

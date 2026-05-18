@@ -94,7 +94,7 @@
             <div class="cart-item-list">
                 @foreach($cartMovieItems as $movie)
                 <div class="cart-item-card">
-                    <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="cart-item-thumb">
+                    <img src="{{ $movie->getFileName() }}" alt="{{ $movie->getTitle() }}" class="cart-item-thumb">
                     <div class="cart-item-info">
                         <p class="cart-item-title">{{ $movie->getTitle() }}</p>
                         <p class="cart-item-meta">{{ $movie->getGenreCapitalized() }} · {{ $movie->getYear() }}</p>
