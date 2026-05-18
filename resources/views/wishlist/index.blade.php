@@ -22,7 +22,7 @@
 			@if($wishlistItem->movie)
 			<a href="{{ route('movie.show', ['id' => $wishlistItem->movie->getId()]) }}" class="library-card" style="text-decoration: none;">
 				<div class="card-poster">
-					<img src="{{ asset('storage/' . $wishlistItem->movie->getFileName()) }}" alt="{{ $wishlistItem->movie->getTitle() }}" class="card-img">
+					<img src="{{ $wishlistItem->movie->getFileName() }}" alt="{{ $wishlistItem->movie->getTitle() }}" class="card-img">
 					<span class="card-badge">{{ $wishlistItem->movie->getClassificationCapitalized() }}+</span>
 				</div>
 

@@ -21,6 +21,7 @@ Route::middleware('admin')->group(function () {
 // Movie routes
 Route::get('/', 'App\Http\Controllers\MovieController@index')->name('movie.index');
 Route::get('/movie/{id}', 'App\Http\Controllers\MovieController@show')->name('movie.show');
+Route::post('/movie/{id}/watch', 'App\Http\Controllers\MovieController@watch')->name('movie.watch');
 Route::get('/movie', 'App\Http\Controllers\MovieController@searchMovieByName')->name('movie.search');
 
 // User routes
