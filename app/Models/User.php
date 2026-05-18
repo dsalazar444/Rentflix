@@ -23,7 +23,7 @@ class User extends Authenticatable
      * $this->attributes['email'] - string - contains the user email
      * $this->attributes['password'] - string - contains the user password
      * $this->attributes['role'] - string - contains the user role
-    * $this->attributes['profilePhotoURL'] - string - contains the user profile photo URL
+     * $this->attributes['profilePhotoURL'] - string - contains the user profile photo URL
      * $this->attributes['email_verified_at'] - datetime - contains the email verification timestamp
      * $this->attributes['remember_token'] - string - contains the remember token for authentication
      * $this->attributes['created_at'] - datetime - contains the user creation timestamp

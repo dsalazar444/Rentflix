@@ -97,7 +97,7 @@ class BillItem extends Model
     {
         return $this->attributes['price'] * $this->attributes['quantity'];
     }
-    
+
     public function getSubtotalFormatted(): string
     {
         return number_format($this->getSubtotal(), 2);

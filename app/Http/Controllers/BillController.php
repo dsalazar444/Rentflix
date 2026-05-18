@@ -4,14 +4,13 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Bill;
 use App\Http\Requests\CreateBillRequest;
-use App\Services\LibraryItemService;
+use App\Models\Bill;
 use App\Services\BillService;
+use App\Services\LibraryItemService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class BillController extends Controller

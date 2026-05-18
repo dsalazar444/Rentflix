@@ -14,7 +14,7 @@ return [
     'successTitle' => '¡Éxito!',
     'downloadButtonTitle' => 'Descargar factura',
     'sendButtonTitle' => 'Enviar factura por correo',
-    
+
     'statusModal' => [
         'notFound' => [
             'error' => 'La factura no existe.',

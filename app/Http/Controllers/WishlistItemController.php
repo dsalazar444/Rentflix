@@ -4,15 +4,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\WishlistItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\User;
 
 class WishlistItemController extends Controller
 {
-    
     public function index(): View|RedirectResponse
     {
 

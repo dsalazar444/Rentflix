@@ -5,11 +5,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Exception;
-use App\Models\Bill;
-use App\Models\User;
-use App\Models\Movie;
 use App\Http\Requests\CreateBillRequest;
+use App\Models\Bill;
+use App\Models\Movie;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;

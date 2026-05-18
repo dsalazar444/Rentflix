@@ -27,12 +27,12 @@ class MovieFactory extends Factory
                 'comedy',
                 'drama',
                 'horror',
-                'sci-fi'
+                'sci-fi',
             ]),
 
             'format' => fake()->randomElement([
                 'dvd',
-                'digital'
+                'digital',
             ]),
 
             'location' => fake()->randomLetter(),
@@ -49,7 +49,7 @@ class MovieFactory extends Factory
                 'g',
                 'pg',
                 'pg-13',
-                'r'
+                'r',
             ]),
 
             'year' => fake()->year(),
