@@ -19,4 +19,24 @@ return [
     'editButtonTitle' => 'Editar',
     'deleteButtonTitle' => 'Eliminar',
     'deleteConfirmMessage' => '¿Seguro que quieres eliminar esta factura?',
+
+    'statusModal' => [
+        'save' => [
+            'title' => 'Guardar factura',
+            'success' => 'La factura se guardó correctamente.',
+            'error' => 'Error al crear la factura. Por favor, intenta de nuevo.',
+        ],
+        'delete' => [
+            'title' => 'Eliminar factura',
+            'success' => 'La factura se eliminó correctamente.',
+        ],
+        'update' => [
+            'title' => 'Actualizar factura',
+            'success' => 'La factura se actualizó correctamente.',
+        ],
+        'notFound' => [
+            'title' => 'Factura no encontrada',
+            'error' => 'La factura no existe.',
+        ],
+    ],
 ];
