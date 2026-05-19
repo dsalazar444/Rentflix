@@ -1,8 +1,14 @@
 FROM php:8.4-apache
 
 RUN apt-get update && apt-get install -y \
-    git zip unzip curl \
-    libpng-dev libonig-dev libxml2-dev libzip-dev
+    git \
+    zip \
+    unzip \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl
 
@@ -16,13 +22,14 @@ COPY . .
 
 RUN git config --global --add safe.directory /var/www/html
 
-RUN mkdir -p storage bootstrap/cache \
-    && chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 storage bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html
 
 RUN composer install --no-dev --optimize-autoloader
 
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+
+RUN chmod -R 777 storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 80
 
