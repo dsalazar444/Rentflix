@@ -11,11 +11,15 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
+        "google/cloud-storage": "^1.0",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.10.1",
+        "league/flysystem-google-cloud-storage": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "grazulex/laravel-atlas": "^1.7",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",
         "laravel/sail": "^1.41",

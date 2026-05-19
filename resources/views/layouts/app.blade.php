@@ -10,13 +10,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/allied_products/allied_banner.css') }}">
     @yield('styles')
     <title>RentFix</title>
 </head>
 
 <body>
 
-    @include('header.dispatcher')
+    <!-- Allied Products Banner -->
+    <a href="{{ route('allied_products.index') }}" class="allied-banner">
+        <div class="allied-banner-content">
+            <span class="allied-banner-text">{{ __('alliedProducts.titlePage') }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
+    </a>
+
+    @include('components.header.dispatcher')
 
     <div class="@yield('content-container-class', 'container my-4')">
         @yield('content')

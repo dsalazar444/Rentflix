@@ -129,7 +129,7 @@
                 <td>{{ $item->movie->getTitle() }}</td>
                 <td>{{ $item->getQuantity() }}</td>
                 <td>${{ $item->getPriceFormatted() }}</td>
-                <td>${{ $item->getTotalPrice() }}</td>
+                <td>${{ $item->getSubtotalFormatted() }}</td>
             </tr>
             @endforeach
         </tbody>

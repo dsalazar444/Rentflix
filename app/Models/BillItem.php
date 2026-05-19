@@ -18,6 +18,8 @@ class BillItem extends Model
      * $this->attributes['bill_id'] - int - contains the foreign key to the bill
      * $this->attributes['created_at'] - timestamp - contains the creation date
      * $this->attributes['updated_at'] - timestamp - contains the last modification date
+     * $this->bill - Bill - contains the bill associated with this item
+     * $this->movie - Movie - contains the movie associated with this item
      */
     protected $fillable = ['price', 'quantity', 'movie_id'];
 
@@ -91,8 +93,13 @@ class BillItem extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function getTotalPrice(): string
+    public function getSubtotal(): int
     {
-        return number_format($this->attributes['price'] * $this->attributes['quantity'], 2);
+        return $this->attributes['price'] * $this->attributes['quantity'];
+    }
+
+    public function getSubtotalFormatted(): string
+    {
+        return number_format($this->getSubtotal(), 2);
     }
 }

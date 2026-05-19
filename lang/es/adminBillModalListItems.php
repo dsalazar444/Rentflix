@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'modalTitle' => 'Items de la factura',

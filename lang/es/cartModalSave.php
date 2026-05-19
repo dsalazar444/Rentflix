@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'modalTitle' => 'Completar compra',

@@ -19,6 +19,7 @@ class RegisterUserRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:4'],
+            'profile_photo' => ['nullable', 'image', 'max:2048'],
             'role' => ['required', 'in:client,admin'],
         ];
     }

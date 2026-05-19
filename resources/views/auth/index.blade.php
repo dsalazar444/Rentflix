@@ -48,6 +48,12 @@
                 <h2>{{ __('authIndex.loginTitle') }}</h2>
                 <p class="form-subtitle">{{ __('authIndex.loginSubtitle') }}</p>
 
+                @if (session('error'))
+                    <div class="alert-error">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <form class="login-form" method="POST" action="{{ route('auth.login') }}">
                     @csrf
                     <div class="form-group">
@@ -88,10 +94,6 @@
                 <h2>{{ __('authIndex.registerTitle') }}</h2>
                 <p class="form-subtitle">{{ __('authIndex.registerSubtitle') }}</p>
 
-                @if (session('success'))
-                    <div class="alert-success">{{ session('success') }}</div>
-                @endif
-
                 @if ($errors->any())
                     <div class="alert-error">
                         <ul>
@@ -102,7 +104,7 @@
                     </div>
                 @endif
 
-                <form class="login-form" method="POST" action="{{ route('auth.create') }}">
+                <form class="login-form" method="POST" action="{{ route('auth.create') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">{{ __('authIndex.nameLabel') }}</label>
@@ -134,6 +136,16 @@
                             <option value="client" {{ old('role') === 'client' ? 'selected' : '' }}>{{ __('authIndex.roleOptions.client') }}</option>
                             <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>{{ __('authIndex.roleOptions.admin') }}</option>
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile_photo">{{ __('authIndex.profilePhotoLabel') }}</label>
+                        <input
+                            type="file"
+                            id="profile_photo"
+                            name="profile_photo"
+                            accept="image/*"
+                        >
                     </div>
 
                     <div class="form-group">

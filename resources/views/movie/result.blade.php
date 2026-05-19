@@ -15,17 +15,17 @@
         @if($viewData['notFound'])
             <div class="no-results-message">
                 <p>{{ __('movieResult.noResults') }} "{{ $viewData['query'] }}"</p>
-                <a href="{{ route('catalog.index') }}" class="btn-return">{{ __('movieResult.backToCatalog') }}</a>
+                <a href="{{ route('movie.index') }}" class="btn-return">{{ __('movieResult.backToCatalog') }}</a>
             </div>
         @else
         <div class="movies-grid">
             @foreach ($viewData['movies'] as $movie)
-            <a href="{{ route('catalog.show', ['id' => $movie->getId()]) }}" class="movie-card">
+            <a href="{{ route('movie.show', ['id' => $movie->getId()]) }}" class="movie-card">
                 
                 <span class="rating-badge">{{ $movie->getClassificationCapitalized() }}</span>
 
                 <div class="card-poster">
-                    <img src="{{ asset('storage/' . $movie->getFileName()) }}" alt="{{ $movie->getTitle() }}" class="card-img">
+                    <img src="{{ $movie->getFileName() }}" alt="{{ $movie->getTitle() }}" class="card-img">
                     <div class="card-overlay">
                         <span class="btn-reserve-overlay">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"

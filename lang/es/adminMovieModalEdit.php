@@ -1,10 +1,15 @@
-<?php 
+<?php
 
 return [
     'modalTitle' => 'Editar Película',
     'closeButtonLabel' => 'Cerrar',
     'titleLabel' => 'Título',
     'titlePlaceholder' => 'Ej: The Dark Knight',
+    'storageLabel' => 'Almacenamiento de imagen',
+    'storageOptions' => [
+        'gcp' => 'Google Cloud Storage',
+        'local' => 'Almacenamiento local',
+    ],
     'genreLabel' => 'Género',
     'genreSelectPlaceholder' => 'Seleccionar...',
     'genres' => [

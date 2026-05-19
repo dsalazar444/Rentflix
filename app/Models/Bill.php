@@ -4,13 +4,11 @@
 
 namespace App\Models;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Http\Response;
 
 class Bill extends Model
 {
@@ -22,6 +20,8 @@ class Bill extends Model
      * $this->attributes['user_id'] - int - contains the foreign key to the user
      * $this->attributes['created_at'] - timestamp - contains the date it was created
      * $this->attributes['updated_at'] - timestamp - contains the date it was last modified
+     * $this->items - Collection of BillItem - contains the items associated with the bill
+     * $this->user - User - contains the user associated with the bill
      */
     protected $fillable = ['price', 'address', 'user_id'];
 
@@ -113,15 +113,8 @@ class Bill extends Model
         return $this->items;
     }
 
-    public function calculateTotalPrice(): int
-    {
-        return $this->items->sum(function ($item) {
-            return $item->getPrice() * $item->getQuantity();
-        });
-    }
-
-    // Synchronizes bill items: updates existing items and deletes those not in the provided list
-    public function syncItems($items): void
+    // Synchronizes bill items after update in Bill: updates existing items and deletes those not in the provided list
+    public function syncItems(array $items): void
     {
         $requestItemIds = collect($items ?? [])->pluck('id')->filter()->map(fn ($id) => (int) $id)->toArray();
 
@@ -143,7 +136,7 @@ class Bill extends Model
             $bill = self::create($billData);
 
             if ($items) {
-                foreach ($items as $index => $itemData) {
+                foreach ($items as $itemData) {
                     $createdItem = $bill->items()->create([
                         'movie_id' => $itemData['movie_id'],
                         'quantity' => $itemData['quantity'],
@@ -156,16 +149,5 @@ class Bill extends Model
         } catch (Exception $e) {
             throw $e;
         }
-    }
-
-    public function generatePdf(): Response
-    {
-        if (! $this->relationLoaded('items')) {
-            $this->load('items.movie');
-        }
-
-        $pdf = Pdf::loadView('bill.pdf', ['bill' => $this]);
-
-        return $pdf->download('factura_id_'.$this->id.'.pdf');
     }
 }

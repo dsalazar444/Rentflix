@@ -4,74 +4,22 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Mail\InvoiceMail;
-use App\Models\Bill;
-use App\Models\LibraryItem;
-use App\Models\User;
-use App\Models\Movie;
 use App\Http\Requests\CreateBillRequest;
+use App\Models\Bill;
+use App\Services\BillService;
+use App\Services\LibraryItemService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class BillController extends Controller
 {
-    public function index(): View
+    private LibraryItemService $libraryItemService;
+
+    public function __construct(LibraryItemService $libraryItemService)
     {
-        $viewData = [];
-        $viewData['bills'] = Bill::with('items.movie')->get();
-        $viewData['users'] = User::all();
-        $viewData['movies'] = Movie::all();
-
-        return view('admin.bill.index')->with('viewData', $viewData);
-    }
-
-    public function save(CreateBillRequest $request): RedirectResponse
-    {
-        try {
-            Bill::createWithItems(
-                [
-                    'user_id' => $request->user_id,
-                    'price' => $request->price,
-                    'address' => $request->address,
-                ],
-                $request->items ?? []
-            );
-
-            return redirect()->back()->with('success', 'Factura creada correctamente');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al crear la factura. Por favor, intenta de nuevo.');
-        }
-    }
-
-    public function delete(string $id): RedirectResponse
-    {
-        $bill = Bill::find($id);
-        if (! $bill) {
-            return redirect()->route('admin.bill.index');
-        }
-        $bill->delete();
-
-        return redirect()->route('admin.bill.index')->with('success', 'Factura eliminada correctamente');
-    }
-
-    public function update(Request $request, int $id): RedirectResponse
-    {
-
-        $bill = Bill::find($id);
-
-        if (! $bill) {
-            return redirect()->route('admin.bill.index')->with('failure', 'Factura no existe');
-        }
-
-        if ($request->has('items')) {
-            $bill->syncItems($request->items);
-        }
-
-        return redirect()->route('admin.bill.index')->with('success', 'Factura actualizada correctamente');
+        $this->libraryItemService = $libraryItemService;
     }
 
     public function processPayment(CreateBillRequest $request): RedirectResponse
@@ -87,14 +35,14 @@ class BillController extends Controller
             );
 
             // Sync purchased movies to user's library
-            LibraryItem::synchLibraryAfterPurchase($bill);
+            $this->libraryItemService->synchLibraryAfterPurchase($bill);
 
             // Clean shopping cart from session
             session()->forget('cart');
 
-            return redirect()->back()->with('success', 'Pago procesado correctamente');
+            return redirect()->back()->with('success', __('billProcessPayment.statusModal.processPayment.success'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al procesar pago. Por favor, intenta de nuevo.');
+            return redirect()->back()->with('error', __('billProcessPayment.statusModal.processPayment.error'));
         }
     }
 
@@ -107,27 +55,13 @@ class BillController extends Controller
         return view('bill.listBills')->with('viewData', $viewData);
     }
 
-    public function download(string $id): Response
+    public function download(string $id, BillService $service): Response|RedirectResponse
     {
-        $bill = Bill::with('items.movie', 'user')->find($id);
-
-        if (! $bill) {
-            abort(404, 'Factura no encontrada');
-        }
-
-        return $bill->generatePDF();
+        return $service->downloadBill($id);
     }
 
-    public function send(string $id): RedirectResponse
+    public function send(string $id, BillService $service): RedirectResponse
     {
-        $bill = Bill::with('user')->find($id);
-        
-        if (! $bill) {
-            abort(404, 'Factura no encontrada');
-        }
-
-        Mail::to($bill->user->getEmail())->send(new InvoiceMail($bill));
-
-        return redirect()->back()->with('success', 'Correo enviado correctamente');
+        return $service->sendBill($id);
     }
 }

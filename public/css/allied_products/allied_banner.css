@@ -1,0 +1,40 @@
+.allied-banner {
+    display: block;
+    background: linear-gradient(135deg, #e63946 0%, #c0282f 100%);
+    padding: 0.4rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.allied-banner:hover {
+    background: linear-gradient(135deg, #c0282f 0%, #a02024 100%);
+    color: white;
+    text-decoration: none;
+}
+
+.allied-banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.allied-banner-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .allied-banner {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+}
