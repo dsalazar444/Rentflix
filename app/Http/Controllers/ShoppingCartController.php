@@ -6,11 +6,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Utils\UserDataUtils;
 
 class ShoppingCartController extends Controller
 {
     public function add(Request $request): RedirectResponse
     {
+        $user = UserDataUtils::bringSessionUser();
+        
+        if (! $user) {
+            return redirect()->route('auth.index');
+        }
         $id = $request->route('id');
         $cart = session()->get('cart', []);
 

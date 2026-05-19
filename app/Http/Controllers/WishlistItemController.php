@@ -4,18 +4,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\WishlistItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Utils\UserDataUtils;
 
 class WishlistItemController extends Controller
 {
+
     public function index(): View|RedirectResponse
     {
+        $user = UserDataUtils::bringSessionUser();
 
-        $user = User::find(session('user_id'));
+        if (!$user) {
+            return redirect()->route('auth.index');
+        }
 
         $viewData = [];
         $viewData['wishlistItems'] = $user->getWishlistItems();
@@ -25,9 +29,13 @@ class WishlistItemController extends Controller
 
     public function add(Request $request): RedirectResponse
     {
+        $user = UserDataUtils::bringSessionUser();
 
+        if (!$user) {
+            return redirect()->route('auth.index');
+        }
         WishlistItem::create([
-            'user_id' => session('user_id'),
+            'user_id' => $user->getId(),
             'movie_id' => $request->route('id'),
         ]);
 
