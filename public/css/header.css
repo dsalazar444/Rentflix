@@ -368,6 +368,12 @@
     color: #ffffff;
 }
 
+.profile-menu-item:last-child {
+    background: #e63946;
+    color: white;
+}
+
+
 /* Header variants */
 .auth-link-btn {
     display: inline-flex;

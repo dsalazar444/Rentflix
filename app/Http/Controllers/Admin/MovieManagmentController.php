@@ -12,9 +12,9 @@ use App\Http\Resources\ExternalMovieApiResource;
 use App\Interfaces\ImageStorage;
 use App\Models\Movie;
 use App\Services\MovieService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Exception;
 
 class MovieManagmentController extends Controller
 {
@@ -114,7 +114,7 @@ class MovieManagmentController extends Controller
         $title = $request->input('title');
         $movieApiData = MovieService::searchMovieExternalApi($title);
 
-        if ($movieApiData['Response']  === 'False') {
+        if ($movieApiData['Response'] === 'False') {
             return redirect()->route('admin.movie.create')->with('error', __('adminMovieModalCreate.movieNotFound'));
         }
 

@@ -24,7 +24,7 @@ class ImageLocalStorage implements ImageStorage
 
             return $fileName;
         } catch (Exception $e) {
-           throw $e;
+            throw $e;
         }
     }
 

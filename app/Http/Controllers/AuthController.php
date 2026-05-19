@@ -4,9 +4,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\ImageStorage;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
+use App\Interfaces\ImageStorage;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

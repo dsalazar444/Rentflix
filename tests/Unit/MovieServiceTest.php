@@ -4,10 +4,10 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Models\Movie;
 use App\Services\MovieService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class MovieServiceTest extends TestCase
 {
@@ -45,7 +45,7 @@ class MovieServiceTest extends TestCase
 
         $this->assertIsArray($movieData);
         $this->assertArrayHasKey('Response', $movieData);
-        
+
         if ($movieData['Response'] === 'True') {
             $this->assertArrayHasKey('Title', $movieData);
             $this->assertArrayHasKey('Year', $movieData);

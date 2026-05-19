@@ -12,15 +12,16 @@ Route::middleware('admin')->group(function () {
     Route::match(['get', 'post'], '/admin/movie/searchMovieExternalApi', 'App\Http\Controllers\Admin\MovieManagmentController@getMovieDataFromExternalApi')->name('admin.movie.searchMovieExternalApi');
 
     // Admin bill routes
-    Route::get('/admin/bill', 'App\Http\Controllers\BillController@index')->name('admin.bill.index');
-    Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\BillController@delete')->name('admin.bill.delete');
-    Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\BillController@update')->name('admin.bill.update');
-    Route::post('/admin/bill/save', 'App\Http\Controllers\BillController@save')->name('admin.bill.save');
+    Route::get('/admin/bill', 'App\Http\Controllers\Admin\BillManagmentController@index')->name('admin.bill.index');
+    Route::delete('/admin/bill/delete/{id}', 'App\Http\Controllers\Admin\BillManagmentController@delete')->name('admin.bill.delete');
+    Route::put('/admin/bill/update/{id}', 'App\Http\Controllers\Admin\BillManagmentController@update')->name('admin.bill.update');
+    Route::post('/admin/bill/save', 'App\Http\Controllers\Admin\BillManagmentController@save')->name('admin.bill.save');
 });
 
 // Movie routes
 Route::get('/', 'App\Http\Controllers\MovieController@index')->name('movie.index');
 Route::get('/movie/{id}', 'App\Http\Controllers\MovieController@show')->name('movie.show');
+Route::post('/movie/{id}/watch', 'App\Http\Controllers\MovieController@watch')->name('movie.watch');
 Route::get('/movie', 'App\Http\Controllers\MovieController@searchMovieByName')->name('movie.search');
 
 // User routes
@@ -51,3 +52,6 @@ Route::post('/cart/add/{id}', 'App\Http\Controllers\ShoppingCartController@add')
 Route::delete('/cart/remove/{id}', 'App\Http\Controllers\ShoppingCartController@remove')->name('cart.remove');
 Route::get('/cart/clean', 'App\Http\Controllers\ShoppingCartController@clean')->name('cart.clean');
 Route::post('/cart/process', 'App\Http\Controllers\BillController@processPayment')->name('cart.process');
+
+// External Api
+Route::get('/allied-products', 'App\Http\Controllers\Api\ExternalVenekaApiController@index')->name('allied_products.index');

@@ -6,8 +6,8 @@ namespace App\Services;
 
 use App\Models\Movie;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class MovieService
 {
@@ -17,7 +17,7 @@ class MovieService
         $notFound = false;
 
         if ($query) {
-            $movies = Movie::whereRaw('LOWER(title) LIKE ?', ['%' . strtolower($query) . '%'])->get();
+            $movies = Movie::whereRaw('LOWER(title) LIKE ?', ['%'.strtolower($query).'%'])->get();
             $notFound = $movies->isEmpty();
         }
 
@@ -49,7 +49,7 @@ class MovieService
         return $movieResponse;
     }
 
-    static public function getMovies(Request $request): Collection
+    public static function getMovies(Request $request): Collection
     {
         $selectedGenre = $request->query('genre', 'all');
         $selectedSort = $request->query('sort', 'priceAsc');
@@ -70,6 +70,7 @@ class MovieService
         }
 
         $movies = $moviesQuery->get();
+
         return $movies;
     }
 }
